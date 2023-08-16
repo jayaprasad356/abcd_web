@@ -101,7 +101,7 @@ if (isset($_POST['btnEdit'])) {
                     $referral_bonus = $function->getSettingsVal('refer_bonus_amount');
 
                 }
-                if($ref_user_status == 1 && $ref_code_generate == 0 && $ref_worked_days >= $ref_duration ){
+                else if($ref_user_status == 1 && $ref_code_generate == 0 && $ref_worked_days >= $ref_duration ){
                     $referral_bonus = 500;
 
                 }
