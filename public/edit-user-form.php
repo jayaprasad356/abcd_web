@@ -497,6 +497,48 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                         </div>
+                           <br>
+
+                        <div class="row">
+                            <div class="form-group">
+                            <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Earn</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="earn" value="<?php echo $res[0]['earn']; ?>">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Balance</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="balance" value="<?php echo $res[0]['balance']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Today Codes</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="today_codes" value="<?php echo $res[0]['today_codes']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Total Codes</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="total_codes" value="<?php echo $res[0]['total_codes']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+<div class="row">
+    <div class="form-group">
+
+        <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="earning_wallet" value="<?php echo $res[0]['earning_wallet']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Project Type</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="project_type" value="<?php echo $project_type ?>" readonly>
+                                </div>
+    </div>
+</div>
                         <br>
                         <div class="row">
                             <div class="col-md-3">
@@ -591,21 +633,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="checkbox" id="black_box_button" class="js-switch" <?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="black_box" name="black_box" value="<?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 1 : 0 ?>">
                                 </div>
-                                <div class="row">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="earning_wallet" value="<?php echo $res[0]['earning_wallet']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Project Type</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="project_type" value="<?php echo $project_type ?>" readonly>
-                                </div>
-                            </div>
                             </div>
                         </div>
                         <br>
