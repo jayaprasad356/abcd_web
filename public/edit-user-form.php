@@ -58,6 +58,9 @@ if (isset($_POST['btnEdit'])) {
             $sa_withdrawal = $db->escapeString(($_POST['sa_withdrawal']));
             $level = $db->escapeString(($_POST['level']));
             $per_code_val = $db->escapeString(($_POST['per_code_val']));
+            $earnings_wallet = $db->escapeString(($_POST['earnings_wallet']));
+            $bonus_wallet = $db->escapeString(($_POST['bonus_wallet']));
+            $project_type = $db->escapeString(($_POST['project_type']));
             $error = array();
 
             if (empty($lead_id)) {
@@ -246,7 +249,7 @@ if (isset($_POST['btnEdit'])) {
 
         }
     
-        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val WHERE id =  $ID";
+        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type=$project_type WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -588,7 +591,20 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="checkbox" id="black_box_button" class="js-switch" <?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="black_box" name="black_box" value="<?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 1 : 0 ?>">
                                 </div>
-                                
+                                <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="earning_wallet" value="<?php echo $res[0]['earning_wallet']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Project Type</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="project_type" value="<?php echo $project_type ?>" readonly>
+                                </div>
                             </div>
                             </div>
                         </div>
