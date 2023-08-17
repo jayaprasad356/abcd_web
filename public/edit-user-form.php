@@ -511,7 +511,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Project Type</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="project_type" value="<?php echo $project_type ?>" readonly>
+                                    <input type="text" class="form-control" name="project_type" value="<?php echo $res[0]['project_type']; ?>" readonly>
                                 </div>
                                  </div>
                            </div>
