@@ -512,12 +512,12 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
                                 </div>
                                 <div class="col-md-3">
-                                <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
+                                   <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
                                     <select id='project_type' name="project_type" class='form-control'>
-                                           <option value='1'>ABCD</option>
-                                           <option value='2'>Amail</option>
+                                     <option value='1' <?php if ($res[0]['project_type'] == 1) echo 'selected'; ?>>abcd</option>
+                                      <option value='2' <?php if ($res[0]['project_type'] == 2) echo 'selected'; ?>>amail</option>
                                     </select>
-                                </div>
+                                    </div>
                                  </div>
                            </div>
                            <br>
