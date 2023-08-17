@@ -505,7 +505,7 @@ if (isset($_POST['btnCancel'])) { ?>
 
                                  <div class="col-md-3">
                                     <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="earning_wallet" value="<?php echo $res[0]['earning_wallet']; ?>">
+                                    <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
