@@ -49,7 +49,7 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        $sql = "INSERT INTO transactions (`user_id`,`tyoe`,`datetime`,`amount`) VALUES ($user_id,'earning_wallet','$datetime',$earning_wallet)";
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'earning_wallet','$datetime',$earning_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + earning_wallet,earning_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
@@ -68,7 +68,7 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        $sql = "INSERT INTO transactions (`user_id`,`tyoe`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$earning_wallet)";
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$earning_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + bonus_wallet,bonus_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
