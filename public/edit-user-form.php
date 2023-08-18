@@ -251,7 +251,7 @@ if (isset($_POST['btnEdit'])) {
 
         }
     
-        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type=$project_type ,today_mails=$today_mails,total_mails=$total_mails WHERE id =  $ID";
+        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -514,8 +514,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <div class="col-md-3">
                                    <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
                                     <select id='project_type' name="project_type" class='form-control'>
-                                     <option value='1' <?php if ($res[0]['project_type'] == 1) echo 'selected'; ?>>abcd</option>
-                                      <option value='2' <?php if ($res[0]['project_type'] == 2) echo 'selected'; ?>>amail</option>
+                                     <option value='abcd' <?php if ($res[0]['project_type'] == 'abcd') echo 'selected'; ?>>abcd</option>
+                                      <option value='amail' <?php if ($res[0]['project_type'] == 'amail') echo 'selected'; ?>>amail</option>
                                     </select>
                                     </div>
                                  </div>

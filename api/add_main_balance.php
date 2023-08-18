@@ -36,39 +36,38 @@ $num = $db->numRows($res);
 
 
 if ($num == 1) {
-    $earning_wallet = $res[0]['earning_wallet'];
+    $earnings_wallet = $res[0]['earnings_wallet'];
     $bonus_wallet = $res[0]['bonus_wallet'];
     $current_refers = $res[0]['current_refers'];
-    $today_ads = $res[0]['today_ads'];
     $target_refers = $res[0]['target_refers'];
 
-    if($wallet_type == 'basic_wallet'){
-        if ($basic_wallet < 30) {
+    if($wallet_type == 'earnings_wallet'){
+        if ($earnings_wallet < 75) {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹30 to add balance";
+            $response['message'] = "Minimum ₹75 to add balance";
             print_r(json_encode($response));
             return false;
         }
-        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'earning_wallet','$datetime',$earning_wallet)";
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'earnings_wallet','$datetime',$earnings_wallet)";
         $db->sql($sql);
-        $sql = "UPDATE users SET balance= balance + earning_wallet,earning_wallet = 0 WHERE id=" . $user_id;
+        $sql = "UPDATE users SET balance= balance + earnings_wallet,earnings_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
 
     }
-    if($wallet_type == 'premium_wallet'){
+    if($wallet_type == 'bonus_wallet'){
         if ($current_refers < $target_refers) {
             $response['success'] = false;
             $response['message'] = "Minimum ".$target_refers." refers to add balance";
             print_r(json_encode($response));
             return false;
         }
-        if ($premium_wallet < 120) {
+        if ($bonus_wallet < 225) {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹120 to add balance";
+            $response['message'] = "Minimum ₹225 to add balance";
             print_r(json_encode($response));
             return false;
         }
-        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$earning_wallet)";
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$bonus_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + bonus_wallet,bonus_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
