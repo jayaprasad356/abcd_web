@@ -535,12 +535,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
                                      <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
                                      </div>
-     
-                                  </div>
-                                </div>
-                                <br>
-                                <div class="row">   
-                                  <div class="form-group">
                                      <div class="col-md-3">
                                          <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
                                            <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
@@ -550,8 +544,9 @@ if (isset($_POST['btnCancel'])) { ?>
                                             <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
                                            </div>
                                        </div>
+                                  </div>
                                 </div>
-                        <br>
+                                <br>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
