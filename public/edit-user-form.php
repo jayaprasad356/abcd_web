@@ -92,49 +92,69 @@ if (isset($_POST['btnEdit'])) {
             $res = $db->getResult();
             $num = $db->numRows($res);
             if ($num == 1){
-                $set_duration = $function->getSettingsVal('duration');
                 $user_id = $res[0]['id'];
-                $sql_query = "SELECT id FROM leaves WHERE user_id =  $user_id AND date = '$date'";
-                $db->sql($sql_query);
-                $lres = $db->getResult();
-                $lnum = $db->numRows($lres);
-                $ref_code_generate = $res[0]['code_generate'];
-                $ref_worked_days = $res[0]['worked_days'];
-                $ref_duration = $res[0]['duration'];
-                $ref_user_status = $res[0]['status'];
-                $ref_user_history_days = $res[0]['history_days'];
-                $ref_total_refund = $res[0]['total_refund'];
-                if($ref_user_status == 1 && ($ref_code_generate == 1 || $ref_code_generate == 0 && $ref_worked_days < $ref_duration && $lnum == 1)  ){
-                    $referral_bonus = $function->getSettingsVal('refer_bonus_amount');
+                $user_project_type = $res[0]['project_type'];
+                if($user_project_type == 'amail'){
+                    $user_current_refers = $res[0]['current_refers'];
+                    if($user_current_refers >= $target_refers){
+                        $referral_bonus = 1000;
 
-                }
-                else if($ref_user_status == 1 && $ref_code_generate == 0 && $ref_worked_days >= $ref_duration ){
-                    $referral_bonus = 500;
-
-                }
-
-                $sa_refer_count=$res[0]['sa_refer_count'];
-                $refer_sa_balance=200;
-            
-              
-                $sql_query = "UPDATE users SET `l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus,`salary_advance_balance`=salary_advance_balance +$refer_sa_balance,`sa_refer_count`=sa_refer_count + 1 WHERE id =  $user_id";
-                $db->sql($sql_query);
-                $fn->update_refer_code_cost($user_id);
-                $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
-                $db->sql($sql_query);
-                $sql_query = "INSERT INTO salary_advance_trans (user_id,refer_user_id,amount,datetime,type)VALUES($ID,$user_id,'$refer_sa_balance','$datetime','credit')";
-                $db->sql($sql_query);
-                if($ref_user_status == 1 && ($ref_code_generate == 1 || $ref_code_generate == 0 && $ref_worked_days < $ref_duration)  ){
-
-                    $ref_per_code_cost = $fn->get_code_per_cost($user_id);
-
-
-                    $amount = $refer_bonus_codes  * $ref_per_code_cost;
-                    $sql_query = "UPDATE users SET `earn` = earn + $amount,`balance` = balance + $amount,`today_codes` = today_codes + $refer_bonus_codes,`total_codes` = total_codes + $refer_bonus_codes WHERE refer_code =  '$referred_by' AND status = 1";
+                    }else{
+                        $referral_bonus = 500;
+                    }
+                 
+                    $sql_query = "UPDATE users SET `current_refers` = current_refers + 1,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id";
                     $db->sql($sql_query);
-                    $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($user_id,$amount,$refer_bonus_codes,'$datetime','code_bonus')";
+                    $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
                     $db->sql($sql_query);
+
+                }else{
+                    $set_duration = $function->getSettingsVal('duration');
+                   
+                    $sql_query = "SELECT id FROM leaves WHERE user_id =  $user_id AND date = '$date'";
+                    $db->sql($sql_query);
+                    $lres = $db->getResult();
+                    $lnum = $db->numRows($lres);
+                    $ref_code_generate = $res[0]['code_generate'];
+                    $ref_worked_days = $res[0]['worked_days'];
+                    $ref_duration = $res[0]['duration'];
+                    $ref_user_status = $res[0]['status'];
+                    $ref_user_history_days = $res[0]['history_days'];
+                    $ref_total_refund = $res[0]['total_refund'];
+                    if($ref_user_status == 1 && ($ref_code_generate == 1 || $ref_code_generate == 0 && $ref_worked_days < $ref_duration && $lnum == 1)  ){
+                        $referral_bonus = $function->getSettingsVal('refer_bonus_amount');
+    
+                    }
+                    else if($ref_user_status == 1 && $ref_code_generate == 0 && $ref_worked_days >= $ref_duration ){
+                        $referral_bonus = 500;
+    
+                    }
+    
+                    $sa_refer_count=$res[0]['sa_refer_count'];
+                    $refer_sa_balance=200;
+                
+                  
+                    $sql_query = "UPDATE users SET `l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus,`salary_advance_balance`=salary_advance_balance +$refer_sa_balance,`sa_refer_count`=sa_refer_count + 1 WHERE id =  $user_id";
+                    $db->sql($sql_query);
+                    $fn->update_refer_code_cost($user_id);
+                    $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
+                    $db->sql($sql_query);
+                    $sql_query = "INSERT INTO salary_advance_trans (user_id,refer_user_id,amount,datetime,type)VALUES($ID,$user_id,'$refer_sa_balance','$datetime','credit')";
+                    $db->sql($sql_query);
+                    if($ref_user_status == 1 && ($ref_code_generate == 1 || $ref_code_generate == 0 && $ref_worked_days < $ref_duration)  ){
+    
+                        $ref_per_code_cost = $fn->get_code_per_cost($user_id);
+    
+    
+                        $amount = $refer_bonus_codes  * $ref_per_code_cost;
+                        $sql_query = "UPDATE users SET `earn` = earn + $amount,`balance` = balance + $amount,`today_codes` = today_codes + $refer_bonus_codes,`total_codes` = total_codes + $refer_bonus_codes WHERE refer_code =  '$referred_by' AND status = 1";
+                        $db->sql($sql_query);
+                        $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($user_id,$amount,$refer_bonus_codes,'$datetime','code_bonus')";
+                        $db->sql($sql_query);
+                    }
+
                 }
+
                 $sql_query = "UPDATE users SET refer_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
 
@@ -154,31 +174,45 @@ if (isset($_POST['btnEdit'])) {
         $register_bonus_sent = $fn->get_value('users','register_bonus_sent',$ID);
 
         if($status == 1 && $register_bonus_sent != 1 && $join_type == 0){
-            $join_codes = $function->getSettingsVal('join_codes');
-            $amount = $join_codes  * $per_code_cost;
-            $register_bonus = $amount;
-            $total_codes = $total_codes + $join_codes;
-            $today_codes = $today_codes + $join_codes;
-            $salary_advance_balance = $salary_advance_balance + 200;
-            $earn = $earn + $register_bonus;
-            $balance = $balance + $register_bonus;
-            $duration = $plan;
-
-            $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
-            $db->sql($sql_query);
-            $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,$amount,$join_codes,'$datetime','register_bonus')";
-            $db->sql($sql_query);
-            if(strlen($referred_by) == 3){
-                $incentives = 100;
-            }else{
-                if($plan == 30){
-                    $incentives = 12.5;
-
+            if($project_type == 'amail'){
+                $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
+                $db->sql($sql_query);
+                if(strlen($referred_by) == 3){
+                    $incentives = 125;
                 }else{
-                    $incentives = 5;
+                    $incentives = 15;
+                    
                 }
-                
+
+            }else{
+                $join_codes = $function->getSettingsVal('join_codes');
+                $amount = $join_codes  * $per_code_cost;
+                $register_bonus = $amount;
+                $total_codes = $total_codes + $join_codes;
+                $today_codes = $today_codes + $join_codes;
+                $salary_advance_balance = $salary_advance_balance + 200;
+                $earn = $earn + $register_bonus;
+                $balance = $balance + $register_bonus;
+                $duration = $plan;
+    
+                $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
+                $db->sql($sql_query);
+                $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,$amount,$join_codes,'$datetime','register_bonus')";
+                $db->sql($sql_query);
+                if(strlen($referred_by) == 3){
+                    $incentives = 100;
+                }else{
+                    if($plan == 30){
+                        $incentives = 12.5;
+    
+                    }else{
+                        $incentives = 5;
+                    }
+                    
+                }
+
             }
+
 
             $sql_query = "UPDATE staffs SET incentives = incentives + $incentives,earn = earn + $incentives,balance = balance + $incentives,supports = supports + 1 WHERE id =  $support_id";
             $db->sql($sql_query);
