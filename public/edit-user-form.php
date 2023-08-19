@@ -455,7 +455,7 @@ if (isset($_POST['btnCancel'])) { ?>
                         </div>
                         <br>
                         <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                                     <label class="control-label">Plan</label><i class="text-danger asterik">*</i><br>
                                     <div id="plan" class="btn-group">
                                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -466,15 +466,14 @@ if (isset($_POST['btnCancel'])) { ?>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                    <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
                                     <select id='project_type' name="project_type" class='form-control'>
                                      <option value='abcd' <?php if ($res[0]['project_type'] == 'abcd') echo 'selected'; ?>>abcd</option>
                                       <option value='amail' <?php if ($res[0]['project_type'] == 'amail') echo 'selected'; ?>>amail</option>
                                     </select>
                                     </div>
-                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <label class="control-label">Status</label><i class="text-danger asterik">*</i><br>
                                     <div id="status" class="btn-group">
                                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -555,6 +554,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
                                 </div>
+                                 </div>
                            </div>
                                 <br>
                         <div class="row">
@@ -629,6 +629,29 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <div class="row">   
+                                  <div class="form-group">
+                                    <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
+                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
+                                 </div>
+                                 <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
+                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
+                                     </div>
+                                     <div class="col-md-3">
+                                         <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
+                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
+                                             </div>
+                                     <div class="col-md-3">
+                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
+                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
+                                           </div>
+                                       </div>
+                                  </div>
+                                </div>
+                        <br>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -672,8 +695,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                            </div>
                                        </div>
                                   </div>
-                                </div> 
-                                </div> 
+                                </div>
                         <br>
 
 
