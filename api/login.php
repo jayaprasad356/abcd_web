@@ -66,10 +66,15 @@ if ($num == 1) {
     if ($num == 1) {
         
         $status = $res[0]['status'];
+        $project_type = $res[0]['project_type'];
         if ($status == 1 || $status == 0) {
             $sql = "SELECT * FROM settings";
             $db->sql($sql);
             $setres = $db->getResult();
+            if($project_type == 'amail'){
+                $setres[0]['min_withdrawal'] = 75;
+
+            }
             $sql_query = "UPDATE users SET device_id = '$device_id' WHERE mobile ='$mobile' AND password ='$password' AND device_id = ''";
             $db->sql($sql_query);
             

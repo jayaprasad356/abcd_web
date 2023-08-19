@@ -41,6 +41,11 @@ if($user_id != ''){
     $device_id = $res[0]['device_id'];
     $today_codes = $res[0]['today_codes'];
     $task_type = $res[0]['task_type'];
+    $project_type = $res[0]['project_type'];
+    if($project_type == 'amail'){
+        $set[0]['min_withdrawal'] = 75;
+
+    }
     $code_generate_time = $res[0]['code_generate_time'];
     $res[0]['joined_date'] = $fn->get_joined_date($user_id);;
 
