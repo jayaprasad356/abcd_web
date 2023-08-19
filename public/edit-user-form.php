@@ -651,9 +651,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="hidden" id="black_box" name="black_box" value="<?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 1 : 0 ?>">
                                 </div>
                             </div>
-                        </div>
-                    
-                        <div class="row">   
+                            <div class="row">   
                                   <div class="form-group">
                                     <div class="col-md-3">
                                     <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
@@ -673,6 +671,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                            </div>
                                        </div>
                                   </div>
+                                </div>
+                        </div>
                         <br>
 
 
