@@ -40,6 +40,15 @@ if ($num == 1) {
     $bonus_wallet = $res[0]['bonus_wallet'];
     $current_refers = $res[0]['current_refers'];
     $target_refers = $res[0]['target_refers'];
+    $status = $res[0]['status'];
+    $project_type = $res[0]['project_type'];
+
+    if ($status == 0 || ($status == 1 && $project_type != 'amail')) {
+        $response['success'] = false;
+        $response['message'] = "You Should Purchase Amail Plan";
+        print_r(json_encode($response));
+        return false;
+    }
 
     if($wallet_type == 'earnings_wallet'){
         if ($earnings_wallet < 75) {
