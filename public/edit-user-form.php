@@ -466,7 +466,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="form-group col-md-4">
                                    <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
                                     <select id='project_type' name="project_type" class='form-control'>
                                      <option value='abcd' <?php if ($res[0]['project_type'] == 'abcd') echo 'selected'; ?>>abcd</option>
@@ -474,7 +474,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     </select>
                                     </div>
                                  </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-">
                                     <label class="control-label">Status</label><i class="text-danger asterik">*</i><br>
                                     <div id="status" class="btn-group">
                                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
