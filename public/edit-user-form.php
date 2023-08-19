@@ -455,7 +455,7 @@ if (isset($_POST['btnCancel'])) { ?>
                         </div>
                         <br>
                         <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                                     <label class="control-label">Plan</label><i class="text-danger asterik">*</i><br>
                                     <div id="plan" class="btn-group">
                                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -554,8 +554,10 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
                                 </div>
+                              
                                  </div>
                            </div>
+                                
                                 <br>
                         <div class="row">
                             <div class="col-md-3">
@@ -630,28 +632,6 @@ if (isset($_POST['btnCancel'])) { ?>
                             </div>
                         </div>
                         <br>
-                        <div class="row">   
-                                  <div class="form-group">
-                                    <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
-                                 </div>
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
-                                     </div>
-                                     <div class="col-md-3">
-                                         <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
-                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
-                                             </div>
-                                     <div class="col-md-3">
-                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
-                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
-                                           </div>
-                                       </div>
-                                  </div>
-                                </div>
-                        <br>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -675,27 +655,28 @@ if (isset($_POST['btnCancel'])) { ?>
                             </div>
                         </div>
                         <br>
-                        <div class="row">   
-                                  <div class="form-group">
-                                    <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
-                                 </div>
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
-                                     </div>
-                                     <div class="col-md-3">
-                                         <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
-                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
-                                             </div>
-                                     <div class="col-md-3">
-                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
-                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
-                                           </div>
-                                       </div>
-                                  </div>
-                                
+
+<div class="row">   
+    <div class="form-group">
+
+      <div class="col-md-3">
+      <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
+       <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
+   </div>
+   <div class="col-md-3">
+      <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
+       <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
+       </div>
+       <div class="col-md-3">
+           <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
+             <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
+               </div>
+       <div class="col-md-3">
+              <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
+              <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
+             </div>
+         </div>
+    </div>
                         <br>
 
 
