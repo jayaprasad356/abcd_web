@@ -556,30 +556,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                     </div>
                                  </div>
                            </div>
-                           <br>
-
-                              <div class="row">   
-                                  <div class="form-group">
-
-                                    <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
-                                 </div>
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
-                                     </div>
-                                     <div class="col-md-3">
-                                         <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
-                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
-                                             </div>
-                                     <div class="col-md-3">
-                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
-                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
-                                           </div>
-                                       </div>
-                                  </div>
-                                </div>
                                 <br>
                         <div class="row">
                             <div class="col-md-3">
@@ -676,6 +652,29 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <div class="row">   
+                                  <div class="form-group">
+
+                                    <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
+                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
+                                 </div>
+                                 <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
+                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
+                                     </div>
+                                     <div class="col-md-3">
+                                         <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
+                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
+                                             </div>
+                                     <div class="col-md-3">
+                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
+                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
+                                           </div>
+                                       </div>
+                                  </div>
+                                </div>
                         <br>
 
 
