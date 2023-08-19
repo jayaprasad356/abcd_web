@@ -37,13 +37,14 @@ $sql = "SELECT * FROM settings";
 $db->sql($sql);
 $mres = $db->getResult();
 $main_ws = $mres[0]['withdrawal_status'];
-$sql = "SELECT balance,refer_balance,withdrawal_status,branch_id FROM users WHERE id = $user_id ";
+$sql = "SELECT balance,refer_balance,withdrawal_status,branch_id,project_type FROM users WHERE id = $user_id ";
 $db->sql($sql);
 $res = $db->getResult();
 $balance = $res[0]['balance'];
 $refer_balance = $res[0]['refer_balance'];
 $withdrawal_status = $res[0]['withdrawal_status'];
 $branch_id = $res[0]['branch_id'];
+$project_type = $res[0]['project_type'];
 if(!empty($branch_id)){
     $sql = "SELECT min_withdrawal FROM branches WHERE id = $branch_id";
     $db->sql($sql);
@@ -52,6 +53,11 @@ if(!empty($branch_id)){
 }
 else{
     $min_withdrawal = $mres[0]['min_withdrawal'];
+}
+
+if($project_type == 'amail'){
+    $min_withdrawal = 75;
+
 }
 
 $datetime = date('Y-m-d H:i:s');
