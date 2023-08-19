@@ -651,30 +651,33 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="hidden" id="black_box" name="black_box" value="<?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 1 : 0 ?>">
                                 </div>
                             </div>
-                            <div class="row">   
-                                  <div class="form-group">
-                                    <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
-                                 </div>
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
-                                     </div>
-                                     <div class="col-md-3">
-                                         <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
-                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
-                                             </div>
-                                     <div class="col-md-3">
-                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
-                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
-                                           </div>
-                                       </div>
-                                  </div>
-                                </div>
                         </div>
                         <br>
+                        <br>
+                        <div class="row">
+                            <div class="form-group">
 
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Refer Code</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="refer_code" value="<?php echo $res[0]['refer_code']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Joined Date</label><i class="text-danger asterik">*</i>
+                                    <input type="date" class="form-control" name="joined_date" value="<?php echo $res[0]['joined_date']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">E-mail</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="email" value="<?php echo $res[0]['email']; ?>" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">City</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="city" value="<?php echo $res[0]['city']; ?>">
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <br>
 
                     </div><!-- /.box-body -->
 
