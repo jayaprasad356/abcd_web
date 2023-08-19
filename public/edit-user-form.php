@@ -473,7 +473,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                       <option value='amail' <?php if ($res[0]['project_type'] == 'amail') echo 'selected'; ?>>amail</option>
                                     </select>
                                     </div>
-                                 </div> 
                                 <div class="form-group col-md-5">
                                     <label class="control-label">Status</label><i class="text-danger asterik">*</i><br>
                                     <div id="status" class="btn-group">
@@ -556,6 +555,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
                                 </div>
                            </div>
+                                                </div>
                                 <br>
                         <div class="row">
                             <div class="col-md-3">
@@ -674,7 +674,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                            </div>
                                        </div>
                                   </div>
-                                </div>
+                                
 
                     </div><!-- /.box-body -->
 
