@@ -652,7 +652,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                         </div>
-                        <br>
+                    
                         <div class="row">   
                                   <div class="form-group">
                                     <div class="col-md-3">
