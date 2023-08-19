@@ -455,7 +455,7 @@ if (isset($_POST['btnCancel'])) { ?>
                         </div>
                         <br>
                         <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                                     <label class="control-label">Plan</label><i class="text-danger asterik">*</i><br>
                                     <div id="plan" class="btn-group">
                                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
@@ -474,7 +474,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     </select>
                                     </div>
                                  </div>
-                                <div class="form-group col-md-">
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Status</label><i class="text-danger asterik">*</i><br>
                                     <div id="status" class="btn-group">
                                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
