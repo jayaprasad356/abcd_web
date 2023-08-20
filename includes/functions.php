@@ -363,25 +363,31 @@ class functions
         }
     }
     //getting all tokens to send push to all devices
-    public function getAllTokens($send_to,$support_id)
+    public function getAllTokens($send_to,$support_id,$project_type)
     {
         $table = 'users';
         $currentdate = date('Y-m-d');
+        $join = '';
+        if($project_type == 'amail'){
+            $join = "AND project_type = '$project_type'";
+
+        }
         if($send_to == 1){
-            $sql = "SELECT `fcm_id` FROM `$table` WHERE status = 0";
+            $sql = "SELECT `fcm_id` FROM `$table` WHERE status = 0 $join";
 
         }else if($send_to == 2){
-            $sql = "SELECT `fcm_id` FROM `$table` WHERE status = 1";
+            $sql = "SELECT `fcm_id` FROM `$table` WHERE status = 1 $join";
 
         }else if($send_to == 3){
-            $sql = "SELECT `fcm_id` FROM `$table` WHERE NOT (joined_date < '2023-02-06' AND status = 1)";
+            $sql = "SELECT `fcm_id` FROM `$table` WHERE NOT (joined_date < '2023-02-06' AND status = 1) $join";
 
         }
         else{
-            $sql = "SELECT `fcm_id` FROM `$table`";
+            $join = "WHERE project_type = '$project_type'";
+            $sql = "SELECT `fcm_id` FROM `$table` $join";
         }
         if(!empty($support_id)){
-            $sql = "SELECT `fcm_id` FROM `$table` WHERE support_id = $support_id";
+            $sql = "SELECT `fcm_id` FROM `$table` WHERE support_id = $support_id $join";
 
         }
         

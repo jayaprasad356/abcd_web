@@ -542,21 +542,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                         </div>
-                        <br>
 
-                         <div class="row">   
-                            <div class="form-group">
-
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
-                                </div>
-                           </div>
-                                                </div>
                                 <br>
                         <div class="row">
                             <div class="col-md-3">
@@ -675,9 +661,26 @@ if (isset($_POST['btnCancel'])) { ?>
                                            </div>
                                        </div>
                                   </div>
+                                  <br>
+                                  <div class="row">   
+   <div class="form-group">
+
+        <div class="col-md-3">
+           <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
+           <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>">
+       </div>
+       <div class="col-md-3">
+           <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
+           <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
+       </div>
+  </div>
+                       </div>
                                 
 
                     </div><!-- /.box-body -->
+             
+
+
 
 
                 </form>

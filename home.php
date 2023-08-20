@@ -439,6 +439,8 @@ include "header.php";
                                             <th data-field="name" data-sortable='true'>Name</th>
                                             <th data-field="mobile">Mobile</th>
                                             <th data-field="today_codes" data-sortable='true'>Codes</th>
+                                            <th data-field="today_mails" data-sortable='true'>Mails</th>
+                                            <th data-field="project_type" data-sortable='true'>Project Type</th>
                                             <th data-field="support" data-sortable='true'>Support</th>
                                             <th data-field="earn" >Earn</th>
                                             <th data-field="duration" data-sortable='true'>Duration</th>

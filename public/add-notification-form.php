@@ -122,6 +122,15 @@ if (isset($_POST['btnd'])) {
                                 </select>
                             </div>
                         </div>
+                        <div class="row">
+                        <div class="col-md-3">
+                                   <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
+                                    <select id='project_type' name="project_type" class='form-control'>
+                                     <option value='abcd' >abcd</option>
+                                      <option value='amail'>amail</option>
+                                    </select>
+                                    </div>
+                        </div>
 
                     </div>
                     <!-- /.box-body -->

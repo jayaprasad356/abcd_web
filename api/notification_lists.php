@@ -21,25 +21,31 @@ if (empty($_POST['user_id'])) {
     return false;
 }
 $user_id = $db->escapeString($_POST['user_id']);
-$sql = "SELECT status,joined_date FROM `users` WHERE id = $user_id ";
+$sql = "SELECT project_type,status,joined_date FROM `users` WHERE id = $user_id ";
 $db->sql($sql);
 $res = $db->getResult();
 $status = $res[0]['status'];
 $joined_date = $res[0]['joined_date'];
+$project_type = $res[0]['project_type'];
 $expiry_date = '2023-02-06';
 
 $joined_timestamp = strtotime($joined_date);
 $expiry_timestamp = strtotime($expiry_date);
+$join = '';
+if($project_type == 'amail'){
+    $join = "AND project_type = '$project_type'";
+
+}
 if($status == 0){
-    $sql = "SELECT * FROM `notifications` WHERE send_to = 0 OR send_to = 1 ORDER BY id DESC LIMIT 20 ";
+    $sql = "SELECT * FROM `notifications` WHERE send_to = 0 OR send_to = 1 $join ORDER BY id DESC LIMIT 20 ";
 
 }
 elseif($joined_timestamp >= $expiry_timestamp ||  $status == 0){
-    $sql = "SELECT * FROM `notifications` WHERE send_to = 0 OR send_to = 2 OR send_to = 3 ORDER BY id DESC LIMIT 20 ";
+    $sql = "SELECT * FROM `notifications` WHERE send_to = 0 OR send_to = 2 OR send_to = 3 $join ORDER BY id DESC LIMIT 20 ";
 
 }
 else{
-    $sql = "SELECT * FROM `notifications` WHERE send_to = 0 OR send_to = 2 ORDER BY id DESC LIMIT 20 ";
+    $sql = "SELECT * FROM `notifications` WHERE send_to = 0 OR send_to = 2 $join ORDER BY id DESC LIMIT 20 ";
 
 
 }
