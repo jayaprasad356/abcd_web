@@ -96,7 +96,8 @@ if (isset($_POST['btnEdit'])) {
                 $user_project_type = $res[0]['project_type'];
                 if($user_project_type == 'amail'){
                     $user_current_refers = $res[0]['current_refers'];
-                    if($user_current_refers >= $target_refers){
+                    $user_target_refers = $res[0]['target_refers'];
+                    if($user_current_refers >= $user_target_refers){
                         $referral_bonus = 1000;
 
                     }else{

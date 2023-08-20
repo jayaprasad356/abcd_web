@@ -139,6 +139,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
         $tempRow['registered_date'] = $row['registered_date'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
+        $tempRow['project_type'] = $row['project_type'];
+        
         $tempRow['password'] = $row['password'];
         $tempRow['plan'] = $row['plan'];
         $tempRow['dob'] = $row['dob'];

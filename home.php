@@ -221,13 +221,13 @@ include "header.php";
                         <div class="inner">
                             <h3><?php
                                 $currentdate = date('Y-m-d');
-                                $sql = "SELECT SUM(codes) AS codes FROM transactions WHERE task_type = 'champion' AND DATE(datetime) = '$currentdate'";
+                                $sql = "SELECT COUNT(id) AS total FROM users WHERE status=1 AND code_generate = 1 AND today_codes != 0 AND project_type = 'amail'";
                                 $db->sql($sql);
                                 $res = $db->getResult();
-                                $num = $res[0]['codes'];
+                                $num = $res[0]['total'];
                                 echo $num;
                                 ?></h3>
-                                <p>Champions Today Codes</p>
+                                <p>Amail Active Users</p>
                         </div>
                        
                         <a href="champion_users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
