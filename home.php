@@ -244,13 +244,13 @@ include "header.php";
                                 } else {
                                     $join1="";
                                 }
-                                $sql = "SELECT id FROM users WHERE joined_date= '$currentdate' AND status=1 $join1";
+                                $sql = "SELECT u.id FROM users u,transactions t WHERE u.id = t.user_id AND t.type = 'register_bonus' AND DATE(t.datetime) = '$currentdate' AND u.joined_date= '$currentdate' AND u.status=1 $join1";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $num = $db->numRows($res);
                                 echo $num;
                                 ?></h3>
-                                <p>Today Registration</p>
+                                <p>Today Joins</p>
                         </div>
                         
                         <a href="users.php?date=<?php echo date('Y-m-d') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
