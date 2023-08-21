@@ -221,7 +221,7 @@ include "header.php";
                         <div class="inner">
                             <h3><?php
                                 $currentdate = date('Y-m-d');
-                                $sql = "SELECT COUNT(id) AS total FROM users WHERE status=1 AND code_generate = 1 AND today_codes != 0 AND project_type = 'amail'";
+                                $sql = "SELECT COUNT(id) AS total FROM users WHERE status=1 AND code_generate = 1 AND today_mails != 0 AND project_type = 'amail'";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $num = $res[0]['total'];
