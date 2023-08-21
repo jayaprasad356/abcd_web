@@ -237,7 +237,7 @@ if (isset($_POST['btnEdit'])) {
         if($status == 1 && ($join_type == 1 || $join_type == 2)){
             $total_codes = 0;
             $today_codes = 0;
-            $join_codes = 500;
+      
             $withdrawal = 0;
             $worked_days = 0;
             $level = 1;
@@ -245,15 +245,18 @@ if (isset($_POST['btnEdit'])) {
             $per_code_val = 1;
             $salary_advance_balance = 200;
             $joined_date = $date;
-            $amount = $join_codes  * $per_code_cost;
-            $register_bonus = $amount;
-            $total_codes = $total_codes + $join_codes;
-            $today_codes = $today_codes + $join_codes;
+
             $incentives = 25;
             
-            $earn = $earn + $register_bonus;
-            $balance = $balance + $register_bonus;
+
             if($join_type == 1){
+                $join_codes = 500;
+                $amount = $join_codes  * $per_code_cost;
+                $register_bonus = $amount;
+                $total_codes = $total_codes + $join_codes;
+                $today_codes = $today_codes + $join_codes;
+                $earn = $earn + $register_bonus;
+                $balance = $balance + $register_bonus;
                 $referred_by = 'rejoin';
                 $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,$amount,$join_codes,'$datetime','register_bonus')";
                 $db->sql($sql_query);
