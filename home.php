@@ -244,11 +244,15 @@ include "header.php";
                                 } else {
                                     $join1="";
                                 }
+                                $sql = "SELECT t.id FROM transactions t WHERE t.type = 'register_amail' AND DATE(t.datetime) = '$currentdate'";
+                                $db->sql($sql);
+                                $res = $db->getResult();
+                                $anum = $db->numRows($res);
                                 $sql = "SELECT u.id FROM users u,transactions t WHERE u.id = t.user_id AND t.type = 'register_bonus' AND DATE(t.datetime) = '$currentdate' AND u.joined_date= '$currentdate' AND u.status=1 $join1";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $num = $db->numRows($res);
-                                echo $num;
+                                echo $num.'/'.$anum;
                                 ?></h3>
                                 <p>Today Joins</p>
                         </div>
