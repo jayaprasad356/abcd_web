@@ -18,7 +18,7 @@ $fn->monitorApi('reset_codes');
 date_default_timezone_set('Asia/Kolkata');
 
 
-$sql = "UPDATE `users` SET `today_codes` = 0";
+$sql = "UPDATE `users` SET `today_codes` = 0,`today_mails` = 0";
 $db->sql($sql);
 
 echo 'Time Updated';
