@@ -515,12 +515,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     foreach ($res as $row)
         $total = $row['total'];
         if (isset($_GET['search']) && !empty($_GET['search'])) {
-            $sql = "SELECT w.id AS id,w.*,w.withdrawal_type,u.name,u.total_codes,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,DATEDIFF( '$currentdate',u.joined_date) AS history,b.branch,b.bank,b.account_num,b.ifsc,b.holder_name FROM `withdrawals` w,`users` u,`bank_details` b $join
+            $sql = "SELECT w.id AS id,w.*,w.withdrawal_type,u.name,u.total_codes,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,DATEDIFF( '$currentdate',u.joined_date) AS history,b.branch,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
                         $where ORDER BY $sort $order LIMIT $offset, $limit";
              $db->sql($sql);
         }
         else{
-            $sql = "SELECT w.id AS id,w.*,w.withdrawal_type,u.name,u.total_codes,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,DATEDIFF( '$currentdate',u.joined_date) AS history,b.branch,b.bank,b.account_num,b.ifsc,b.holder_name FROM `withdrawals` w,`users` u,`bank_details` b $join
+            $sql = "SELECT w.id AS id,w.*,w.withdrawal_type,u.name,u.total_codes,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,DATEDIFF( '$currentdate',u.joined_date) AS history,b.branch,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
                     AND w.status=0 $where ORDER BY $sort $order LIMIT $offset, $limit";
              $db->sql($sql);
         }
@@ -545,6 +545,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['account_num'] = ','.$row['account_num'].',';
         $tempRow['holder_name'] = $row['holder_name'];
         $tempRow['withdrawal_type'] = $row['withdrawal_type'];
+        $tempRow['project_type'] = $row['project_type'];
         $tempRow['bank'] = $row['bank'];
         $tempRow['branch'] = $row['branch'];
         $tempRow['total_codes'] = $row['total_codes'];
