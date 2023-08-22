@@ -178,6 +178,8 @@ if (isset($_POST['btnEdit'])) {
             if($project_type == 'amail'){
                 $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
+                $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,0,0,'$datetime','register_amail')";
+                $db->sql($sql_query);
                 if(strlen($referred_by) == 3){
                     $incentives = 125;
                 }else{
