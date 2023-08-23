@@ -198,6 +198,8 @@ if ($num == 1) {
     $response['status'] = $res[0]['status'];
     $response['refund_wallet'] = $res[0]['refund_wallet'];
     $response['total_refund'] = $res[0]['total_refund'];
+    $response['daily_wallet'] = $res[0]['daily_wallet'];
+    $response['monthly_wallet'] = $res[0]['monthly_wallet'];
     print_r(json_encode($response));
 
 }
