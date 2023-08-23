@@ -682,6 +682,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                             <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
                                           </div>
                                       </div>
+
                                       <div class="col-md-3">
                                          <label for="exampleInputEmail1">Daily Wallet</label><i class="text-danger asterik">*</i>
                                             <input type="number" class="form-control" name="daily_wallet" value="<?php echo $res[0]['daily_wallet']; ?>">
@@ -692,8 +693,9 @@ if (isset($_POST['btnCancel'])) { ?>
                                             <input type="number" class="form-control" name="monthly_wallet" value="<?php echo $res[0]['monthly_wallet']; ?>">
                                           </div>
                                       </div>
+
                                    </div>
-                                
+                                   </div>
 
                                </div><!-- /.box-body -->
                 </form>
