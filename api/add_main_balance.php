@@ -45,7 +45,7 @@ if ($num == 1) {
     $status = $res[0]['status'];
     $project_type = $res[0]['project_type'];
 
-    if ($status == 0 || ($status == 1 && $project_type != 'amail')) {
+    if ($status == 0 || (($wallet_type == 'earnings_wallet' || $wallet_type == 'bonus_wallet' ) && $status == 1 && $project_type != 'amail')) {
         $response['success'] = false;
         $response['message'] = "You Should Purchase Amail Plan";
         print_r(json_encode($response));
