@@ -177,7 +177,7 @@ if ($num == 1) {
 
     }
 
-    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails  FROM users WHERE id = $user_id ";
+    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails,daily_wallet,monthly_wallet  FROM users WHERE id = $user_id ";
     $db->sql($sql);
     $res = $db->getResult();
     
