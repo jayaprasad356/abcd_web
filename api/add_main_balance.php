@@ -40,6 +40,8 @@ if ($num == 1) {
     $bonus_wallet = $res[0]['bonus_wallet'];
     $current_refers = $res[0]['current_refers'];
     $target_refers = $res[0]['target_refers'];
+    $daily_wallet = $res[0]['daily_wallet'];
+    $monthly_wallet = $res[0]['monthly_wallet'];
     $status = $res[0]['status'];
     $project_type = $res[0]['project_type'];
 
@@ -60,6 +62,32 @@ if ($num == 1) {
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'earnings_wallet','$datetime',$earnings_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + earnings_wallet,earnings_wallet = 0 WHERE id=" . $user_id;
+        $db->sql($sql);
+
+    }
+    if($wallet_type == 'daily_wallet'){
+        if ($daily_wallet < 51)  {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹51 to add balance";
+            print_r(json_encode($response));
+            return false;
+        }
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'daily_wallet','$datetime',$daily_wallet)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + daily_wallet,daily_wallet = 0 WHERE id=" . $user_id;
+        $db->sql($sql);
+
+    }
+    if($wallet_type == 'monthly_wallet'){
+        if ($monthly_wallet < 5000)  {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹5000 to add balance";
+            print_r(json_encode($response));
+            return false;
+        }
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
 
     }
