@@ -150,35 +150,19 @@ if ($num == 1) {
                         print_r(json_encode($response));
                         return false;
                     }
+                    $amount = $codes * 0.17;
+                    $d_amount = $codes * 0.05;
+                    $m_amount = $codes * 0.12;
             
                     $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`,`task_type`)VALUES('$user_id','$codes','$amount','$datetime','$type','$task_type')";
                     $db->sql($sql);
                     $res = $db->getResult();
-                
-                    $sql = "UPDATE `users` SET  `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`earn` = earn + $amount,`balance` = balance + $amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
+
+                                
+                    $sql = "UPDATE `users` SET `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`daily_wallet` = daily_wallet + $d_amount,`monthly_wallet` = monthly_wallet + $m_amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
                     $db->sql($sql);
             
             
-                    $sql = "SELECT referred_by  FROM users WHERE id = $user_id AND status = 1";
-                    $db->sql($sql);
-                    $res = $db->getResult();
-                    $num = $db->numRows($res);
-                    
-                
-                    if($num == 1){
-                        $referred_by = $res[0]['referred_by'];
-                    
-                        
-                        $referamtcode = $codes * REFER_COST_PER_CODE;
-                        
-                        $sql = "SELECT id,mobile FROM users WHERE `refer_code` = '$referred_by' ";
-                        $db->sql($sql);
-                        $rep= $db->getResult();
-                        $sql = "UPDATE `users` SET  `sync_refer_wallet` = sync_refer_wallet + $referamtcode WHERE `refer_code` = '$referred_by'";
-                        $db->sql($sql);
-                        $response['sync'] = "Code Sync Successfully";
-                
-                    }
                 }
             
             
