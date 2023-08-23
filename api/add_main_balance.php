@@ -66,9 +66,9 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'daily_wallet'){
-        if ($daily_wallet < 51)  {
+        if ($daily_wallet < 60)  {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹51 to add balance";
+            $response['message'] = "Minimum ₹60 to add balance";
             print_r(json_encode($response));
             return false;
         }
@@ -79,9 +79,9 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        if ($monthly_wallet < 5000)  {
+        if ($monthly_wallet < 60)  {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹5000 to add balance";
+            $response['message'] = "Minimum ₹60 to add balance";
             print_r(json_encode($response));
             return false;
         }
