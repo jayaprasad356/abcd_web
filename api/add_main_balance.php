@@ -71,10 +71,10 @@ if ($num == 1) {
     }
     if($wallet_type == 'daily_wallet'){
         if($plan == 30){
-            $min_daily_wallet = 60;
+            $min_daily_wallet = 100;
 
         }else{
-            $min_daily_wallet = 100;
+            $min_daily_wallet = 60;
 
         }
         if ($daily_wallet < $min_daily_wallet)  {
