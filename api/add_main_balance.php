@@ -44,10 +44,14 @@ if ($num == 1) {
     $monthly_wallet = $res[0]['monthly_wallet'];
     $status = $res[0]['status'];
     $project_type = $res[0]['project_type'];
+    $plan = $res[0]['plan'];
+    $worked_days = $res[0]['worked_days'];
+    $duration = $res[0]['duration'];
+
 
     if ($status == 0 || (($wallet_type == 'earnings_wallet' || $wallet_type == 'bonus_wallet' ) && $status == 1 && $project_type != 'amail')) {
         $response['success'] = false;
-        $response['message'] = "You Should Purchase Amail Plan";
+        $response['message'] = "Purchase Plan";
         print_r(json_encode($response));
         return false;
     }
@@ -66,9 +70,16 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'daily_wallet'){
-        if ($daily_wallet < 60)  {
+        if($plan == 30){
+            $min_daily_wallet = 60;
+
+        }else{
+            $min_daily_wallet = 100;
+
+        }
+        if ($daily_wallet < $min_daily_wallet)  {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹60 to add balance";
+            $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
             print_r(json_encode($response));
             return false;
         }
@@ -79,9 +90,9 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        if ($monthly_wallet < 60)  {
+        if ($worked_days < $duration)  {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹60 to add balance";
+            $response['message'] = "Withdraw After Plan Days";
             print_r(json_encode($response));
             return false;
         }
