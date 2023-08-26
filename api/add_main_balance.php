@@ -47,6 +47,7 @@ if ($num == 1) {
     $plan = $res[0]['plan'];
     $worked_days = $res[0]['worked_days'];
     $duration = $res[0]['duration'];
+    $level = $res[0]['level'];
 
 
     if ($status == 0 || (($wallet_type == 'earnings_wallet' || $wallet_type == 'bonus_wallet' ) && $status == 1 && $project_type != 'amail')) {
@@ -120,6 +121,26 @@ if ($num == 1) {
         $sql = "UPDATE users SET balance= balance + bonus_wallet,bonus_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
     
+    }
+    if($wallet_type == 'target_bonus'){
+        if ($project_type == 'abcd')  {
+            $amount = 2000;
+            if($level != 5){
+                $response['success'] = false;
+                $response['message'] = "Reach Level 5 and get bonus";
+                print_r(json_encode($response));
+                return false;
+
+            }
+
+        }else{
+            $amount = 500;
+        }
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'target_bonus','$datetime',$amount)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + $amount,earn = earn + $amount WHERE id=" . $user_id;
+        $db->sql($sql);
+
     }
 
     $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
