@@ -150,35 +150,19 @@ if ($num == 1) {
                         print_r(json_encode($response));
                         return false;
                     }
+                    $amount = $codes * 0.17;
+                    $d_amount = $codes * 0.05;
+                    $m_amount = $codes * 0.12;
             
                     $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`,`task_type`)VALUES('$user_id','$codes','$amount','$datetime','$type','$task_type')";
                     $db->sql($sql);
                     $res = $db->getResult();
-                
-                    $sql = "UPDATE `users` SET  `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`earn` = earn + $amount,`balance` = balance + $amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
+
+                                
+                    $sql = "UPDATE `users` SET `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`daily_wallet` = daily_wallet + $d_amount,`monthly_wallet` = monthly_wallet + $m_amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
                     $db->sql($sql);
             
             
-                    $sql = "SELECT referred_by  FROM users WHERE id = $user_id AND status = 1";
-                    $db->sql($sql);
-                    $res = $db->getResult();
-                    $num = $db->numRows($res);
-                    
-                
-                    if($num == 1){
-                        $referred_by = $res[0]['referred_by'];
-                    
-                        
-                        $referamtcode = $codes * REFER_COST_PER_CODE;
-                        
-                        $sql = "SELECT id,mobile FROM users WHERE `refer_code` = '$referred_by' ";
-                        $db->sql($sql);
-                        $rep= $db->getResult();
-                        $sql = "UPDATE `users` SET  `sync_refer_wallet` = sync_refer_wallet + $referamtcode WHERE `refer_code` = '$referred_by'";
-                        $db->sql($sql);
-                        $response['sync'] = "Code Sync Successfully";
-                
-                    }
                 }
             
             
@@ -193,7 +177,7 @@ if ($num == 1) {
 
     }
 
-    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails  FROM users WHERE id = $user_id ";
+    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails,daily_wallet,monthly_wallet  FROM users WHERE id = $user_id ";
     $db->sql($sql);
     $res = $db->getResult();
     
@@ -214,6 +198,8 @@ if ($num == 1) {
     $response['status'] = $res[0]['status'];
     $response['refund_wallet'] = $res[0]['refund_wallet'];
     $response['total_refund'] = $res[0]['total_refund'];
+    $response['daily_wallet'] = $res[0]['daily_wallet'];
+    $response['monthly_wallet'] = $res[0]['monthly_wallet'];
     print_r(json_encode($response));
 
 }
