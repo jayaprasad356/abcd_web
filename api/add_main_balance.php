@@ -75,19 +75,29 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'daily_wallet'){
-        if($plan == 30){
-            $min_daily_wallet = 100;
-
-        }else{
-            $min_daily_wallet = 60;
-
-        }
-        if ($daily_wallet < $min_daily_wallet)  {
+        if ($daily_wallet == 0)  {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
+            $response['message'] = "Your wallet is empty";
             print_r(json_encode($response));
             return false;
         }
+        if ($level < 3)  {
+            if($plan == 30){
+                $min_daily_wallet = 100;
+    
+            }else{
+                $min_daily_wallet = 60;
+    
+            }
+            if ($daily_wallet < $min_daily_wallet)  {
+                $response['success'] = false;
+                $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
+                print_r(json_encode($response));
+                return false;
+            }
+
+        }
+
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'daily_wallet','$datetime',$daily_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + daily_wallet,earn = earn + daily_wallet,daily_wallet = 0 WHERE id=" . $user_id;
@@ -101,9 +111,9 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if ($worked_days < $duration && $level < 2)  {
+        if ($worked_days < $duration && $level < 3)  {
             $response['success'] = false;
-            $response['message'] = "Reach above level 2 to withdraw";
+            $response['message'] = "Reach level 3 and above to withdraw";
             print_r(json_encode($response));
             return false;
         }
