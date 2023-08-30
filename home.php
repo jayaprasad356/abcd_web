@@ -176,11 +176,11 @@ include "header.php";
                         <div class="inner">
                             <h3><?php
                             $currentdate = date('Y-m-d');
-                            $sql = "SELECT COUNT(t.id) AS total FROM `transactions` t,`users` u  WHERE t.user_id = u.id AND t.type = 'refer_bonus' AND DATE(t.datetime) = '$currentdate' AND u.project_type = 'amail' GROUP BY u.id";
+                            $sql = "SELECT u.id FROM `transactions` t,`users` u  WHERE t.user_id = u.id AND t.type = 'refer_bonus' AND DATE(t.datetime) = '$currentdate' AND u.project_type = 'amail' GROUP BY u.id";
                             $db->sql($sql);
                             $res = $db->getResult();
-                            $total = $res[0]['total'];
-                            echo $total;
+                            $num = $db->numRows($res);
+                            echo $num;
                              ?></h3>
                             <p>Today Amail Users Refer Count</p>
                         </div>
