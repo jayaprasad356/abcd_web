@@ -158,19 +158,6 @@ include "header.php";
                     <div class="small-box bg-purple">
                         <div class="inner">
                             <h3><?php
-                            // if($_SESSION['role'] == 'Super Admin'){
-                            //     $join = "WHERE id IS NOT NULL AND task_type='champion'";
-                            // }
-                            // else{
-                            //     $refer_code = $_SESSION['refer_code'];
-                            //     $join = "WHERE refer_code REGEXP '^$refer_code' AND task_type='champion'";
-                            // }
-                            // $branch_id = (isset($_POST['branch_id']) && $_POST['branch_id']!='') ? $_POST['branch_id'] :"";
-                            // if ($branch_id != '') {
-                            //     $join1="AND branch_id='$branch_id'";
-                            // } else {
-                            //     $join1="";
-                            // }
                             $currentdate = date('Y-m-d');
                             $sql = "SELECT t.id FROM transactions t,users u WHERE t.user_id = u.id AND u.l_referral_count = 1 AND t.type = 'refer_bonus' AND DATE(t.datetime) = '$currentdate' GROUP BY user_id";
                             $db->sql($sql);
@@ -179,6 +166,23 @@ include "header.php";
                             echo $num;
                              ?></h3>
                             <p>Today New Referred Users</p>
+                        </div>
+                        
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-orange">
+                        <div class="inner">
+                            <h3><?php
+                            $currentdate = date('Y-m-d');
+                            $sql = "SELECT COUNT(t.id) FROM `transactions` t,`users` u  WHERE t.user_id = u.id AND t.type = 'refer_bonus' AND DATE(t.datetime) = 'currentdate' AND u.project_type = 'amail' GROUP BY u.id";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $db->numRows($res);
+                            echo $num;
+                             ?></h3>
+                            <p>Today Amail Users Refer Count</p>
                         </div>
                         
                         <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
