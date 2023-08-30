@@ -20,7 +20,7 @@ if (empty($_POST['staff_id'])) {
 }
 $staff_id = $db->escapeString($_POST['staff_id']);
 
-$sql = "SELECT * FROM users WHERE lead_id = $staff_id AND status = 0 ORDER BY registered_date DESC LIMIT 100";
+$sql = "SELECT * FROM users WHERE support_id = $staff_id AND status = 0 ORDER BY registered_date DESC LIMIT 100";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);

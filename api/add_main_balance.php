@@ -40,12 +40,23 @@ if ($num == 1) {
     $bonus_wallet = $res[0]['bonus_wallet'];
     $current_refers = $res[0]['current_refers'];
     $target_refers = $res[0]['target_refers'];
+    $daily_wallet = $res[0]['daily_wallet'];
+    $monthly_wallet = $res[0]['monthly_wallet'];
     $status = $res[0]['status'];
     $project_type = $res[0]['project_type'];
+    $plan = $res[0]['plan'];
+    $worked_days = $res[0]['worked_days'];
+    $duration = $res[0]['duration'];
+    $level = $res[0]['level'];
+    $sync_refer_wallet = $res[0]['sync_refer_wallet'];
+    $target_bonus_sent = $res[0]['target_bonus_sent'];
+    $num_target_bonus = $res[0]['num_target_bonus'];
+    $joined_date = $res[0]['num_target_bonus'];
 
-    if ($status == 0 || ($status == 1 && $project_type != 'amail')) {
+
+    if ($status == 0 || (($wallet_type == 'earnings_wallet' || $wallet_type == 'bonus_wallet' ) && $status == 1 && $project_type != 'amail')) {
         $response['success'] = false;
-        $response['message'] = "You Should Purchase Amail Plan";
+        $response['message'] = "Purchase Plan";
         print_r(json_encode($response));
         return false;
     }
@@ -59,7 +70,40 @@ if ($num == 1) {
         }
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'earnings_wallet','$datetime',$earnings_wallet)";
         $db->sql($sql);
-        $sql = "UPDATE users SET balance= balance + earnings_wallet,earnings_wallet = 0 WHERE id=" . $user_id;
+        $sql = "UPDATE users SET balance= balance + earnings_wallet,earn = earn + earnings_wallet,earnings_wallet = 0 WHERE id=" . $user_id;
+        $db->sql($sql);
+
+    }
+    if($wallet_type == 'daily_wallet'){
+        if($plan == 30){
+            $min_daily_wallet = 100;
+
+        }else{
+            $min_daily_wallet = 60;
+
+        }
+        if ($daily_wallet < $min_daily_wallet)  {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
+            print_r(json_encode($response));
+            return false;
+        }
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'daily_wallet','$datetime',$daily_wallet)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + daily_wallet,earn = earn + daily_wallet,daily_wallet = 0 WHERE id=" . $user_id;
+        $db->sql($sql);
+
+    }
+    if($wallet_type == 'monthly_wallet'){
+        if ($worked_days < $duration)  {
+            $response['success'] = false;
+            $response['message'] = "Withdraw After Plan Days";
+            print_r(json_encode($response));
+            return false;
+        }
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
 
     }
@@ -78,9 +122,63 @@ if ($num == 1) {
         }
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$bonus_wallet)";
         $db->sql($sql);
-        $sql = "UPDATE users SET balance= balance + bonus_wallet,bonus_wallet = 0 WHERE id=" . $user_id;
+        $sql = "UPDATE users SET balance= balance + bonus_wallet,earn = earn + bonus_wallet,bonus_wallet = 0 WHERE id=" . $user_id;
         $db->sql($sql);
     
+    }
+    if($wallet_type == 'target_bonus'){
+        $response['success'] = false;
+        $response['message'] = "Disabled";
+        print_r(json_encode($response));
+        return false;
+        if ($status == 0) {
+            $response['success'] = false;
+            $response['message'] = "Purchase Plan";
+            print_r(json_encode($response));
+            return false;
+        }
+        if ($project_type == 'amail')  {
+            $amount = 500;
+            $total_num = intval($worked_days / 30);
+
+            if($num_target_bonus > $total_num && $current_refers >= $target_refers){
+                $amount = $amount - $sync_refer_wallet;
+                $sql = "UPDATE users SET num_target_bonus = num_target_bonus + 1,balance= balance + $amount,earn = earn + $amount,sync_refer_wallet = 0,target_bonus_sent = 1 WHERE id=" . $user_id;
+                $db->sql($sql);
+                $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'target_bonus','$datetime',$amount)";
+                $db->sql($sql);
+
+            }
+            echo $total_num;
+
+
+        }else{
+
+
+            $amount = 2000;
+            if($level != 5){
+                $response['success'] = false;
+                $response['message'] = "Reach Level 5 and get bonus";
+                print_r(json_encode($response));
+                return false;
+            }
+            if ($target_bonus_sent == 1) {
+                $response['success'] = false;
+                $response['message'] = "You Already claimed bonus";
+                print_r(json_encode($response));
+                return false;
+            }
+            
+
+            $amount = $amount - $sync_refer_wallet;
+            $sql = "UPDATE users SET balance= balance + $amount,earn = earn + $amount,sync_refer_wallet = 0,target_bonus_sent = 1 WHERE id=" . $user_id;
+            $db->sql($sql);
+            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'target_bonus','$datetime',$amount)";
+            $db->sql($sql);
+        }
+
+
+
     }
 
     $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";

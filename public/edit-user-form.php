@@ -33,6 +33,7 @@ if (isset($_POST['btnEdit'])) {
             $withdrawal_status = $db->escapeString(($_POST['withdrawal_status']));
             $refer_bonus_sent = (isset($_POST['refer_bonus_sent']) && !empty($_POST['refer_bonus_sent'])) ? $db->escapeString($_POST['refer_bonus_sent']) : 0;
             $register_bonus_sent = (isset($_POST['register_bonus_sent']) && !empty($_POST['register_bonus_sent'])) ? $db->escapeString($_POST['register_bonus_sent']) : 0;
+            $target_bonus_sent = (isset($_POST['target_bonus_sent']) && !empty($_POST['target_bonus_sent'])) ? $db->escapeString($_POST['target_bonus_sent']) : 0;
             $referred_by = (isset($_POST['referred_by']) && !empty($_POST['referred_by'])) ? $db->escapeString($_POST['referred_by']) : "";
             $earn = (isset($_POST['earn']) && !empty($_POST['earn'])) ? $db->escapeString($_POST['earn']) : 0;
             $code_generate = (isset($_POST['code_generate']) && !empty($_POST['code_generate'])) ? $db->escapeString($_POST['code_generate']) : 0;
@@ -65,6 +66,9 @@ if (isset($_POST['btnEdit'])) {
             $total_mails = $db->escapeString(($_POST['total_mails']));
             $current_refers = $db->escapeString(($_POST['current_refers']));
             $target_refers = $db->escapeString(($_POST['target_refers']));
+            $daily_wallet = $db->escapeString(($_POST['daily_wallet']));
+            $monthly_wallet = $db->escapeString(($_POST['monthly_wallet']));
+
             $error = array();
 
             if (empty($lead_id)) {
@@ -247,6 +251,7 @@ if (isset($_POST['btnEdit'])) {
             $per_code_val = 1;
             $salary_advance_balance = 200;
             $joined_date = $date;
+            $target_bonus_sent = 0;
 
             $incentives = 25;
             
@@ -259,6 +264,7 @@ if (isset($_POST['btnEdit'])) {
                 $today_codes = $today_codes + $join_codes;
                 $earn = $earn + $register_bonus;
                 $balance = $balance + $register_bonus;
+
                 $referred_by = 'rejoin';
                 $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,$amount,$join_codes,'$datetime','register_bonus')";
                 $db->sql($sql_query);
@@ -293,7 +299,7 @@ if (isset($_POST['btnEdit'])) {
 
         }
     
-        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers  WHERE id =  $ID";
+        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -353,6 +359,7 @@ if (isset($_POST['btnCancel'])) { ?>
                 <form id="edit_user_form" method="post" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" name="refer_bonus_sent" value="<?php echo $res[0]['refer_bonus_sent']; ?>">
                     <input type="hidden" class="form-control" name="register_bonus_sent" value="<?php echo $res[0]['register_bonus_sent']; ?>">
+                    <input type="hidden" class="form-control" name="target_bonus_sent" value="<?php echo $res[0]['target_bonus_sent']; ?>">
                     <div class="box-body">
                     <div class="row">
                             <div class="form-group">
@@ -642,62 +649,62 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="checkbox" id="black_box_button" class="js-switch" <?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="black_box" name="black_box" value="<?= isset($res[0]['black_box']) && $res[0]['black_box'] == 1 ? 1 : 0 ?>">
                                 </div>
-                            </div>
-                        </div>
+                              </div>
+                           </div>
+                         </div>
                         <br>
                         <div class="row">   
                                   <div class="form-group">
-
                                     <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
-                                 </div>
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
-                                     <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
+                                       <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
                                      </div>
-                                     <div class="col-md-3">
+                                 <div class="col-md-3">
+                                        <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
+                                    </div>
+                                <div class="col-md-3">
                                          <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
-                                           <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
-                                             </div>
-                                     <div class="col-md-3">
-                                            <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
-                                            <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
-                                           </div>
-                                       </div>
+                                         <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
+                                     </div>
+                                <div class="col-md-3">
+                                         <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
+                                         <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                         <br>
+                     <div class="row">   
+                            <div class="form-group">
+                                  <div class="col-md-3">
+                                        <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>">
+                                    </div>
+                                 <div class="col-md-3">
+                                        <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
+                                         <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
+                                    </div>
+                                 <div class="col-md-3">
+                                        <label for="exampleInputEmail1">Daily Wallet</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="daily_wallet" value="<?php echo $res[0]['daily_wallet']; ?>">
+                                    </div>
+                                <div class="col-md-3">
+                                       <label for="exampleInputEmail1">Monthly Wallet</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="monthly_wallet" value="<?php echo $res[0]['monthly_wallet']; ?>">
+                                     </div>
                                   </div>
-                                  <br>
-                                  <div class="row">   
-   <div class="form-group">
-
-        <div class="col-md-3">
-           <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
-           <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>">
-       </div>
-       <div class="col-md-3">
-           <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
-           <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
-       </div>
-  </div>
-                       </div>
-                                
-
-                    </div><!-- /.box-body -->
-             
-
-
-
-
-                </form>
-                <div class="form-group col-md-3">
+                             </div><!-- /.box-body -->
+                       </form>
+                     <br>
+                         <div class="form-group col-md-3">
                                 <h4 class="box-title"> </h4>
                                 <a class="btn btn-block btn-primary" href="add-codes.php?id=<?php echo $ID ?>"><i class="fa fa-plus-square"></i> Add Codes</a>
                             </div>
-                            <div class="form-group col-md-3">
+                         <div class="form-group col-md-3">
                                 <h4 class="box-title"> </h4>
                                 <a class="btn btn-block btn-success" href="add-balance.php?id=<?php echo $ID ?>"><i class="fa fa-plus-square"></i>  Add Balance</a>
                             </div>
-                </div>
+                    </div>
                 <div class="box-header">
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
                 </div>

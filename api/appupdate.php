@@ -34,7 +34,7 @@ $sql = "SELECT * FROM app_settings";
 $db->sql($sql);
 $appres = $db->getResult();
 if($user_id != ''){
-    $sql = "SELECT l_referral_count,black_box,code_generate_time,total_referrals,withdrawal,last_updated,device_id,datediff('$date', joined_date) AS history_days,datediff('$datetime', last_updated) AS days,code_generate,withdrawal_status,status,joined_date,today_codes,refer_balance,trial_expired,task_type,champion_task_eligible,trial_count,mcg_timer,security,ongoing_sa_balance,salary_advance_balance,sa_refer_count,refund_wallet,total_refund,earn,refer_code,level,per_code_val,worked_days,project_type,bonus_wallet,earnings_wallet,today_mails,total_mails,target_refers  FROM users WHERE id = $user_id ";
+    $sql = "SELECT l_referral_count,black_box,code_generate_time,total_referrals,withdrawal,last_updated,device_id,datediff('$date', joined_date) AS history_days,datediff('$datetime', last_updated) AS days,code_generate,withdrawal_status,status,joined_date,today_codes,refer_balance,trial_expired,task_type,champion_task_eligible,trial_count,mcg_timer,security,ongoing_sa_balance,salary_advance_balance,sa_refer_count,refund_wallet,total_refund,earn,refer_code,level,per_code_val,worked_days,project_type,bonus_wallet,earnings_wallet,today_mails,total_mails,target_refers,daily_wallet,monthly_wallet  FROM users WHERE id = $user_id ";
     $db->sql($sql);
     $res = $db->getResult();
     $history_days = $res[0]['history_days'];
