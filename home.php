@@ -312,10 +312,11 @@ include "header.php";
                     <div class="small-box bg-teal">
                         <div class="inner">
                         <?php
-                          $sql = "SELECT COUNT(id) AS total FROM users WHERE today_mails";
-                          $db->sql($sql);
-                          $res = $db->getResult();
-                          $num = $res[0]['total'];
+                            $currentdate = date('Y-m-d');
+                            $sql = "SELECT SUM(mails) AS today_mails FROM transactions WHERE DATE(datetime) = '$currentdate'";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            $num = $res[0]['today_mails'];
                            ?>
                           <h3><?php echo $num; ?></h3>
                             <p>Today mails</p>
