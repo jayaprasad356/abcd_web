@@ -92,19 +92,24 @@
                             "fileName": "yellow app-users-list-<?= date('d-m-Y') ?>",
                             "ignoreColumn": ["operate"] 
                         }'>
-                            <thead>
-                                <tr>
-
-                                   <th data-field="operate">Action</th>
+                        <thead>
+                            <tr>
+                                    <th data-field="operate">Action</th>
                                     <th data-field="id" data-sortable="true">ID</th>
                                     <th data-field="registered_date" data-sortable="true">Registration Date</th>
-                                    <th data-field="name" data-sortable="true">Name</th>
-                                    <th data-field="mobile" data-sortable="true">Phone Number</th>
+                                    <th data-field="name" data-sortable="true">User Name</th>
+                                    <th data-field="mobile" data-sortable="true">Mobile Number</th>
+                                    <th data-field="referred_by" data-sortable="true">Referred By</th>
+                                    <th data-field="refer_code" data-sortable="true">Refer Code</th>
+                                   
+                                    <th data-field="lead_id" data-sortable="true">Lead</th>
+                                    <th data-field="support_id" data-sortable="true">Support</th>
+                                    
+                                    <?php if ($_SESSION['role'] == 'Super Admin') { ?>
                                     <th data-field="level" data-sortable="true">Level</th>
                                     <th data-field="status" data-sortable="true">Status</th>
                                     <th data-field="total_referrals" data-sortable="true">Total Referrals</th>
                                     <th data-field="plan" data-sortable="true">Plan</th>
-                                    <th data-field="project_type" data-sortable="true">Project Type</th>
                                     <th data-field="balance" data-sortable="true">Balance</th>
                                     <th data-field="withdrawal" data-sortable="true">Withdrawal</th>
                                     <th data-field="history" data-sortable="true">History</th>
@@ -112,16 +117,12 @@
                                     <th data-field="withdrawal_status" data-sortable="true">Withdrawal Status</th>
                                     <th data-field="today_codes" data-sortable="true">Today Codes</th>
                                     <th data-field="total_codes" data-sortable="true">Total Codes</th>
-                                    <th data-field="refer_code" data-sortable="true">Refer Code</th>
                                     <th data-field="refer_name" >Refer Name</th>
                                     <th data-field="refer_mobile" >Refer Mobile</th>
                                     <th data-field="refer_support" >Refer Support</th>
-                                    <th data-field="referred_by" data-sortable="true">Refered By</th>
                                     <th data-field="salary_advance_balance" data-sortable="true">Salary Advance Balance</th>
                                     <th data-field="ongoing_sa_balance" data-sortable="true">Ongoing SA Balance</th>
                                     <th data-field="sa_refer_count" data-sortable="true">SA Refer Count</th>
-                                    <th data-field="support_id" data-sortable="true">Support</th>
-                                    <th data-field="lead" data-sortable="true">Lead</th>
                                     <th data-field="branch" data-sortable="true">Branch</th>
                                     <th data-field="refund_wallet" data-sortable="true">Refund Wallet</th>
                                     <th data-field="total_refund" data-sortable="true">Total Refund</th>
@@ -132,11 +133,9 @@
                                     <th data-field="earn" data-sortable="true">Earn</th>
                                     <th data-field="password" data-sortable="true">Password</th>
                                     <th data-field="dob" data-sortable="true">Date of Birth</th>
-                                    
-
-                                    
-                                </tr>
-                            </thead>
+                                <?php } ?>
+                            </tr>
+                        </thead>
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -198,3 +197,4 @@
         };
     }
 </script>
+   

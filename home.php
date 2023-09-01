@@ -47,6 +47,8 @@ include "header.php";
             </ol>
         </section>
         <section class="content">
+        <?php
+                if($_SESSION['role'] == 'Super Admin'){?>
             <div class="row">
                 <div class="col-md-12">
                     <form id='employee_form' method="post" enctype="multipart/form-data">
@@ -74,13 +76,14 @@ include "header.php";
                     </form>
                 </div>
             </div>
+            <?php } ?>
             <br>
             <div class="row">
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
                             <h3><?php
-                            if($_SESSION['role'] == 'Super Admin'){
+                            if($_SESSION['role'] == 'Admin'){
                                 $join = "WHERE id IS NOT NULL";
                             }
                             else{
@@ -105,6 +108,8 @@ include "header.php";
                         <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <?php
+                if($_SESSION['role'] == 'Super Admin'){?>
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
@@ -135,8 +140,7 @@ include "header.php";
                         <a href="users.php?activeusers=1" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <?php
-                if($_SESSION['role'] == 'Super Admin'){?>
+
                     <div class="col-lg-4 col-xs-6">
                         <div class="small-box bg-teal">
                             <div class="inner">
@@ -153,7 +157,6 @@ include "header.php";
                             <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                <?php } ?>
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-purple">
                         <div class="inner">
@@ -484,6 +487,7 @@ include "header.php";
 
                     </div>
                 </div>
+                <?php } ?>
                 <!-- <div class="col-md-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -516,6 +520,7 @@ include "header.php";
         </section>
     </div>
     <script>
+    
         $('#filter_order').on('change', function() {
             $('#orders_table').bootstrapTable('refresh');
         });

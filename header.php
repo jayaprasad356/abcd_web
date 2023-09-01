@@ -185,7 +185,10 @@ $fn = new custom_functions;
                         <li><a href="champions.php"><i class="fa fa-trophy"></i>Task Champion Users</a></li> -->
                     </ul>
                 </li>
-                <li class="treeview">
+            
+                <?php
+                if($_SESSION['role'] == 'Super Admin'){?>
+                    <li class="treeview">
                     <a href="#">
                         <i class="fa fa-money"></i>
                         <span>Withdrawals</span>
@@ -197,8 +200,6 @@ $fn = new custom_functions;
                         <li><a href="bank_details.php"><i class="fa fa-bank"></i>Bank Details</a></li>
                     </ul>
                 </li>
-                <?php
-                if($_SESSION['role'] == 'Super Admin'){?>
                   <li class="treeview">
                     <a href="#">
                         <i class="fa fa-clipboard"></i>

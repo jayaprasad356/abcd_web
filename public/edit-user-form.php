@@ -507,7 +507,7 @@ if (isset($_POST['btnCancel'])) { ?>
                     </div>
                     <hr>
                         <br>
-
+                        <?php if ($_SESSION['role'] == 'Super Admin') { ?>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -519,11 +519,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <label for="exampleInputEmail1">Device Id</label>
                                     <input type="text" class="form-control" name="device_id" value="<?php echo $res[0]['device_id']; ?>">
                                 </div>
-
-
-
-
-
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Level Referral Count</label><i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="l_referral_count" value="<?php echo $res[0]['l_referral_count']; ?>">
@@ -709,6 +704,7 @@ if (isset($_POST['btnCancel'])) { ?>
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
                 </div>
             </div><!-- /.box -->
+            <?php } ?>
         </div>
     </div>
 </section>

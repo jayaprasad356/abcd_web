@@ -107,6 +107,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
     if($_SESSION['role'] == 'Super Admin'){
         $join = "LEFT JOIN `branches` b ON u.branch_id = b.id LEFT JOIN `staffs` e ON u.lead_id = e.id LEFT JOIN `staffs` s ON u.support_id = s.id WHERE u.id IS NOT NULL";
     }
+    if($_SESSION['role'] == 'Admin'){
+        $join = "LEFT JOIN `branches` b ON u.branch_id = b.id LEFT JOIN `staffs` e ON u.lead_id = e.id LEFT JOIN `staffs` s ON u.support_id = s.id WHERE u.id IS NOT NULL";
+    }
     else{
         $refer_code = $_SESSION['refer_code'];
         $join = "LEFT JOIN `branches` b ON u.branch_id = b.id LEFT JOIN `staffs` e ON u.lead_id = e.id LEFT JOIN `staffs` s ON u.support_id = s.id WHERE u.refer_code REGEXP '^$refer_code' ";
