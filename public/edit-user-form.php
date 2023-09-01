@@ -257,17 +257,8 @@ if (isset($_POST['btnEdit'])) {
             
 
             if($join_type == 1){
-                $join_codes = 500;
-                $amount = $join_codes  * $per_code_cost;
-                $register_bonus = $amount;
-                $total_codes = $total_codes + $join_codes;
-                $today_codes = $today_codes + $join_codes;
-                $earn = $earn + $register_bonus;
-                $balance = $balance + $register_bonus;
 
                 $referred_by = 'rejoin';
-                $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,$amount,$join_codes,'$datetime','register_bonus')";
-                $db->sql($sql_query);
     
                 $sql_query = "UPDATE staffs SET incentives = incentives + $incentives,earn = earn + $incentives,balance = balance + $incentives,supports = supports + 1 WHERE id =  $support_id";
                 $db->sql($sql_query);
