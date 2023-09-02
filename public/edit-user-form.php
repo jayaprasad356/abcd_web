@@ -384,7 +384,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Joined Date</label><i class="text-danger asterik">*</i>
-                                    <input type="date" class="form-control" name="joined_date" value="<?php echo $res[0]['joined_date']; ?>">
+                                    <input type="date" class="form-control" name="joined_date" value="<?php echo $res[0]['joined_date']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
+
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">E-mail</label><i class="text-danger asterik">*</i>

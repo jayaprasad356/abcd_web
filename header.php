@@ -177,9 +177,12 @@ $fn = new custom_functions;
                     </a>
                     <ul class="treeview-menu">
                     <li><a href="users.php"><i class="fa fa-users"></i>users</a></li>
+                    <?php
+                if($_SESSION['role'] == 'Super Admin'){?>
                     <li><a href="leaves.php"><i class="fa fa-calendar"></i>Leaves</a></li>
                     <li><a href="referral_users.php"><i class="fa fa-users"></i>6% Referral Income</a></li>
                     <li><a href="manage-devices.php"><i class="fa fa-laptop"></i>Manage Devices</a></li>
+                    <?php } ?>
                         <!-- <li><a href="bulk-upload-user.php"><i class="fa fa-folder-open"></i>User Bulk upload</a></li>
                         <li><a href="user_reports.php"><i class="fa fa-clipboard"></i>Users Reports</a></li>
                         <li><a href="champions.php"><i class="fa fa-trophy"></i>Task Champion Users</a></li> -->

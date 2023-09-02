@@ -134,7 +134,7 @@ include "header.php";
                             $num = $db->numRows($res);
                             echo $num;
                              ?></h3>
-                            <p>Active Users</p>
+                            <p>ABCD Active Users</p>
                         </div>
                         
                         <a href="users.php?activeusers=1" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>

@@ -15,9 +15,12 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
+                    <?php
+                if($_SESSION['role'] == 'Super Admin'){?>
                         <form action="export-user.php">
                             <button type='submit'  class="btn btn-primary"><i class="fa fa-download"></i> Export All Users</button>
                         </form>
+                        <?php } ?>
                         <br>
                         <div class="col-md-2">
                                 <h4 class="box-title">Joined Date </h4>

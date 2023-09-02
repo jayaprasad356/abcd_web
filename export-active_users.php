@@ -7,7 +7,7 @@ $date = $db->escapeString(($_POST['date']));
 
 $sql_query = "SELECT users.id,users.project_type,users.name, users.mobile, users.level, users.worked_days, users.duration, staffs.name AS staff_name, users.today_codes, users.earn, users.joined_date, users.l_referral_count 
     FROM users
-    JOIN transactions ON users.id = transactions.user_id JOIN staffs ON staffs.id = users.support_id WHERE DATE(transactions.datetime) = '$date' AND transactions.type = 'generate' GROUP BY users.id ORDER BY today_codes DESC";
+    JOIN transactions ON users.id = transactions.user_id JOIN staffs ON staffs.id = users.support_id WHERE DATE(transactions.datetime) = '$date' AND (transactions.type = 'generate' OR transactions.type = 'create_mail') GROUP BY users.id ORDER BY today_codes DESC";
 $db->sql($sql_query);
 $developer_records = $db->getResult();
 
