@@ -32,10 +32,10 @@ private $db_name = "u117947056_abcd";
 
 
 
-       //private $db_host = "localhost";
-       //private $db_user = "root";
-      // private $db_pass = ""; 
-     // private $db_name = "abcd"; 
+    //    private $db_host = "localhost";
+    //    private $db_user = "root";
+    //   private $db_pass = ""; 
+    //  private $db_name = "abcd"; 
 
 
     /*
