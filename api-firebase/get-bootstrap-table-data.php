@@ -556,10 +556,17 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['earnings_wallet'] = $row['earnings_wallet'];
         $tempRow['bonus_wallet'] = $row['bonus_wallet'];
         $tempRow['balance'] = $row['balance'];
-        $tempRow['account_num'] = $row['account_num'];
+        $tempRow['account_num'] = ','.$row['account_num'].',';
         $tempRow['holder_name'] = $row['holder_name'];
         $tempRow['bank'] = $row['bank'];
         $tempRow['ifsc'] = $row['ifsc'];
+
+        if($row['status']==1)
+            $tempRow['status'] ="<p class='text text-success'>Paid</p>";
+        elseif($row['status']==0)
+            $tempRow['status']="<p class='text text-primary'>Unpaid</p>";
+        else
+            $tempRow['status']="<p class='text text-danger'>Cancelled</p>";
         
         
 
