@@ -252,18 +252,19 @@ if (isset($_POST['export_all'])) {
                                         <th data-field="id" data-sortable="true">ID</th>
                                         <th data-field="name" data-sortable="true" data-visible="true" data-footer-formatter="totalFormatter">Name</th>
                                         <th data-field="amount" data-sortable="true" data-visible="true" data-footer-formatter="priceFormatter">Withdrawals Amount</th>
-                                        <th data-field="date" data-sortable="true">date</th>
+                                        <th data-field="mobile" data-sortable="true">Mobile</th>
+                                        <th data-field="datetime" data-sortable="true">date</th>
                                         <th data-field="referred_by" data-sortable="true">Referred By</th>
                                         <th data-field="refer_code" data-sortable="true">Refer Code</th>
                                         <th data-field="project_type" data-sortable="true">Project Type</th>
                                         <th data-field="plan" data-sortable="true">Plan Days</th>
                                         <th data-field="worked_days" data-sortable="true">Worked Days</th>
                                         <th data-field="level" data-sortable="true">Level</th>
-                                        <th data-field="refer_count" data-sortable="true">Refer Count</th>
+                                        <th data-field="total_referrals" data-sortable="true">Refer Count</th>
                                         <th data-field="support_id" data-sortable="true">Support Name</th>
                                         <th data-field="daily_wallet" data-sortable="true">Daily Wallet</th>
                                         <th data-field="monthly_wallet" data-sortable="true">Monthly Wallet</th>
-                                        <th data-field="earning_wallet" data-sortable="true">Earning Wallet</th>
+                                        <th data-field="earnings_wallet" data-sortable="true">Earning Wallet</th>
                                         <th data-field="bonus_wallet" data-sortable="true">Bonus Wallet</th>
                                         <th data-field="balance" data-sortable="true">Main Wallet</th>
                                         <th data-field="account_num" data-sortable="true">Account Number</th>
