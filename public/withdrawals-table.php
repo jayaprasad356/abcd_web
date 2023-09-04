@@ -251,25 +251,25 @@ if (isset($_POST['export_all'])) {
                                         <th data-field="column"> All</th>
                                         <th data-field="id" data-sortable="true">ID</th>
                                         <th data-field="name" data-sortable="true" data-visible="true" data-footer-formatter="totalFormatter">Name</th>
-                                        <th data-field="amount" data-sortable="true" data-visible="true" data-footer-formatter="priceFormatter">Amount</th>
-                                        <th data-field="total_refund" data-sortable="true">Total Refund</th>
-                                        <th data-field="status" data-sortable="true">Status</th>
-                                        <th data-field="balance" data-sortable="true">Balance</th>
-                                        <th data-field="project_type" data-sortable="true">Project Type</th>
-                                        <th data-field="withdrawal_type" data-sortable="true">Withdrawal Type</th>
-                                        <th data-field="datetime" data-sortable="true">DateTime</th>
-                                        <th data-field="account_num" data-sortable="true">Account Number</th>
-                                        <th data-field="holder_name" data-sortable="true">Holder Name</th>
-                                        <th data-field="bank" data-sortable="true">Bank</th>
-                                        <th data-field="branch" data-sortable="true">Branch</th>
-                                        <th data-field="ifsc" data-sortable="true">IFSC</th>
-                                        <th data-field="total_codes" data-sortable="true">Total Codes</th>
-                                        <th data-field="total_referrals" data-sortable="true">Total Referrals</th>
-                                        <th data-field="mobile" data-sortable="true">Mobile</th>
+                                        <th data-field="amount" data-sortable="true" data-visible="true" data-footer-formatter="priceFormatter">Withdrawals Amount</th>
+                                        <th data-field="date" data-sortable="true">date</th>
                                         <th data-field="referred_by" data-sortable="true">Referred By</th>
                                         <th data-field="refer_code" data-sortable="true">Refer Code</th>
-                                        <th data-field="history" data-sortable="true">History</th>
-
+                                        <th data-field="project_type" data-sortable="true">Project Type</th>
+                                        <th data-field="plan" data-sortable="true">Plan Days</th>
+                                        <th data-field="worked_days" data-sortable="true">Worked Days</th>
+                                        <th data-field="level" data-sortable="true">Level</th>
+                                        <th data-field="refer_count" data-sortable="true">Refer Count</th>
+                                        <th data-field="support_id" data-sortable="true">Support Name</th>
+                                        <th data-field="daily_wallet" data-sortable="true">Daily Wallet</th>
+                                        <th data-field="monthly_wallet" data-sortable="true">Monthly Wallet</th>
+                                        <th data-field="earning_wallet" data-sortable="true">Earning Wallet</th>
+                                        <th data-field="bonus_wallet" data-sortable="true">Bonus Wallet</th>
+                                        <th data-field="balance" data-sortable="true">Main Wallet</th>
+                                        <th data-field="account_num" data-sortable="true">Account Number</th>
+                                        <th data-field="holder_name" data-sortable="true">Account Holder Name</th>
+                                        <th data-field="bank" data-sortable="true">Bank Name</th>
+                                        <th data-field="ifsc" data-sortable="true">IFSC</th>    
                                         <!-- <th  data-field="operate" data-events="actionEvents">Action</th> -->
                                     </tr>
                                 </thead>

@@ -518,12 +518,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     foreach ($res as $row)
         $total = $row['total'];
         if (isset($_GET['search']) && !empty($_GET['search'])) {
-            $sql = "SELECT w.id AS id,w.*,w.withdrawal_type,u.name,u.total_codes,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,DATEDIFF( '$currentdate',u.joined_date) AS history,b.branch,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
+            $sql = "SELECT w.id AS id,w.*,w.datetime,u.name,u.balance,u.mobile,u.referred_by,u.refer_code,u.plan,u.worked_days,u.level,u.sa_refer_count,u.support_id,u.daily_wallet,u.monthly_wallet,u.earning_wallet,u.bonus_wallet,u.support_id DATEDIFF( '$currentdate',u.joined_date) AS history,b.bank,b.account_num,b.ifsc,b.holder_name,b.amount,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
                         $where ORDER BY $sort $order LIMIT $offset, $limit";
              $db->sql($sql);
         }
         else{
-            $sql = "SELECT w.id AS id,w.*,w.withdrawal_type,u.name,u.total_codes,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,DATEDIFF( '$currentdate',u.joined_date) AS history,b.branch,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
+            $sql = "SELECT w.id AS id,w.*,w.datetime,u.name,u.balance,u.mobile,u.referred_by,u.refer_code,u.plan,u.worked_days,u.level,u.sa_refer_count,u.support_id,u.daily_wallet,u.monthly_wallet,u.earning_wallet,u.bonus_wallet,u.support_id DATEDIFF( '$currentdate',u.joined_date) AS history,b.bank,b.account_num,b.ifsc,b.holder_name,b.amount,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
                     AND w.status=0 $where ORDER BY $sort $order LIMIT $offset, $limit";
              $db->sql($sql);
         }
@@ -544,6 +544,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['amount'] = $row['amount'];
+        $tempRow['support_id'] = $row['support_id'];
         $tempRow['datetime'] = $row['datetime'];
         $tempRow['account_num'] = ','.$row['account_num'].',';
         $tempRow['holder_name'] = $row['holder_name'];
@@ -551,14 +552,19 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['project_type'] = $row['project_type'];
         $tempRow['bank'] = $row['bank'];
         $tempRow['branch'] = $row['branch'];
-        $tempRow['total_codes'] = $row['total_codes'];
-        $tempRow['total_referrals'] = $row['total_referrals'];
+        $tempRow['worked_days'] = $row['worked_days'];
+        $tempRow['level'] = $row['level'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['balance'] = $row['balance'];
         $tempRow['referred_by'] = $row['referred_by'];
         $tempRow['refer_code'] = $row['refer_code'];
-        $tempRow['history'] = $row['history'];
+        $tempRow['refer_count'] = $row['refer_count'];
+        $tempRow['plan'] = $row['plan'];
         $tempRow['ifsc'] = $row['ifsc'];
+        $tempRow['daily_wallet'] = $row['daily_wallet'];
+        $tempRow['monthly_wallet'] = $row['monthly_wallet'];
+        $tempRow['earning_wallet'] = $row['earning_wallet'];
+        $tempRow['bonus_wallet'] = $row['bonus_wallet'];
         $tempRow['column'] = $checkbox;
         $tempRow['total_refund'] = $total_refund;
         if($row['status']==1)
@@ -573,7 +579,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
-
 //transactions table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
     $offset = 0;
@@ -2409,4 +2414,3 @@ if (isset($_GET['table']) && $_GET['table'] == 'suspect_users') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
-$db->disconnect();
