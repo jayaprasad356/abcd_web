@@ -36,6 +36,7 @@ if (isset($_POST['btnAdd'])) {
         if (empty($city)) {
             $error['city'] = " <span class='label label-danger'>Required!</span>";
         }
+      
        
        
        if (!empty($name) && !empty($email) && !empty($mobile) && !empty($password) && !empty($city)  && !empty($dob)) 
@@ -44,11 +45,12 @@ if (isset($_POST['btnAdd'])) {
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
+        $datetime = date('Y-m-d H:i:s');
         if ($num >= 1) {
             $error['add_user'] = " <span class='label label-danger'>Mobile Number Already Exists</span>";
         }
         else{
-            $sql_query = "INSERT INTO users (name,mobile,email,password,dob,city,referred_by)VALUES('$name','$mobile','$email','$password','$dob','$city','$referred_by')";
+            $sql_query = "INSERT INTO users (name,mobile,email,password,dob,city,referred_by,device_id,last_updated,registered_date)VALUES('$name','$mobile','$email','$password','$dob','$city','$referred_by','$device_id','$datetime','$datetime')";
             $db->sql($sql_query);
             $result = $db->getResult();
 
@@ -82,6 +84,27 @@ if (isset($_POST['btnAdd'])) {
                 $sql_query = "UPDATE users SET refer_code='$refer_code' WHERE id =  $user_id";
                 $db->sql($sql_query);
             }
+            $short_code = substr($refer_code, 0, 3);
+            $sql = "SELECT short_code, id FROM branches WHERE short_code = '$short_code'";
+            $db->sql($sql);
+            $sres = $db->getResult();
+            $num = $db->numRows($sres);
+
+           if ($num >= 1) {
+             $branch_id = $sres[0]['id'];
+           } else {
+            $branch_id = '1';
+            }
+
+           if (empty($support_id)) {
+              $sql_query = "UPDATE users SET refer_code='$refer_code', branch_id = $branch_id WHERE id = $user_id";
+             $db->sql($sql_query);
+            } else {
+                // Add the condition to update support_id when it's not empty
+               $sql_query = "UPDATE users SET refer_code='$refer_code', branch_id = $branch_id, support_id = $support_id WHERE id = $user_id";
+              $db->sql($sql_query);
+            }
+
     
             if ($result == 1) {
                 
