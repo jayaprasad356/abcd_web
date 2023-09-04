@@ -113,6 +113,7 @@
                                     <th data-field="status" data-sortable="true">Status</th>
                                     <th data-field="total_referrals" data-sortable="true">Total Referrals</th>
                                     <th data-field="plan" data-sortable="true">Plan</th>
+                                    <th data-field="project_type" data-sortable="true">Project Type</th>
                                     <th data-field="balance" data-sortable="true">Balance</th>
                                     <th data-field="withdrawal" data-sortable="true">Withdrawal</th>
                                     <th data-field="history" data-sortable="true">History</th>
