@@ -1325,7 +1325,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'top_coders') {
     $db->sql($sql);
     $res = $db->getResult();
     $total = $db->numRows($res);
-    $sql = "SELECT users.project_type,users.level,users.worked_days,users.duration,users.id,users.task_type,users.name,staffs.name AS staff_name, SUM(transactions.codes) AS today_codes,SUM(transactions.mails) AS today_mails,SUM(transactions.amount) AS earn,users.joined_date,users.mobile,users.total_referrals,users.earn AS total_earn,users.l_referral_count 
+    $sql = "SELECT users.current_refers,users.project_type,users.level,users.worked_days,users.duration,users.id,users.task_type,users.name,staffs.name AS staff_name, SUM(transactions.codes) AS today_codes,SUM(transactions.mails) AS today_mails,SUM(transactions.amount) AS earn,users.joined_date,users.mobile,users.total_referrals,users.earn AS total_earn,users.l_referral_count 
     FROM users
     JOIN transactions ON users.id = transactions.user_id JOIN staffs ON staffs.id = users.support_id WHERE DATE(transactions.datetime) = '$currentdate' AND (transactions.type = 'generate' OR transactions.type = 'create_mail')
     GROUP BY users.id ORDER BY today_codes DESC LIMIT " . $offset . "," . $limit;
@@ -1345,6 +1345,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'top_coders') {
         $tempRow['worked_days'] = $row['worked_days'];
         $tempRow['project_type'] = $row['project_type'];
         $tempRow['today_mails'] = $row['today_mails'];
+        $tempRow['current_refers'] = $row['current_refers'];
         
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['today_codes'] = $row['today_codes'];

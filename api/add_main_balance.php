@@ -51,7 +51,14 @@ if ($num == 1) {
     $sync_refer_wallet = $res[0]['sync_refer_wallet'];
     $target_bonus_sent = $res[0]['target_bonus_sent'];
     $num_target_bonus = $res[0]['num_target_bonus'];
-    $joined_date = $res[0]['num_target_bonus'];
+    $joined_date = $res[0]['joined_date'];
+    $target_date = '2023-08-21';
+    $joined_date_timestamp = strtotime($joined_date);
+    $target_date_timestamp = strtotime($target_date);
+
+
+
+
 
 
     if ($status == 0 || (($wallet_type == 'earnings_wallet' || $wallet_type == 'bonus_wallet' ) && $status == 1 && $project_type != 'amail')) {
@@ -144,10 +151,7 @@ if ($num == 1) {
     
     }
     if($wallet_type == 'target_bonus'){
-        $response['success'] = false;
-        $response['message'] = "Disabled";
-        print_r(json_encode($response));
-        return false;
+
         if ($status == 0) {
             $response['success'] = false;
             $response['message'] = "Purchase Plan";
@@ -155,6 +159,10 @@ if ($num == 1) {
             return false;
         }
         if ($project_type == 'amail')  {
+            $response['success'] = false;
+            $response['message'] = "Disabled";
+            print_r(json_encode($response));
+            return false;
             $amount = 500;
             $total_num = intval($worked_days / 30);
 
@@ -173,22 +181,28 @@ if ($num == 1) {
 
 
             $amount = 2000;
-            if($level != 5){
+            if ($joined_date_timestamp < $target_date_timestamp) {
                 $response['success'] = false;
-                $response['message'] = "Reach Level 5 and get bonus";
+                $response['message'] = "Disabled";
                 print_r(json_encode($response));
                 return false;
-            }
+            } 
             if ($target_bonus_sent == 1) {
                 $response['success'] = false;
                 $response['message'] = "You Already claimed bonus";
                 print_r(json_encode($response));
                 return false;
             }
+            if($level < 5){
+                $response['success'] = false;
+                $response['message'] = "Reach Level 5 and get bonus";
+                print_r(json_encode($response));
+                return false;
+            }
+
             
 
-            $amount = $amount - $sync_refer_wallet;
-            $sql = "UPDATE users SET balance= balance + $amount,earn = earn + $amount,sync_refer_wallet = 0,target_bonus_sent = 1 WHERE id=" . $user_id;
+            $sql = "UPDATE users SET balance= balance + $amount,earn = earn + $amount,target_bonus_sent = 1 WHERE id=" . $user_id;
             $db->sql($sql);
             $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'target_bonus','$datetime',$amount)";
             $db->sql($sql);

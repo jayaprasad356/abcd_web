@@ -470,6 +470,7 @@ include "header.php";
                                             <th data-field="today_codes" data-sortable='true'>Codes</th>
                                             <th data-field="today_mails" data-sortable='true'>Mails</th>
                                             <th data-field="project_type" data-sortable='true'>Project Type</th>
+                                            <th data-field="current_refers" data-sortable='true'>Current Refers</th>
                                             <th data-field="support" data-sortable='true'>Support</th>
                                             <th data-field="earn" >Earn</th>
                                             <th data-field="duration" data-sortable='true'>Duration</th>
