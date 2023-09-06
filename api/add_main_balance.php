@@ -124,6 +124,12 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
+        if ($level < 2)  {
+            $response['success'] = false;
+            $response['message'] = "Reach level 2 to withdraw";
+            print_r(json_encode($response));
+            return false;
+        }
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
         $db->sql($sql);
