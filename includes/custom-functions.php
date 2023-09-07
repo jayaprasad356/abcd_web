@@ -211,12 +211,18 @@ class custom_functions
     }
     public function update_refer_code_cost($id)
     {
-        $sql = "SELECT l_referral_count FROM users WHERE id = " . $id;
+        $sql = "SELECT l_referral_count,project_type FROM users WHERE id = " . $id;
         $this->db->sql($sql);
         $res = $this->db->getResult();
         if (!empty($res) && isset($res[0]['l_referral_count'])) {
             $l_referral_count =  $res[0]['l_referral_count'];
+            $project_type =  $res[0]['project_type'];
             $per_code_val = 2;
+            if($project_type == 'amail'){
+                $per_code_val = 1;
+
+            }
+            
             if($l_referral_count <= 2){
                 $per_code_val = 2;
                 $level = 1;
