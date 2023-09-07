@@ -175,7 +175,7 @@ if (isset($_POST['btnEdit'])) {
             $duration = 50;
 
         }
-        $fn->update_refer_code_cost($ID);
+        
         $register_bonus_sent = $fn->get_value('users','register_bonus_sent',$ID);
 
         if($status == 1 && $register_bonus_sent != 1 && $join_type == 0){
@@ -293,6 +293,8 @@ if (isset($_POST['btnEdit'])) {
         $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
+
+        $fn->update_refer_code_cost($ID);
         if (!empty($update_result)) {
             $update_result = 0;
         } else {
