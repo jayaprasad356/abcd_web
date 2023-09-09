@@ -14,6 +14,13 @@
             <!-- Left col -->
             <div class="col-xs-12">
                 <div class="box">
+                <div class="box-header">
+                    <?php
+                if($_SESSION['role'] == 'Admin'){?>
+                        <form action="export-unpaid-withdrawals.php">
+                            <button type='submit'  class="btn btn-primary"><i class="fa fa-download"></i> Export Unpaid Withdrawal</button>
+                        </form>
+                        <?php } ?>
                     <div class="box-header">
                     <?php
                 if($_SESSION['role'] == 'Super Admin'){?>

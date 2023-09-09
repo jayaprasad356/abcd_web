@@ -595,12 +595,14 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                         </div>
                         <br>
+                        <?php } ?>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Duration</label><i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>">
                                 </div>
+                                <?php if ($_SESSION['role'] == 'Super Admin') { ?>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Worked Days</label><i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>" readonly>
