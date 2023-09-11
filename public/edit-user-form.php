@@ -500,21 +500,20 @@ if (isset($_POST['btnCancel'])) { ?>
                     </div>
                     <hr>
                         <br>
-                        <?php if ($_SESSION['role'] == 'Super Admin') { ?>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Date of Birth</label><i class="text-danger asterik">*</i>
-                                    <input type="date" class="form-control" name="dob" value="<?php echo $res[0]['dob']; ?>" required>
+                                    <input type="date" class="form-control" name="dob" value="<?php echo $res[0]['dob']; ?>" required <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
 
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Device Id</label>
-                                    <input type="text" class="form-control" name="device_id" value="<?php echo $res[0]['device_id']; ?>">
+                                    <input type="text" class="form-control" name="device_id" value="<?php echo $res[0]['device_id']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Level Referral Count</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="l_referral_count" value="<?php echo $res[0]['l_referral_count']; ?>">
+                                    <input type="text" class="form-control" name="l_referral_count" value="<?php echo $res[0]['l_referral_count']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
 
 
@@ -525,20 +524,20 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                             <div class="col-md-3">
                                     <label for="exampleInputEmail1">Earn</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="earn" value="<?php echo $res[0]['earn']; ?>">
+                                    <input type="text" class="form-control" name="earn" value="<?php echo $res[0]['earn']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Balance</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="balance" value="<?php echo $res[0]['balance']; ?>">
+                                    <input type="text" class="form-control" name="balance" value="<?php echo $res[0]['balance']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Today Codes</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="today_codes" value="<?php echo $res[0]['today_codes']; ?>">
+                                    <input type="text" class="form-control" name="today_codes" value="<?php echo $res[0]['today_codes']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Total Codes</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="total_codes" value="<?php echo $res[0]['total_codes']; ?>">
+                                    <input type="text" class="form-control" name="total_codes" value="<?php echo $res[0]['total_codes']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                             </div>
                         </div>
@@ -549,17 +548,17 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <div class="form-group">
                                     <label for="">Code Generate</label><br>
                                     <input type="checkbox" id="code_generate_button" class="js-switch" <?= isset($res[0]['code_generate']) && $res[0]['code_generate'] == 1 ? 'checked' : '' ?>>
-                                    <input type="hidden" id="code_generate_status" name="code_generate" value="<?= isset($res[0]['code_generate']) && $res[0]['code_generate'] == 1 ? 1 : 0 ?>">
+                                    <input type="hidden" id="code_generate_status" name="code_generate" value="<?= isset($res[0]['code_generate']) && $res[0]['code_generate'] == 1 ? 1 : 0 ?>" >
                                 </div>
 
                             </div>
                             <div class="col-md-3">
                                     <label for="exampleInputEmail1">Code Generate Time</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="code_generate_time" value="<?php echo $res[0]['code_generate_time']; ?>">
+                                    <input type="number" class="form-control" name="code_generate_time" value="<?php echo $res[0]['code_generate_time']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Num Sync Times</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="num_sync_times" value="<?php echo $res[0]['num_sync_times']; ?>">
+                                    <input type="text" class="form-control" name="num_sync_times" value="<?php echo $res[0]['num_sync_times']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
 
                                 <div class="col-md-3">
@@ -587,29 +586,27 @@ if (isset($_POST['btnCancel'])) { ?>
                             </div>
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">Salary Advance Balance</label><i class="text-danger asterik">*</i>
-                                <input type="text" class="form-control" name="salary_advance_balance" value="<?php echo $res[0]['salary_advance_balance']; ?>">
+                                <input type="text" class="form-control" name="salary_advance_balance" value="<?php echo $res[0]['salary_advance_balance']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                             </div>
                             <div class="col-md-3">
                                     <label for="exampleInputEmail1">Per Code Cost</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="per_code_cost" value="<?php echo $res[0]['per_code_cost']; ?>">
+                                    <input type="text" class="form-control" name="per_code_cost" value="<?php echo $res[0]['per_code_cost']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                         </div>
                         <br>
-                        <?php } ?>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Duration</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>">
+                                    <input type="number" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
-                                <?php if ($_SESSION['role'] == 'Super Admin') { ?>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Worked Days</label><i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Trial Wallet</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="trial_wallet" value="<?php echo $res[0]['trial_wallet']; ?>">
+                                    <input type="text" class="form-control" name="trial_wallet" value="<?php echo $res[0]['trial_wallet']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Salary Advance Withdrawal</label><br>
@@ -623,11 +620,11 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Level</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>">
+                                    <input type="number" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Per Code Value</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="per_code_val" value="<?php echo $res[0]['per_code_val']; ?>">
+                                    <input type="number" class="form-control" name="per_code_val" value="<?php echo $res[0]['per_code_val']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Balance Leave</label><i class="text-danger asterik">*</i>
@@ -647,19 +644,19 @@ if (isset($_POST['btnCancel'])) { ?>
                                   <div class="form-group">
                                     <div class="col-md-3">
                                        <label for="exampleInputEmail1">Today Mails</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>">
+                                        <input type="number" class="form-control" name="today_mails" value="<?php echo $res[0]['today_mails']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                      </div>
                                  <div class="col-md-3">
                                         <label for="exampleInputEmail1">Total Mails</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>">
+                                        <input type="number" class="form-control" name="total_mails" value="<?php echo $res[0]['total_mails']; ?>" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
                                 <div class="col-md-3">
                                          <label for="exampleInputEmail1">Current Refers</label><i class="text-danger asterik">*</i>
-                                         <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>">
+                                         <input type="number" class="form-control" name="current_refers" value="<?php echo $res[0]['current_refers']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                      </div>
                                 <div class="col-md-3">
                                          <label for="exampleInputEmail1">Target Refers</label><i class="text-danger asterik">*</i>
-                                         <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>">
+                                         <input type="number" class="form-control" name="target_refers" value="<?php echo $res[0]['target_refers']; ?>"<?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
                                 </div>
                             </div>
@@ -668,19 +665,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                   <div class="col-md-3">
                                         <label for="exampleInputEmail1">Earning Wallet</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>"style="background-color:#e6def3;">
+                                        <input type="number" class="form-control" name="earnings_wallet" value="<?php echo $res[0]['earnings_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
                                  <div class="col-md-3">
                                         <label for="exampleInputEmail1">Bonus Wallet</label><i class="text-danger asterik">*</i>
-                                         <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>"style="background-color:#e6def3;">
+                                         <input type="number" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
                                  <div class="col-md-3">
                                         <label for="exampleInputEmail1">Daily Wallet</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="daily_wallet" value="<?php echo $res[0]['daily_wallet']; ?>"style="background-color:#e6def3;">
+                                        <input type="number" class="form-control" name="daily_wallet" value="<?php echo $res[0]['daily_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
                                 <div class="col-md-3">
                                        <label for="exampleInputEmail1">Monthly Wallet</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="monthly_wallet" value="<?php echo $res[0]['monthly_wallet']; ?>"style="background-color:#e6def3;">
+                                        <input type="number" class="form-control" name="monthly_wallet" value="<?php echo $res[0]['monthly_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                      </div>
                                   </div>
                              </div><!-- /.box-body -->
@@ -699,7 +696,6 @@ if (isset($_POST['btnCancel'])) { ?>
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
                 </div>
             </div><!-- /.box -->
-            <?php } ?>
         </div>
     </div>
 </section>
@@ -707,7 +703,7 @@ if (isset($_POST['btnCancel'])) { ?>
 <div class="separator"> </div>
 <?php $db->disconnect(); ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-
+<?php if($_SESSION['role'] == 'Super Admin'){?> 
 <script>
     var changeCheckbox = document.querySelector('#code_generate_button');
     var init = new Switchery(changeCheckbox);
@@ -746,19 +742,6 @@ if (isset($_POST['btnCancel'])) { ?>
         }
     };
 </script>
-<!-- <script>
-       $(document).on('change', '#support_id', function() {
-        $.ajax({
-            url: "public/db-operation.php",
-            data: "support_id=" + $('#support_id').val() + "&change_support=1",
-            method: "POST",
-            success: function(data) {
-                $('#branch_id').html("<option value=''>---Select Branch---</option>" + data);
-            }
-        });
-    });
-</script> -->
-
 <script>
     var changeCheckbox = document.querySelector('#security_button');
     var init = new Switchery(changeCheckbox);
@@ -783,27 +766,8 @@ if (isset($_POST['btnCancel'])) { ?>
         }
     };
 </script>
-<script>
-    var changeCheckbox = document.querySelector('#eligible_button');
-    var init = new Switchery(changeCheckbox);
-    changeCheckbox.onchange = function() {
-        if ($(this).is(':checked')) {
-            $('#champion_task_eligible').val(1);
 
-        } else {
-            $('#champion_task_eligible').val(0);
-        }
-    };
-</script>
-<script>
-    var changeCheckbox = document.querySelector('#ad_button');
-    var init = new Switchery(changeCheckbox);
-    changeCheckbox.onchange = function() {
-        if ($(this).is(':checked')) {
-            $('#ad_status').val(1);
 
-        } else {
-            $('#ad_status').val(0);
-        }
-    };
-</script>
+<?php } ?>
+
+
