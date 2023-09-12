@@ -113,6 +113,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
+        $response['success'] = false;
+        $response['message'] = "Your wallet is empty";
+        print_r(json_encode($response));
+        return false;
         if ($monthly_wallet == 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
