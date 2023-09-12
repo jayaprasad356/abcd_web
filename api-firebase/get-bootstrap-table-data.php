@@ -173,6 +173,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
         $tempRow['refund_wallet'] = $row['refund_wallet'];
         $tempRow['total_refund'] = $row['total_refund'];
         $tempRow['trial_wallet'] = $row['trial_wallet'];
+        $tempRow['old_monthly_wallet'] = $row['old_monthly_wallet'];
         if($row['status']==0)
             $tempRow['status'] ="<label class='label label-default'>Not Verify</label>";
         elseif($row['status']==1)

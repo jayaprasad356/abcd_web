@@ -51,6 +51,7 @@ if ($num == 1) {
     $sync_refer_wallet = $res[0]['sync_refer_wallet'];
     $target_bonus_sent = $res[0]['target_bonus_sent'];
     $num_target_bonus = $res[0]['num_target_bonus'];
+    $old_monthly_wallet = $res[0]['old_monthly_wallet'];
     $joined_date = $res[0]['joined_date'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
@@ -124,12 +125,32 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if ($level < 2)  {
-            $response['success'] = false;
-            $response['message'] = "Reach level 2 to withdraw";
-            print_r(json_encode($response));
-            return false;
+        if($user_id = 24900){
+            if ($level == 1)  {
+                $percent = 29;
+                $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+                $result = ($percent / 100) * $monthly_wallet;
+                $monthly_wallet = $old_monthly_wallet + $result;
+            }
+
+
+
+
+
+            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+            $db->sql($sql);
+            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0 WHERE id=" . $user_id;
+            $db->sql($sql);
+                
+        }else{
+            if ($level < 2)  {
+                $response['success'] = false;
+                $response['message'] = "Reach level 2 to withdraw";
+                print_r(json_encode($response));
+                return false;
+            }
         }
+
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
         $db->sql($sql);

@@ -114,8 +114,6 @@
                                    
                                     <th data-field="lead_id" data-sortable="true">Lead</th>
                                     <th data-field="support_id" data-sortable="true">Support</th>
-                                    
-                                    <?php if ($_SESSION['role'] == 'Super Admin') { ?>
                                     <th data-field="level" data-sortable="true">Level</th>
                                     <th data-field="status" data-sortable="true">Status</th>
                                     <th data-field="total_referrals" data-sortable="true">Total Referrals</th>
@@ -144,7 +142,7 @@
                                     <th data-field="earn" data-sortable="true">Earn</th>
                                     <th data-field="password" data-sortable="true">Password</th>
                                     <th data-field="dob" data-sortable="true">Date of Birth</th>
-                                <?php } ?>
+                                    <th data-field="old_monthly_wallet" data-sortable="true">Old Monthly Balance</th>
                             </tr>
                         </thead>
                         </table>
