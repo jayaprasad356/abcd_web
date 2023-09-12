@@ -53,6 +53,8 @@ if ($num == 1) {
     $num_target_bonus = $res[0]['num_target_bonus'];
     $old_monthly_wallet = $res[0]['old_monthly_wallet'];
     $joined_date = $res[0]['joined_date'];
+    $total_codes = $res[0]['total_codes'];
+    $monthly_wallet_status = $res[0]['monthly_wallet_status'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -113,47 +115,39 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
+        if ($monthly_wallet_status == 0)  {
+            $response['success'] = false;
+            $response['message'] = "Your wallet is disabled";
+            print_r(json_encode($response));
+            return false;
+        }
         if ($monthly_wallet == 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
             print_r(json_encode($response));
             return false;
         }
-        if ($worked_days < $duration && $level < 3)  {
+        if ($worked_days < $duration && $level < 3 && $total_codes < 60000)  {
             $response['success'] = false;
             $response['message'] = "Reach level 3 and above to withdraw";
             print_r(json_encode($response));
             return false;
         }
-        if($user_id == 22954){
-            if ($level == 1)  {
-                $percent = 29;
-                $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
-                $result = ($percent / 100) * $monthly_wallet;
-                $monthly_wallet = $old_monthly_wallet + $result;
-            }
-
-
-
-
-
+        if ($level == 1  && $total_codes < 60000)  {
+            $percent = 29;
+            $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+            $result = ($percent / 100) * $monthly_wallet;
+            $monthly_wallet = $old_monthly_wallet + $result;
             $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
             $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0 WHERE id=" . $user_id;
+            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
             $db->sql($sql);
-                
-        }else{
-            if ($level < 2)  {
-                $response['success'] = false;
-                $response['message'] = "Reach level 2 to withdraw";
-                print_r(json_encode($response));
-                return false;
-            }
+        }
+        else {
             $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
             $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
+            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
             $db->sql($sql);
-    
         }
 
 
