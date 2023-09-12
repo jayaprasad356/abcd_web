@@ -115,39 +115,49 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        if ($monthly_wallet_status == 0 || $user_id != 70322 || $user_id != 22954)  {
+        if($user_id == 70322 || $user_id == 22954){
+            if ($monthly_wallet_status == 0 )  {
+                $response['success'] = false;
+                $response['message'] = "Your wallet is disabled";
+                print_r(json_encode($response));
+                return false;
+            }
+            if ($monthly_wallet == 0)  {
+                $response['success'] = false;
+                $response['message'] = "Your wallet is empty";
+                print_r(json_encode($response));
+                return false;
+            }
+            if ($worked_days < $duration && $level < 3 && $total_codes < 60000)  {
+                $response['success'] = false;
+                $response['message'] = "Reach level 3 and above to withdraw";
+                print_r(json_encode($response));
+                return false;
+            }
+            if ($level == 1  && $total_codes < 60000)  {
+                $percent = 29;
+                $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+                $result = ($percent / 100) * $monthly_wallet;
+                $monthly_wallet = $old_monthly_wallet + $result;
+                $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+                $db->sql($sql);
+                $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+                $db->sql($sql);
+            }
+            else {
+                $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+                $db->sql($sql);
+                $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
+                $db->sql($sql);
+            }
+    
+
+        }else{
             $response['success'] = false;
             $response['message'] = "Your wallet is disabled";
             print_r(json_encode($response));
             return false;
-        }
-        if ($monthly_wallet == 0)  {
-            $response['success'] = false;
-            $response['message'] = "Your wallet is empty";
-            print_r(json_encode($response));
-            return false;
-        }
-        if ($worked_days < $duration && $level < 3 && $total_codes < 60000)  {
-            $response['success'] = false;
-            $response['message'] = "Reach level 3 and above to withdraw";
-            print_r(json_encode($response));
-            return false;
-        }
-        if ($level == 1  && $total_codes < 60000)  {
-            $percent = 29;
-            $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
-            $result = ($percent / 100) * $monthly_wallet;
-            $monthly_wallet = $old_monthly_wallet + $result;
-            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-            $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
-            $db->sql($sql);
-        }
-        else {
-            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-            $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
-            $db->sql($sql);
+
         }
 
 
