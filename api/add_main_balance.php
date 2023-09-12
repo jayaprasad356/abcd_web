@@ -146,7 +146,7 @@ if ($num == 1) {
         else {
             $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
             $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
             $db->sql($sql);
         }
 
