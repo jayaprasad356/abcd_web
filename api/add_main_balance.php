@@ -113,10 +113,6 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        $response['success'] = false;
-        $response['message'] = "Your wallet is empty";
-        print_r(json_encode($response));
-        return false;
         if ($monthly_wallet == 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
@@ -143,7 +139,7 @@ if ($num == 1) {
 
             $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
             $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0 WHERE id=" . $user_id;
+            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0 WHERE id=" . $user_id;
             $db->sql($sql);
                 
         }else{
