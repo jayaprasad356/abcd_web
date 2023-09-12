@@ -153,13 +153,15 @@ if ($num == 1) {
                 print_r(json_encode($response));
                 return false;
             }
+            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+            $db->sql($sql);
+            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
+            $db->sql($sql);
+    
         }
 
 
-        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-        $db->sql($sql);
-        $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
-        $db->sql($sql);
+
 
     }
     if($wallet_type == 'bonus_wallet'){
