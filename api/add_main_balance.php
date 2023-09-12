@@ -125,7 +125,7 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if($user_id = 24900){
+        if($user_id = 22954){
             if ($level == 1)  {
                 $percent = 29;
                 $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
