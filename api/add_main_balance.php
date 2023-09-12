@@ -115,7 +115,7 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        if ($monthly_wallet_status == 0 || $user_id != 70322)  {
+        if ($monthly_wallet_status == 0 || $user_id != 70322 || $user_id != 22954)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is disabled";
             print_r(json_encode($response));
