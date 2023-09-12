@@ -127,11 +127,14 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if ($worked_days < $duration && $level < 3)  {
-            $response['success'] = false;
-            $response['message'] = "Reach level 3 and above to withdraw";
-            print_r(json_encode($response));
-            return false;
+        if($total_codes < 60000){
+            if ($worked_days < $duration && $level < 3)  {
+                $response['success'] = false;
+                $response['message'] = "Reach level 3 and above to withdraw";
+                print_r(json_encode($response));
+                return false;
+            }
+
         }
         if ($level == 1)  {
             $percent = 29;
@@ -149,7 +152,6 @@ if ($num == 1) {
             $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
             $db->sql($sql);
         }
-
 
 
 
