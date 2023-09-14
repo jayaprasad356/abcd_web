@@ -28,13 +28,14 @@ if (empty($_POST['user_id'])) {
 $user_id = $db->escapeString($_POST['user_id']);
 
 
-$sql = "SELECT project_type,code_generate,num_sync_times,level,total_codes FROM users WHERE id = $user_id";
+$sql = "SELECT project_type,code_generate,num_sync_times,level,total_codes,status FROM users WHERE id = $user_id";
 $db->sql($sql);
 $ures = $db->getResult();
 $num = $db->numRows($ures);
 if ($num == 1) {
     $user_code_generate = $ures[0]['code_generate'];
     $project_type = $ures[0]['project_type'];
+    $status = $ures[0]['status'];
     $sql = "SELECT code_generate,num_sync_times,sync_codes FROM settings";
     $db->sql($sql);
     $set = $db->getResult();
@@ -119,15 +120,9 @@ if ($num == 1) {
 
         }
 
-        if($code_generate == 1 && $user_code_generate == 1){
+        if($code_generate == 1 && $user_code_generate == 1 && $status == 1){
             if($codes != 0){
 
-                    // if ($sync_codes != $codes) {
-                    //     $response['success'] = false;
-                    //     $response['message'] = "Please Sync Only ".$sync_codes." Codes";
-                    //     print_r(json_encode($response));
-                    //     return false;
-                    // }
 
                     $per_code_cost = $fn->get_code_per_cost($user_id);
                     $amount = $codes  * $per_code_cost;
@@ -173,6 +168,7 @@ if ($num == 1) {
             $response['success'] = false;
             $response['message'] = "Cannot Sync Right Now, Code Generate is turned off";
             print_r(json_encode($response));
+            return false;
         }
 
     }
