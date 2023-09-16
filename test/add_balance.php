@@ -14,7 +14,7 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
-$sql = "SELECT t.user_id FROM `transactions` t,`users` u WHERE t.user_id = u.id AND u.project_type = 'amail' AND t.type = 'refer_bonus' AND DATE(t.datetime) = '2023-09-13'";
+$sql = "SELECT * FROM `bonus_mails`";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -22,14 +22,16 @@ if ($num >= 1) {
 
     foreach ($res as $row) {
         
-        $user_id = $row['user_id'];
-        $sql = "SELECT id FROM `users` WHERE id = $user_id";
+        //$user_id = $row['user_id'];
+        $mobile = $row['mobile'];
+        $balance = $row['amount'];
+        $sql = "SELECT id FROM `users` WHERE mobile = $mobile";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
         if($num == 1){
             $ID = $res[0]['id'];
-            $balance = 100;
+            
             $datetime = date('Y-m-d H:i:s');
             $type = 'admin_credit_balance';
             $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$ID','$balance','$datetime','$type')";

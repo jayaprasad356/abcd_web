@@ -14,7 +14,7 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
-$sql = "SELECT t.id,t.user_id FROM transactions t,users u WHERE t.user_id = u.id AND u.l_referral_count = 1 AND t.type = 'refer_bonus' AND DATE(t.datetime) = '2023-08-10' GROUP BY user_id";
+$sql = "SELECT * FROM `bonus_codes`";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -22,14 +22,15 @@ if ($num >= 1) {
 
     foreach ($res as $row) {
         
-        $user_id = $row['user_id'];
-        $sql = "SELECT id FROM `users` WHERE id = $user_id";
+        $mobile = $row['mobile'];
+        $codes = $row['codes'];
+        $sql = "SELECT id FROM `users` WHERE mobile = $mobile";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
         if($num == 1){
             $ID = $res[0]['id'];
-            $codes = 200;
+            //$codes = 200;
             $datetime = date('Y-m-d H:i:s');
             $type = 'code_bonus';
             $per_code_cost = $fn->get_code_per_cost($ID);
