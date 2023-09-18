@@ -320,7 +320,7 @@ class custom_functions
             $sql_query = "UPDATE users SET `per_code_cost` = $per_code_cost,`level` = $level WHERE id =  $id";
             $this->db->sql($sql_query);
 
-            return '';
+            return $per_code_cost;
         } else {
             return '';
         }
