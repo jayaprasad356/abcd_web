@@ -28,7 +28,7 @@ if (empty($_POST['user_id'])) {
 $user_id = $db->escapeString($_POST['user_id']);
 
 
-$sql = "SELECT project_type,code_generate,num_sync_times,level,total_codes,status FROM users WHERE id = $user_id";
+$sql = "SELECT project_type,code_generate,num_sync_times,level,total_codes,status,per_code_cost FROM users WHERE id = $user_id";
 $db->sql($sql);
 $ures = $db->getResult();
 $num = $db->numRows($ures);
@@ -80,6 +80,66 @@ if ($num == 1) {
             $response['success'] = false;
             $response['message'] = "Cannot Sync Right Now, Code Generate is turned off";
             print_r(json_encode($response));
+        }
+
+        
+
+    }elseif($project_type == 'champion'){
+        $message = 'code addeed sucessfully';
+        
+        $task_type = (isset($_POST['task_type']) && $_POST['task_type'] != "") ? $db->escapeString($_POST['task_type']) : '';
+        $codes = (isset($_POST['codes']) && $_POST['codes'] != "") ? $db->escapeString($_POST['codes']) : 0;
+
+        $type = 'champion_generate';
+
+
+
+        if($code_generate == 1 && $user_code_generate == 1 && $status == 1){
+            if($codes != 0){
+
+
+                    $per_code_cost = $ures[0]['per_code_cost'];
+                    $amount = $codes  * $per_code_cost;
+                    $sql = "SELECT COUNT(id) AS count  FROM transactions WHERE user_id = $user_id AND DATE(datetime) = '$currentdate' AND type = 'champion_generate'";
+                    $db->sql($sql);
+                    $tres = $db->getResult();
+                    $t_count = $tres[0]['count'];
+                    if ($t_count >= 1) {
+                        $response['success'] = false;
+                        $response['message'] = "You Reached Daily Sync Limit";
+                        print_r(json_encode($response));
+                        return false;
+                    }
+
+                    // if ($ures[0]['total_codes'] >= 60000) {
+                    //     $sql = "UPDATE `users` SET  `code_generate` = 0 WHERE `id` = $user_id";
+                    //     $db->sql($sql);
+                    //     $response['success'] = false;
+                    //     $response['message'] = "You Reached Codes Limit";
+                    //     print_r(json_encode($response));
+                    //     return false;
+                    // }
+                    $amount = $codes * $per_code_cost;
+                    $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`)VALUES('$user_id','$codes','$amount','$datetime','$type')";
+                    $db->sql($sql);
+                    $res = $db->getResult();
+
+                                
+                    $sql = "UPDATE `users` SET `today_codes` = today_codes + $codes,`balance` = balance + $amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
+                    $db->sql($sql);
+            
+            
+                }
+            
+            
+
+        }
+        else{
+        
+            $response['success'] = false;
+            $response['message'] = "Cannot Sync Right Now, Code Generate is turned off";
+            print_r(json_encode($response));
+            return false;
         }
 
         

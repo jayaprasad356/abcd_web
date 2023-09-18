@@ -101,17 +101,23 @@ if (isset($_POST['btnEdit'])) {
                 if($user_project_type == 'amail'){
                     $user_current_refers = $res[0]['current_refers'];
                     $user_target_refers = $res[0]['target_refers'];
-                    if($user_current_refers >= $user_target_refers){
-                        $referral_bonus = 1000;
-
-                    }else{
-                        $referral_bonus = 500;
-                    }
-                 
-                    $sql_query = "UPDATE users SET `current_refers` = current_refers + 1,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id";
+                    $referral_bonus = 500;
+                    $sql_query = "UPDATE users SET `current_refers` = current_refers + 1,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id AND status = 1";
                     $db->sql($sql_query);
                     $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
                     $db->sql($sql_query);
+
+                }elseif($user_project_type == 'champion'){
+                    $user_current_refers = $res[0]['current_refers'];
+                    $user_target_refers = $res[0]['target_refers'];
+                    $referral_bonus = 500;
+                    
+                    $sql_query = "UPDATE users SET `l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id  AND status = 1";
+                    $db->sql($sql_query);
+                    $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
+                    $db->sql($sql_query);
+
+                    $fn->update_refer_code_cost_champion($user_id);
 
                 }else{
                     $set_duration = $function->getSettingsVal('duration');
@@ -184,6 +190,19 @@ if (isset($_POST['btnEdit'])) {
                 $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
                 $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,0,0,'$datetime','register_amail')";
+                $db->sql($sql_query);
+                if(strlen($referred_by) == 3){
+                    $incentives = 125;
+                }else{
+                    $incentives = 15;
+                    
+                }
+
+            }else if($project_type == 'champion'){
+                $per_code_val = 1;
+                $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
+                $db->sql($sql_query);
+                $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,0,0,'$datetime','register_champion')";
                 $db->sql($sql_query);
                 if(strlen($referred_by) == 3){
                     $incentives = 125;
@@ -477,6 +496,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <select id='project_type' name="project_type" class='form-control'>
                                      <option value='abcd' <?php if ($res[0]['project_type'] == 'abcd') echo 'selected'; ?>>abcd</option>
                                       <option value='amail' <?php if ($res[0]['project_type'] == 'amail') echo 'selected'; ?>>amail</option>
+                                      <option value='champion' <?php if ($res[0]['project_type'] == 'champion') echo 'selected'; ?>>champion</option>
                                     </select>
                                     </div>
                                 <div class="form-group col-md-5">

@@ -209,6 +209,42 @@ class custom_functions
             return COST_PER_CODE;
         }
     }
+    public function get_code_per_cost_champion($id)
+    {
+        $sql = "SELECT level FROM users WHERE id = " . $id;
+        $this->db->sql($sql);
+        $res = $this->db->getResult();
+        if (!empty($res) && isset($res[0]['level'])) {
+            $level =  $res[0]['level'];
+            $per_code_cost = 3;
+            if($level == 1){
+                $per_code_cost = 3;
+
+
+            }elseif($level == 2){
+                $per_code_cost = 4;
+
+            }
+            elseif($level == 3){
+                $per_code_cost = 6;
+
+            }
+            elseif($level == 4){
+                $per_code_cost = 8;
+
+            }
+            else{
+                $per_code_val = 10;
+
+            }
+            // $sql_query = "UPDATE users SET `per_code_val` = $per_code_val,`level` = $level WHERE id =  $id";
+            // $this->db->sql($sql_query);
+
+            return $per_code_cost;
+        } else {
+            return '';
+        }
+    }
     public function update_refer_code_cost($id)
     {
         $sql = "SELECT l_referral_count FROM users WHERE id = " . $id;
@@ -242,6 +278,46 @@ class custom_functions
 
             }
             $sql_query = "UPDATE users SET `per_code_val` = $per_code_val,`level` = $level WHERE id =  $id";
+            $this->db->sql($sql_query);
+
+            return '';
+        } else {
+            return '';
+        }
+    }
+    public function update_refer_code_cost_champion($id)
+    {
+        $sql = "SELECT l_referral_count FROM users WHERE id = " . $id;
+        $this->db->sql($sql);
+        $res = $this->db->getResult();
+        if (!empty($res) && isset($res[0]['l_referral_count'])) {
+            $l_referral_count =  $res[0]['l_referral_count'];
+            $per_code_cost = 4;
+            if($l_referral_count <= 2){
+                $per_code_cost = 2;
+                $level = 1;
+
+
+            }elseif($l_referral_count >= 3 && $l_referral_count <= 5){
+                $per_code_cost = 4;
+                $level = 2;
+
+            }
+            elseif($l_referral_count >= 6 && $l_referral_count <= 8){
+                $per_code_cost = 6;
+                $level = 3;
+
+            }
+            elseif($l_referral_count >= 9 && $l_referral_count <= 11){
+                $per_code_cost = 8;
+                $level = 4;
+
+            }else{
+                $per_code_cost = 10;
+                $level = 5;
+
+            }
+            $sql_query = "UPDATE users SET `per_code_cost` = $per_code_cost,`level` = $level WHERE id =  $id";
             $this->db->sql($sql_query);
 
             return '';
