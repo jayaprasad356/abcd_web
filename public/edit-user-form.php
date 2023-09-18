@@ -200,6 +200,7 @@ if (isset($_POST['btnEdit'])) {
 
             }else if($project_type == 'champion'){
                 $per_code_val = 1;
+                $per_code_cost = 3;
                 $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
                 $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,0,0,'$datetime','register_champion')";
