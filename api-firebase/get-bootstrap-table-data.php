@@ -513,7 +513,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     
     // Calculate the date 7 days ago
     $seven_days_ago = date('Y-m-d', strtotime('-7 days'));
-    $where .= " AND w.datetime >= '$seven_days_ago' ";
+    $where .= " AND w.datetime = '$currentdate' ";
 
     $sql = "SELECT COUNT(w.id) as total FROM `withdrawals` w,`users` u,`bank_details` b $join AND w.status=0  ". $where ."";
     $db->sql($sql);
