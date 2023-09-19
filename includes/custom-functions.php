@@ -294,7 +294,7 @@ class custom_functions
             $l_referral_count =  $res[0]['l_referral_count'];
             $per_code_cost = 4;
             if($l_referral_count <= 2){
-                $per_code_cost = 2;
+                $per_code_cost = 3;
                 $level = 1;
 
 
