@@ -251,6 +251,10 @@ include "header.php";
                                 } else {
                                     $join1="";
                                 }
+                                $sql = "SELECT id FROM users u WHERE u.joined_date = '$currentdate' AND status = 1 AND project_type = 'champion' $join1";
+                                $db->sql($sql);
+                                $res = $db->getResult();
+                                $cnum = $db->numRows($res);
                                 $sql = "SELECT id FROM users u WHERE u.joined_date = '$currentdate' AND status = 1 AND project_type = 'amail' $join1";
                                 $db->sql($sql);
                                 $res = $db->getResult();
@@ -259,7 +263,7 @@ include "header.php";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $num = $db->numRows($res);
-                                echo $num.'/'.$anum;
+                                echo $num.'/'.$anum.'/'.$cnum;
                                 ?></h3>
                                 <p>Today Joins</p>
                         </div>
