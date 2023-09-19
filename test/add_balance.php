@@ -14,7 +14,7 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
-$sql = "SELECT * FROM `bonus_mails`";
+$sql = "SELECT * FROM `amail_amount`";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);

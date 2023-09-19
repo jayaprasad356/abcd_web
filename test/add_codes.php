@@ -14,7 +14,7 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
-$sql = "SELECT * FROM `bonus_codes`";
+$sql = "SELECT * FROM `abcd_codes`";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
