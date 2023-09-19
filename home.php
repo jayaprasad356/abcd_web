@@ -251,11 +251,11 @@ include "header.php";
                                 } else {
                                     $join1="";
                                 }
-                                $sql = "SELECT t.id FROM transactions t WHERE t.type = 'register_amail' AND DATE(t.datetime) = '$currentdate'";
+                                $sql = "SELECT id FROM users u WHERE u.joined_date = '$currentdate' AND status = 1 AND project_type = 'amail' $join1";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $anum = $db->numRows($res);
-                                $sql = "SELECT u.id FROM users u,transactions t WHERE u.id = t.user_id AND t.type = 'register_bonus' AND DATE(t.datetime) = '$currentdate' AND u.joined_date= '$currentdate' AND u.status=1 $join1";
+                                $sql = "SELECT id FROM users u WHERE u.joined_date = '$currentdate' AND status = 1 AND project_type = 'abcd' $join1";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $num = $db->numRows($res);
