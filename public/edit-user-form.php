@@ -319,7 +319,7 @@ if (isset($_POST['btnEdit'])) {
             $per_code_cost = $fn->update_refer_code_cost_champion($ID);
         }
         else{
-            if($referred_by = 'free'){
+            if($referred_by == 'free'){
                 $per_code_cost = 0.14;
 
             }else{
