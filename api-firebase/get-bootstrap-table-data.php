@@ -139,6 +139,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
         $row['history'] = $history_days;
         $operate = '<a href="edit-user.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-user.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $operate .= ' <a class="text text-success" href="copy-user.php?id=' . $row['id'] . '"><i class="fa fa-copy"></i>Copy</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['registered_date'] = $row['registered_date'];
         $tempRow['name'] = $row['name'];
