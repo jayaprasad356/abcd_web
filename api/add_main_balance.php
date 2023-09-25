@@ -55,6 +55,8 @@ if ($num == 1) {
     $joined_date = $res[0]['joined_date'];
     $total_codes = $res[0]['total_codes'];
     $monthly_wallet_status = $res[0]['monthly_wallet_status'];
+    $ch_daily_wallet = $res[0]['ch_daily_wallet'];
+    $ch_monthly_wallet = $res[0]['ch_monthly_wallet'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -72,7 +74,7 @@ if ($num == 1) {
     }
 
     if($wallet_type == 'earnings_wallet'){
-        if ($earnings_wallet < 75) {
+        if ($earnings_wallet < 25) {
             $response['success'] = false;
             $response['message'] = "Minimum ₹75 to add balance";
             print_r(json_encode($response));
@@ -157,6 +159,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'bonus_wallet'){
+        $response['success'] = false;
+        $response['message'] = "bonus wallet disabled";
+        print_r(json_encode($response));
+        return false;
         if ($current_refers < $target_refers) {
             $response['success'] = false;
             $response['message'] = "Minimum ".$target_refers." refers to add balance";
@@ -235,6 +241,26 @@ if ($num == 1) {
 
 
 
+    }
+    if($wallet_type == 'ch_daily_wallet'){
+        if ($ch_daily_wallet < 30) {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹30 to add balance";
+            print_r(json_encode($response));
+            return false;
+        }
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'ch_daily_wallet','$datetime',$ch_daily_wallet)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + ch_daily_wallet,earn = earn + ch_daily_wallet,ch_daily_wallet = 0 WHERE id=" . $user_id;
+        $db->sql($sql);
+
+    }
+    if($wallet_type == 'ch_monthly_wallet'){
+        $response['success'] = false;
+        $response['message'] = "disabled";
+        print_r(json_encode($response));
+        return false;
+    
     }
 
     $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
