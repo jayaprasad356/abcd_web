@@ -159,10 +159,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'bonus_wallet'){
-        $response['success'] = false;
-        $response['message'] = "disabled";
-        print_r(json_encode($response));
-        return false;
+        // // $response['success'] = false;
+        // // $response['message'] = "disabled";
+        // // print_r(json_encode($response));
+        // return false;
         if($amail_refer == 0){
             $bonus_wallet = 700;
             $sql_query = "SELECT * FROM `bonus_refer_bonus` WHERE user_id = $user_id AND status = 0";
