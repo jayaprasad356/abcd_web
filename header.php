@@ -199,6 +199,7 @@ $fn = new custom_functions;
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="withdrawals.php"><i class="fa fa-money"></i>Withdrawals</a></li>
+                        <li><a href="add-new-bulk-cancel.php"><i class="fa fa-money"></i>Bulk Cancel</a></li>
                         <li><a href="search_withdrawals.php"><i class="fa fa-search"></i>Search Withdrawals</a></li>
                         <li><a href="bank_details.php"><i class="fa fa-bank"></i>Bank Details</a></li>
                     </ul>
