@@ -182,10 +182,18 @@ if ($num == 1) {
 
             }
         }else{
-            $response['success'] = false;
-            $response['message'] = "bonus wallet disabled";
-            print_r(json_encode($response));
-
+            if ($current_refers < $target_refers) {
+                $response['success'] = false;
+                $response['message'] = "Minimum ".$target_refers." refers to add balance";
+                print_r(json_encode($response));
+                return false;
+            }
+            if ($bonus_wallet < 120) {
+                $response['success'] = false;
+                $response['message'] = "Minimum ₹120 to add balance";
+                print_r(json_encode($response));
+                return false;
+            }
         }
         
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$bonus_wallet)";
