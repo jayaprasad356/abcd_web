@@ -721,7 +721,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                      </div>
                                   </div>
                              </div><!-- /.box-body -->
-                             <div class="row">   
+                    <div class="row">   
                             <div class="form-group">
                                   <div class="col-md-3">
                                         <label for="exampleInputEmail1">Champion Daily Wallet</label><i class="text-danger asterik">*</i>
@@ -731,6 +731,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                         <label for="exampleInputEmail1">Champion Monthly Wallet</label><i class="text-danger asterik">*</i>
                                          <input type="number" class="form-control" name="ch_monthly_wallet" value="<?php echo $res[0]['ch_monthly_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
+                                </div>
                              </div><!-- /.box-body -->
                        </form>
                      <br>
