@@ -24,7 +24,7 @@ if ($num >= 1) {
     foreach ($res as $row) {
         $user_id = $row['id'];
         $refer_code = $row['refer_code'];
-        $sql = "SELECT id FROM `users` WHERE referred_by = '$refer_code'";
+        $sql = "SELECT id FROM `users` WHERE referred_by = '$refer_code' AND status = 1";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
