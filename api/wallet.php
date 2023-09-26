@@ -55,15 +55,15 @@ if ($num == 1) {
                 $db->sql($sql);
                 $tres = $db->getResult();
                 $t_count = $tres[0]['count'];
-                if ($t_count >= 2) {
+                if ($t_count >= 1) {
                     $response['success'] = false;
                     $response['message'] = "You Reached Daily Sync Limit";
                     print_r(json_encode($response));
                     return false;
                 }
-                $amount = $mails * 3;
-                $e_amount = $mails * 0.75;
-                $b_amount = $mails * 2.25;
+                $amount = $mails * 30;
+                $e_amount = $mails * 2.5;
+                $b_amount = $mails * 27.5;
 
                 $sql = "INSERT INTO transactions (`user_id`,`mails`,`amount`,`datetime`,`type`)VALUES('$user_id','$mails','$amount','$datetime','$type')";
                 $db->sql($sql);
@@ -119,14 +119,19 @@ if ($num == 1) {
                     //     print_r(json_encode($response));
                     //     return false;
                     // }
-                    $amount = $codes * $per_code_cost;
+
+                    $amount = $codes * 30;
+                    $e_amount = $codes * 3;
+                    $b_amount = $codes * 27;
+    
                     $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`)VALUES('$user_id','$codes','$amount','$datetime','$type')";
                     $db->sql($sql);
                     $res = $db->getResult();
-
-                                
-                    $sql = "UPDATE `users` SET `today_codes` = today_codes + $codes,`balance` = balance + $amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
+                
+                    $sql = "UPDATE `users` SET  `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`ch_daily_wallet` = ch_daily_wallet + $e_amount,`ch_monthly_wallet` = ch_monthly_wallet + $b_amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
                     $db->sql($sql);
+        
+                    
             
             
                 }
@@ -233,7 +238,7 @@ if ($num == 1) {
 
     }
 
-    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails,daily_wallet,monthly_wallet  FROM users WHERE id = $user_id ";
+    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails,daily_wallet,monthly_wallet,ch_daily_wallet,ch_monthly_wallet  FROM users WHERE id = $user_id ";
     $db->sql($sql);
     $res = $db->getResult();
     
@@ -256,6 +261,8 @@ if ($num == 1) {
     $response['total_refund'] = $res[0]['total_refund'];
     $response['daily_wallet'] = $res[0]['daily_wallet'];
     $response['monthly_wallet'] = $res[0]['monthly_wallet'];
+    $response['ch_daily_wallet'] = $res[0]['ch_daily_wallet'];
+    $response['ch_monthly_wallet'] = $res[0]['ch_monthly_wallet'];
     print_r(json_encode($response));
 
 }

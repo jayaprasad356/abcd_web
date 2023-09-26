@@ -68,6 +68,8 @@ if (isset($_POST['btnEdit'])) {
             $target_refers = $db->escapeString(($_POST['target_refers']));
             $daily_wallet = $db->escapeString(($_POST['daily_wallet']));
             $monthly_wallet = $db->escapeString(($_POST['monthly_wallet']));
+            $ch_daily_wallet = $db->escapeString(($_POST['ch_daily_wallet']));
+            $ch_monthly_wallet = $db->escapeString(($_POST['ch_monthly_wallet']));
 
             $error = array();
 
@@ -328,7 +330,7 @@ if (isset($_POST['btnEdit'])) {
          
         }
     
-        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent WHERE id =  $ID";
+        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent,ch_daily_wallet = $ch_daily_wallet,ch_monthly_wallet = $ch_monthly_wallet WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -718,6 +720,17 @@ if (isset($_POST['btnCancel'])) { ?>
                                         <input type="number" class="form-control" name="monthly_wallet" value="<?php echo $res[0]['monthly_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                      </div>
                                   </div>
+                             </div><!-- /.box-body -->
+                             <div class="row">   
+                            <div class="form-group">
+                                  <div class="col-md-3">
+                                        <label for="exampleInputEmail1">Champion Daily Wallet</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="ch_daily_wallet" value="<?php echo $res[0]['ch_daily_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
+                                    </div>
+                                 <div class="col-md-3">
+                                        <label for="exampleInputEmail1">Champion Monthly Wallet</label><i class="text-danger asterik">*</i>
+                                         <input type="number" class="form-control" name="ch_monthly_wallet" value="<?php echo $res[0]['ch_monthly_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
+                                    </div>
                              </div><!-- /.box-body -->
                        </form>
                      <br>
