@@ -106,6 +106,8 @@ if (isset($_POST['btnEdit'])) {
                     $referral_bonus = 500;
                     $sql_query = "UPDATE users SET `current_refers` = current_refers + 1,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id AND status = 1";
                     $db->sql($sql_query);
+                    $sql_query = "INSERT INTO bonus_refer_bonus (user_id,refer_user_id,status,amount,datetime)VALUES($user_id,$ID,0,700,'$datetime')";
+                    $db->sql($sql_query);
                     $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
                     $db->sql($sql_query);
 

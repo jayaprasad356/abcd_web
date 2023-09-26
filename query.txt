@@ -29,3 +29,4 @@ SELECT user_id,
        TIMESTAMPDIFF(SECOND, MIN(datetime), MAX(datetime)) AS time_difference_seconds
 FROM transactions WHERE DATE(datetime) = '2023-07-26' AND type = 'generate' GROUP BY user_id
 
+DELETE FROM `monthly_target` WHERE (user_id, id) IN ( SELECT user_id, MAX(id) AS latest_ordering_column FROM `monthly_target` GROUP BY user_id HAVING COUNT(user_id) > 1 ) AND status = 0;
