@@ -15,7 +15,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT id,refer_code FROM users WHERE current_refers > 0 AND  current_refers < 4 AND project_type = 'amail' AND status = 1";
+$sql = "SELECT id,refer_code,current_refers FROM users WHERE current_refers > 0 AND  current_refers < 4 AND project_type = 'amail' AND status = 1";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -24,7 +24,8 @@ if ($num >= 1) {
     foreach ($res as $row) {
         $user_id = $row['id'];
         $refer_code = $row['refer_code'];
-        $sql = "SELECT id FROM `users` WHERE referred_by = '$refer_code' AND status = 1";
+        $current_refers = $row['current_refers'];
+        $sql = "SELECT id FROM `users` WHERE referred_by = '$refer_code' AND status = 1 ORDER BY joined_date DESC LIMIT $current_refers";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
