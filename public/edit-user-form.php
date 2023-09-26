@@ -114,7 +114,7 @@ if (isset($_POST['btnEdit'])) {
                 }elseif($user_project_type == 'champion'){
                     $user_current_refers = $res[0]['current_refers'];
                     $user_target_refers = $res[0]['target_refers'];
-                    $referral_bonus = 500;
+                    $referral_bonus = 600;
                     
                     $sql_query = "UPDATE users SET `l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id  AND status = 1";
                     $db->sql($sql_query);

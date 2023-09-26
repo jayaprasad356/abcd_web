@@ -56,7 +56,7 @@ else{
 }
 
 if($project_type == 'amail'){
-    $min_withdrawal = 75;
+    $min_withdrawal = 25;
 
 }
 
