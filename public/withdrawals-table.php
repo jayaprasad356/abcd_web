@@ -234,10 +234,11 @@ if (isset($_POST['export_all'])) {
                                         <div class="text-left col-md-2">
                                             <input type="checkbox" onchange="checkAll(this)" name="chk[]" > Select All</input>
                                         </div> 
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                                 <button type="submit" class="btn btn-primary" name="btnUnpaid">Unpaid</button>
                                                 <button type="submit" class="btn btn-success" name="btnPaid">Paid</button>
                                                 <button type="submit" class="btn btn-danger" name="btnCancel">Cancelled</button>
+                                                <button type="button" class="btn btn-success" name="btnPaidAll" onclick="redirectToPaidPage()">Paid All</button>
                                                 
                                         </div>
                                     <?php } ?>
@@ -306,6 +307,11 @@ if (isset($_POST['export_all'])) {
      }
  }
     
+</script>
+<script>
+function redirectToPaidPage() {
+    window.location.href = "paid.php";
+}
 </script>
 <script>
         $('#user_id').on('change', function() {
