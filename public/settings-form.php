@@ -8,6 +8,26 @@ $fn = new custom_functions;
 <?php
 if (isset($_POST['btnUpdate'])) {
 
+    if ($_FILES['image']['size'] != 0 && $_FILES['image']['error'] == 0 && !empty($_FILES['image'])) {
+        $extension = pathinfo($_FILES["image"]["name"])['extension'];
+
+        $result = $fn->validate_image($_FILES["image"]);
+        $target_path = 'upload/images/';
+        
+        $filename = microtime(true) . '.' . strtolower($extension);
+        $full_path = $target_path . "" . $filename;
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $full_path)) {
+            echo '<p class="alert alert-danger">Can not upload image.</p>';
+            return false;
+            exit();
+        }
+        if (!empty($old_image)) {
+            unlink($old_image);
+        }
+        $upload_image = 'upload/images/' . $filename;
+        $sql = "UPDATE settings SET `image`='" . $upload_image . "' WHERE id = 1";
+        $db->sql($sql);
+    }
     $code_generate = $db->escapeString(($_POST['code_generate']));
     $withdrawal_status = $db->escapeString(($_POST['withdrawal_status']));
     $sync_time = $db->escapeString(($_POST['sync_time']));
@@ -73,6 +93,7 @@ $res = $db->getResult();
                 <!-- form start -->
                 <form name="delivery_charge" method="post" enctype="multipart/form-data">
                     <div class="box-body">
+                   
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -182,7 +203,14 @@ $res = $db->getResult();
                                         <input type="number"class="form-control" name="min_sync_refer_wallet" value="<?= $res[0]['min_sync_refer_wallet'] ?>">
                                     </div>
                                 </div>
-                            </div>  
+                                <div class="col-md-6">
+                                   <div class="form-group">
+                                        <label for="exampleInputFile">Offer Image</label>
+                                        <input class="form-control" type="file" accept="image/png,  image/jpeg" onchange="readURL(this);"  name="image" id="image">
+                                        <p class="help-block"><img id="blah" src="<?php echo $res[0]['image']; ?>" style="max-width:30%;padding:4px;" /></p>
+                                    </div>
+                               </div>
+                            </div>    
                             <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
