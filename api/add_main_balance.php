@@ -165,6 +165,12 @@ if ($num == 1) {
         // // print_r(json_encode($response));
         // return false;
         if($amail_refer == 0){
+            if ($bonus_wallet < 700) {
+                $response['success'] = false;
+                $response['message'] = "Minimum ₹700 to add balance";
+                print_r(json_encode($response));
+                return false;
+            }
             $bonus_wallet = 700;
             $sql_query = "SELECT * FROM `bonus_refer_bonus` WHERE user_id = $user_id AND status = 0";
             $db->sql($sql_query);
@@ -189,9 +195,9 @@ if ($num == 1) {
                 print_r(json_encode($response));
                 return false;
             }
-            if ($bonus_wallet < 120) {
+            if ($bonus_wallet < 225) {
                 $response['success'] = false;
-                $response['message'] = "Minimum ₹120 to add balance";
+                $response['message'] = "Minimum ₹225 to add balance";
                 print_r(json_encode($response));
                 return false;
             }
