@@ -57,6 +57,7 @@ if ($num == 1) {
     $monthly_wallet_status = $res[0]['monthly_wallet_status'];
     $ch_daily_wallet = $res[0]['ch_daily_wallet'];
     $ch_monthly_wallet = $res[0]['ch_monthly_wallet'];
+    $amail_refer = $res[0]['amail_refer'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
