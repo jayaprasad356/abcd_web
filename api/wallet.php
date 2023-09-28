@@ -61,6 +61,9 @@ if ($num == 1) {
                     print_r(json_encode($response));
                     return false;
                 }
+                if ($mails > 10) {
+                    $mails = 10;
+                }
                 $amount = $mails * 30;
                 $e_amount = $mails * 2.5;
                 $b_amount = $mails * 27.5;
