@@ -37,6 +37,10 @@ $db->sql($sql);
 $sql = "UPDATE users SET code_generate = 0  WHERE worked_days = duration";
 $db->sql($sql);
 
+
+$sql = "UPDATE `users` SET  `amail_refer` = 1  WHERE project_type = 'amail' AND status = 1 AND amail_refer = 1 AND worked_days = 30 ";
+$db->sql($sql);
+
 $sql = "UPDATE users SET referred_by = LEFT(refer_code , 3) WHERE DATEDIFF( '$currentdate',DATE(registered_date)) > 7 AND status = 0 AND LENGTH(referred_by) != 3 AND referred_by != ''";
 $db->sql($sql);
 
