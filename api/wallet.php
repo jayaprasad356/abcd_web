@@ -123,6 +123,11 @@ if ($num == 1) {
                     //     return false;
                     // }
 
+
+                    if ($codes > 10) {
+                        $codes = 10;
+                    }
+
                     $amount = $codes * 30;
                     $e_amount = $codes * 3;
                     $b_amount = $codes * 27;
