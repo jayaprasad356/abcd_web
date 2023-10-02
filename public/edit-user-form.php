@@ -115,8 +115,18 @@ if (isset($_POST['btnEdit'])) {
                     $user_current_refers = $res[0]['current_refers'];
                     $user_target_refers = $res[0]['target_refers'];
                     $referral_bonus = 600;
+                    if($project_type == 'champion'){
+                        $pre_bonus = 1000;
+                    
+
+                    }else{
+                        $pre_bonus = 500;
+                    
+                    }
                     
                     $sql_query = "UPDATE users SET `l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id  AND status = 1";
+                    $db->sql($sql_query);
+                    $sql_query = "INSERT INTO champion_refer_bonus (user_id,refer_user_id,status,amount,datetime)VALUES($user_id,$ID,0,$pre_bonus,'$datetime')";
                     $db->sql($sql_query);
                     $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
                     $db->sql($sql_query);
