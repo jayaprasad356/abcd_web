@@ -292,7 +292,18 @@ $fn = new custom_functions;
                     <span>Suspect users</span>
                     </a>
                 </li>
-
+                <li class="treeview">
+                    <a href="add-amail-bulk-amount.php">
+                    <i class="fa fa-file"></i>
+                    <span>Amail Bulk Amount</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="add-abcd-bulk-codes.php">
+                    <i class="fa fa-file"></i>
+                    <span>Abcd Bulk Codes</span>
+                    </a>
+                </li>
                 <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
