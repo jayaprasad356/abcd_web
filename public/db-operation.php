@@ -291,21 +291,23 @@ if (isset($_POST['amail_bulk_amount']) && $_POST['amail_bulk_amount'] == 1) {
         while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
             // print_r($emapData);
             if ($count1 != 0) {
-                $w_id = trim($db->escapeString($emapData[0]));
-             
-
-                $sql = "UPDATE withdrawals SET status=2 WHERE id = $w_id";
-                $db->sql($sql);
-                $sql = "SELECT * FROM `withdrawals` WHERE id = $w_id ";
+                $mobile = trim($db->escapeString($emapData[0]));
+                $amount = trim($db->escapeString($emapData[1]));
+                $sql = "SELECT id FROM `users` WHERE mobile = $mobile";
                 $db->sql($sql);
                 $res = $db->getResult();
-                $user_id= $res[0]['user_id'];
-                $amount= $res[0]['amount'];
+                $num = $db->numRows($res);
+                if($num == 1){
+                    $ID = $res[0]['id'];
+                    $datetime = date('Y-m-d H:i:s');
+                    $type = 'admin_credit_balance';
+                    $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$ID','$amount','$datetime','$type')";
+                    $db->sql($sql);
+                    $sql_query = "UPDATE users SET earn = earn + $amount,balance=balance+ $amount WHERE id=$ID";
+                    $db->sql($sql_query);
+                    $result = $db->getResult();
 
-                $sql = "UPDATE users SET balance= balance + $amount,withdrawal = withdrawal - $amount WHERE id = $user_id";
-                $db->sql($sql);
-                $sql = "INSERT INTO transactions (user_id,amount,datetime,type) VALUES ('$user_id','$amount','$datetime','cancelled')";
-                $db->sql($sql);
+                }
                 
             }
 
@@ -347,24 +349,22 @@ if (isset($_POST['abcd_bulk_codes']) && $_POST['abcd_bulk_codes'] == 1) {
         while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
             // print_r($emapData);
             if ($count1 != 0) {
-                $user_id = trim($db->escapeString($emapData[0]));
+                $mobile = trim($db->escapeString($emapData[0]));
                 $codes = trim($db->escapeString($emapData[1]));
+                $amount = $codes * 0.17;
 
-                
-                $ID = $row['id'];
-                $balance = $row['amount'];
                 $sql = "SELECT id FROM `users` WHERE mobile = $mobile";
                 $db->sql($sql);
                 $res = $db->getResult();
                 $num = $db->numRows($res);
                 if($num == 1){
-                    $ID = $row['id'];
+                    $ID = $res[0]['id'];
                     
                     $datetime = date('Y-m-d H:i:s');
                     $type = 'admin_credit_balance';
-                    $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$ID','$balance','$datetime','$type')";
+                    $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`)VALUES('$ID',$codes,'$amount','$datetime','$type')";
                     $db->sql($sql);
-                    $sql_query = "UPDATE users SET balance=balance+ $balance WHERE id=$ID";
+                    $sql_query = "UPDATE users SET `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`earn` = earn + $amount,balance=balance+ $amount WHERE id=$ID";
                     $db->sql($sql_query);
                     $result = $db->getResult();
             }

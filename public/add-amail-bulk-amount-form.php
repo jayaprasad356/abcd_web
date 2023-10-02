@@ -71,7 +71,7 @@ if (isset($_POST['btnd'])) {
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-6">
-                                <label for="">CSV File</label>
+                                <label for="">Amail CSV File</label>
                                 <input type="file" name="upload_file" class="form-control" accept=".csv" />
                                 </div>
                             </div>
