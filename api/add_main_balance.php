@@ -285,10 +285,34 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'ch_monthly_wallet'){
-        $response['success'] = false;
-        $response['message'] = "disabled";
-        print_r(json_encode($response));
-        return false;
+        if ($ch_monthly_wallet < 1000) {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹1000 to add balance";
+            print_r(json_encode($response));
+            return false;
+        }
+        $sql_query = "SELECT * FROM `champion_refer_bonus` WHERE user_id = $user_id AND status = 0 ORDER BY id ";
+        $db->sql($sql_query);
+        $res = $db->getResult();
+        $num = $db->numRows($res);
+        if($num>=1){
+            $bonus_id = $res[0]['id'];
+            $bonus_wallet = $res[0]['amount'];
+            $sql = "UPDATE champion_refer_bonus SET status= 1 WHERE id=" . $bonus_id;
+            $db->sql($sql);
+
+        }else{
+            $response['success'] = false;
+            $response['message'] = "Refer 1 Person to get ₹1000";
+            print_r(json_encode($response));
+            return false;
+
+        }
+
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'ch_monthly_wallet','$datetime',$bonus_wallet)";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + $bonus_wallet,earn = earn + $bonus_wallet,ch_monthly_wallet = ch_monthly_wallet - $bonus_wallet WHERE id=" . $user_id;
+        $db->sql($sql);
     
     }
 
