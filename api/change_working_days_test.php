@@ -19,7 +19,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT id FROM `users` WHERE joined_date < '2023-08-21' AND project_type = 'amail'";
+$sql = "SELECT id FROM `users` WHERE project_type = 'amail' AND status = 1";
 $db->sql($sql);
 $res = $db->getResult();
 foreach ($res as $row) {
@@ -30,7 +30,7 @@ foreach ($res as $row) {
 }
 
 $response['success'] = true;
-$response['message'] = 'Amail Updated Successfully';
+$response['message'] = 'Amail History Days Updated Successfully';
 print_r(json_encode($response));
 
 
