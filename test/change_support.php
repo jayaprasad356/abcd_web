@@ -12,12 +12,12 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
-$sql = "SELECT id FROM `users` WHERE support_id = 4 ";
+$sql = "SELECT id FROM `users` WHERE support_id = 17 OR support_id = 24 ";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
-    $staff_ids = [3, 5, 7, 9];
+    $staff_ids = [25,29];
     $staff_count = count($staff_ids);
     $staff_index = 0;
     foreach ($res as $row) {
@@ -32,7 +32,7 @@ if ($num >= 1) {
  
     }
     $response['success'] = true;
-    $response['message'] = "Support Updated Successfully";
+    $response['message'] = "Udupi Support Updated Successfully";
     print_r(json_encode($response));
 
 }else{
