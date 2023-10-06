@@ -336,7 +336,7 @@ if (isset($_POST['btnEdit'])) {
         }
         else{
             if($referred_by == 'free'){
-                $per_code_cost = 0.14;
+                $per_code_cost = 0.12;
 
             }else{
                 $per_code_cost = 0.17;
