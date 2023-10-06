@@ -343,6 +343,9 @@ if (isset($_POST['btnEdit'])) {
             }
          
         }
+        if($project_type == 'amail'){
+            $duration = 300;
+        }
         if($status == 0 && $project_type == 'free_project'){
             $per_code_cost = 0.06;
         } 
