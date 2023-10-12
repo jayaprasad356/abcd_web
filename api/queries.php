@@ -169,6 +169,35 @@ if ($query_type == 'withdrawal_cancel') {
    $db->sql($sql);
 
 }
+if ($query_type == 'other_queries') {
+    if (empty($_POST['user_id'])) {
+        $response['success'] = false;
+        $response['message'] = " User Id is Empty";
+        print_r(json_encode($response));
+        return false;
+    }
+    if (empty($_POST['title'])) {
+        $response['success'] = false;
+        $response['message'] = "Title is Empty";
+        print_r(json_encode($response));
+        return false;
+    }
+    if (empty($_POST['description'])) {
+        $response['success'] = false;
+        $response['message'] = "Description is Empty";
+        print_r(json_encode($response));
+        return false;
+    }
+  
+    $user_id=$db->escapeString($_POST['user_id']);
+    $title = $db->escapeString($_POST['title']);
+    $description=$db->escapeString($_POST['description']);
+   
+    
+   $sql = "INSERT INTO other_queries (`user_id`,`title`,`description`) VALUES ('$user_id','$title','$description')";
+   $db->sql($sql);
+
+}
 $response['success'] = true;
 $response['message'] = " Queries Added Successfully";
 

@@ -340,6 +340,12 @@ $fn = new custom_functions;
                     <span>Withdrawal Cancel</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="other_queries.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Other Queries</span>
+                    </a>
+                </li>
                 <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
