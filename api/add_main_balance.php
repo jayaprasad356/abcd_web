@@ -36,6 +36,7 @@ $num = $db->numRows($res);
 
 
 if ($num == 1) {
+    $reward_codes = $res[0]['reward_codes'];
     $earnings_wallet = $res[0]['earnings_wallet'];
     $bonus_wallet = $res[0]['bonus_wallet'];
     $current_refers = $res[0]['current_refers'];
@@ -269,6 +270,25 @@ if ($num == 1) {
         }
 
 
+
+    }
+
+    if($wallet_type == 'reward_codes'){
+
+         if ($reward_codes < 120) {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹120 to add balance";
+            print_r(json_encode($response));
+            return false;
+        }
+        
+        $reward_codes = 0.17;
+        $amount = $reward_codes * 0.17;
+
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`,`codes`) VALUES ($user_id,'reward_codes','$datetime','$amount','$reward_codes')";
+        $db->sql($sql);
+        $sql = "UPDATE users SET balance= balance + $amount , today_codes = today_codes + $reward_codes , total_codes = total_codes + $reward_codes , earn= earn + $amount WHERE id=" . $user_id;
+        $db->sql($sql);
 
     }
     if($wallet_type == 'ch_daily_wallet'){
