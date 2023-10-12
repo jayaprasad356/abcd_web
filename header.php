@@ -316,6 +316,30 @@ $fn = new custom_functions;
                     <span>Queries</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="refer_friends.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Refer Friends</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="refer_not_receive.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Refer Not Receive</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="withdrawal_not_receive.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Withdrawal Not Receive</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="withdrawal_cancel.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Withdrawal Cancel</span>
+                    </a>
+                </li>
                 <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
