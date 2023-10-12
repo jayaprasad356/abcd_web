@@ -720,3 +720,44 @@ if (isset($_POST['change_support'])) {
         echo "<option value=''>--No Branch Assigned--</option>";
     }
 }
+if (isset($_POST['seller_id']) && isset($_POST['get_category_wise_commission']) && !empty($_POST['get_category_wise_commission'])) {
+    $html = '<table class="table table-hover"><tr><th>ID</th><th>User Name</th><th>Category</th><th>Commission(%) <small>[keep blank if want to apply global commission for a particular category]</small></th></tr>';
+    $seller_id = $_POST['seller_id'];
+    $categories = $fn->get_data($columns = ['categories'], "id='" . $seller_id . "'", 'seller');
+    
+    if (isset($categories[0]['categories']) && !empty($categories[0]['categories'])) {
+        $categories = explode(',', $categories[0]['categories']);
+        for ($i = 0; $i < count($categories); $i++) {
+            $category = $fn->get_data($columns = ['id', 'name'], "id='" . $categories[$i] . "'", 'category');
+            if (isset($category[0]['id'])) {
+                $commission = $fn->get_data($columns = ['commission'], "seller_id='" . $seller_id . "' and category_id='" . $category[0]['id'] . "'", 'seller_commission');
+                $commission = isset($commission[0]['commission']) && !empty($commission[0]['commission']) ? $commission[0]['commission'] : '';
+    
+                // Fetch the user's name from the "users" table
+                $user = $fn->get_data($columns = ['name'], "id='" . $seller_id . "'", 'users');
+                $user_name = isset($user[0]['name']) ? $user[0]['name'] : '';
+    
+                $html .= '<tr><td>' . $seller_id . '</td><td>' . $user_name . '</td><td>' . $category[0]['name'] . '</td><td><input type="hidden" name="category_id[]" value=' . $category[0]['id'] . '><input type="number" min="0" name="commission[]" value=' . $commission . '></td></tr>';
+            }
+        }
+        $html .= '</table>';
+        $html .= '<div class="form-group">
+            <button type="submit" id="update_btn" class="btn btn-success">Save</button><hr>
+            <div id="save_result">
+            </div>
+        </div>';
+        $response['error'] = false;
+        $response['html'] = $html;
+        $response['seller_id'] = $seller_id;
+        print_r(json_encode($response));
+    }
+    
+}
+
+
+
+
+
+
+
+

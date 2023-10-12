@@ -371,7 +371,6 @@ if (isset($_POST['btnEdit'])) {
 }
 
 
-
 // create array variable to store previous data
 $data = array();
 $sql_query = "SELECT id FROM leaves WHERE user_id =" . $ID;
@@ -538,6 +537,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                       <option value='amail' <?php if ($res[0]['project_type'] == 'amail') echo 'selected'; ?>>amail</option>
                                       <option value='champion' <?php if ($res[0]['project_type'] == 'champion') echo 'selected'; ?>>champion</option>
                                       <option value='free_project' <?php if ($res[0]['project_type'] == 'free_project') echo 'selected'; ?>>Free Project</option>
+                                      <option value='unlimited' <?php if ($res[0]['project_type'] == 'unlimited') echo 'selected'; ?>>unlimited</option>
                                     </select>
                                     </div>
                                 <div class="form-group col-md-5">

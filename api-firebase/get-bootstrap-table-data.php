@@ -2415,3 +2415,158 @@ if (isset($_GET['table']) && $_GET['table'] == 'suspect_users') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+if (isset($_GET['table']) && $_GET['table'] == 'query_category') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if ((isset($_GET['date'])  && $_GET['date'] != '')) {
+        $date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $where .= "AND joined_date='$date' ";
+    }
+
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($fn->xss_clean($_GET['limit']));
+
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($fn->xss_clean($_GET['sort']));
+    if (isset($_GET['order']))
+        $order = $db->escapeString($fn->xss_clean($_GET['order']));
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($fn->xss_clean($_GET['search']));
+        $where .= "AND name like '%" . $search . "%' OR mobile like '%" . $search . "%' OR city like '%" . $search . "%' OR email like '%" . $search . "%' OR refer_code like '%" . $search . "%' OR registered_date like '%" . $search . "%'";
+    }
+    if (isset($_GET['sort'])) {
+        $sort = $db->escapeString($_GET['sort']);
+    }
+    if (isset($_GET['order'])) {
+        $order = $db->escapeString($_GET['order']);
+    }
+    
+    $sql = "SELECT COUNT(`id`) as total FROM `query_category`" . $where;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+
+    $sql = "SELECT * FROM query_category " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . "," . $limit;
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+        $operate = '<a href="edit-query_category.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate .= ' <a class="text text-danger" href="delete-query_category.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['operate'] = $operate;
+
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+if (isset($_GET['table']) && $_GET['table'] == 'query') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if ((isset($_GET['date'])  && $_GET['date'] != '')) {
+        $date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $where .= "AND joined_date='$date' ";
+    }
+
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($fn->xss_clean($_GET['limit']));
+
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($fn->xss_clean($_GET['sort']));
+    if (isset($_GET['order']))
+        $order = $db->escapeString($fn->xss_clean($_GET['order']));
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($fn->xss_clean($_GET['search']));
+        $where .= "AND name like '%" . $search . "%' OR mobile like '%" . $search . "%' OR city like '%" . $search . "%' OR email like '%" . $search . "%' OR refer_code like '%" . $search . "%' OR registered_date like '%" . $search . "%'";
+    }
+    if (isset($_GET['sort'])) {
+        $sort = $db->escapeString($_GET['sort']);
+    }
+    if (isset($_GET['order'])) {
+        $order = $db->escapeString($_GET['order']);
+    }
+    
+    $join = "LEFT JOIN `users` u ON q.user_id = u.id 
+    LEFT JOIN `query_category` c ON q.query_category_id = c.id 
+    WHERE q.id IS NOT NULL";
+
+$sql = "SELECT COUNT(q.id) as total FROM `query` q $join " . $where;
+$db->sql($sql);
+$res = $db->getResult();
+foreach ($res as $row) {
+$total = $row['total'];
+}
+
+$sql = "SELECT q.id AS id, q.*, u.name AS user_name, u.mobile, 
+          c.name AS query_category_name, q.title, q.description, q.status
+   FROM `query` q $join 
+   $where 
+   ORDER BY $sort $order 
+   LIMIT $offset, $limit";
+
+$db->sql($sql);
+$res = $db->getResult();
+
+
+    $sql = "SELECT COUNT(q.id) as total FROM `query` q $join " . $where . "";
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+    
+    $sql = "SELECT q.id AS id, q.*,u.name AS user_name, u.mobile, 
+                   c.name,q.title, q.description,q.status
+            FROM `query` q $join 
+            $where 
+            ORDER BY $sort $order 
+            LIMIT $offset, $limit";
+    
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+        //$operate. = '<a href="edit-query_category.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = ' <a class="text text-danger" href="delete-query_category.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $tempRow['id'] = $row['id'];
+        $tempRow['query_category_name'] = $row['name']; // Name from query_category table
+        $tempRow['user_name'] = $row['user_name']; 
+        $tempRow['mobile'] = $row['mobile'];
+        $tempRow['title'] = $row['title'];
+        $tempRow['description'] = $row['description'];
+        $tempRow['remarks'] = $row['remarks'];
+        if($row['status']==1)
+        $tempRow['status'] ="<p class='text text-success'>completed</p>";
+    elseif($row['status']==0)
+        $tempRow['status']="<p class='text text-primary'>pending</p>";
+    else
+        $tempRow['status']="<p class='text text-danger'>Cancelled</p>";
+        $tempRow['edit_commission'] = $operate = "<a class='btn btn-xs btn-primary save_seller_commission_form' data-id='" . $row['id'] . "' data-toggle='modal' data-target='#save_seller_commission_form' title='Category wise seller commission'><i class='fa fa-pencil-square-o'></i></a>";
+    
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}

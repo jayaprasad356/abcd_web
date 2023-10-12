@@ -304,6 +304,18 @@ $fn = new custom_functions;
                     <span>Abcd Bulk Codes</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="query_category.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Query Category</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="queries.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Queries</span>
+                    </a>
+                </li>
                 <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
