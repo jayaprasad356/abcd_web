@@ -59,6 +59,9 @@ if($project_type == 'amail'){
     $min_withdrawal = 25;
 
 }
+if($project_type == 'champion'){
+    $min_withdrawal = 30;
+}
 
 $datetime = date('Y-m-d H:i:s');
 $sql = "SELECT id FROM bank_details WHERE user_id = $user_id ";
