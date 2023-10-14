@@ -19,14 +19,14 @@ if (isset($_POST['btnEdit'])) {
              $ifsc_code = $db->escapeString(($_POST['ifsc_code']));
              $description = $db->escapeString(($_POST['description']));
              $remarks = $db->escapeString(($_POST['remarks']));
-             $datetime = $db->escapeString(($_POST['datetime']));
+        
              $status = $db->escapeString(($_POST['status']));
              $error = array();
 
-     if (!empty($account_num) && !empty($ifsc_code) && !empty($description) && !empty($remarks) && !empty($datetime) && !empty($status)) 
+     if (!empty($account_num) && !empty($ifsc_code) && !empty($description)) 
 		{
 
-        $sql_query = "UPDATE withdrawal_cancel SET account_num='$account_num',ifsc_code='$ifsc_code',description='$description',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
+        $sql_query = "UPDATE withdrawal_cancel SET account_num='$account_num',ifsc_code='$ifsc_code',description='$description',remarks='$remarks',status='$status' WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -109,10 +109,6 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <div class="col-md-4">
                                     <label for="exampleInputEmail1">IFSC Code</label><i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="ifsc_code" value="<?php echo $res[0]['ifsc_code']; ?>">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="exampleInputEmail1">Date Time</label><i class="text-danger asterik">*</i>
-                                    <input type="datetime-local" class="form-control" name="datetime" value="<?php echo $res[0]['datetime']; ?>">
                                 </div>
                             </div> 
                         </div>
