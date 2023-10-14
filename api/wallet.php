@@ -275,6 +275,11 @@ if ($num == 1) {
 
         if($code_generate == 1 && $user_code_generate == 1 && $status == 1){
             if($codes != 0){
+                                    if($level == 2){
+                        $sql = "UPDATE `users` SET  `num_sync_times` = 17 WHERE `id` = $user_id";
+                        $db->sql($sql);
+
+                    }
 
 
                     $per_code_cost = $fn->get_code_per_cost($user_id);
@@ -283,6 +288,13 @@ if ($num == 1) {
                     $db->sql($sql);
                     $tres = $db->getResult();
                     $t_count = $tres[0]['count'];
+                    if($level == 2){
+                        $sql = "UPDATE `users` SET  `num_sync_times` = 17 WHERE `id` = $user_id";
+                        $db->sql($sql);
+                        $ures[0]['num_sync_times'] = 17;
+
+                    }
+
                     if ($t_count >= $ures[0]['num_sync_times']) {
                         $response['success'] = false;
                         $response['message'] = "You Reached Daily Sync Limit";

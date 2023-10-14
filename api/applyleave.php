@@ -40,11 +40,19 @@ $user_id = $db->escapeString($_POST['user_id']);
 $leave_date = $db->escapeString($_POST['leave_date']);
 $reason = $db->escapeString($_POST['reason']);
 
-$sql = "SELECT id FROM users WHERE id = $user_id";
+$sql = "SELECT id,project_type FROM users WHERE id = $user_id";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num == 1) {
+    $project_type = $res[0]['project_type'];
+
+    if ($project_type == 'unlimited') {
+        $response['success'] = false;
+        $response['message'] = "Disabled";
+        print_r(json_encode($response));
+
+    }
 
     $sql = "SELECT id FROM `users` WHERE joined_date >= '2023-02-06' AND id = $user_id";
     $db->sql($sql);

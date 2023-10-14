@@ -141,14 +141,14 @@ if ($num == 1) {
             }
 
         }
-        if ($level == 1 && $plan == 30)  {
+        if ($level == 1 && $worked_days < 60)  {
             $response['success'] = false;
             $response['message'] = "Disabled";
             print_r(json_encode($response));
             return false;
 
         }
-        if ($level == 1 && $plan == 50)  {
+        if ($level == 1 && $worked_days >= 60)  {
             $percent = 29;
             $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
             $result = ($percent / 100) * $monthly_wallet;
@@ -282,30 +282,29 @@ if ($num == 1) {
     }
 
     if($wallet_type == 'reward_codes'){
-        if ($project_type != 'abcd') {
-            $response['success'] = false;
-            $response['message'] = "Reward codes only Abcd Project";
-            print_r(json_encode($response));
-            return false;
-        }
-        if ($level == 1) {
-            $response['success'] = false;
-            $response['message'] = "Claim This Codes For Free Reaching Level 2 - Helps Achieving Your Target.";
-            print_r(json_encode($response));
-            return false;
+
+        if ($project_type == 'abcd') {
+            if ($level == 1) {
+                $response['success'] = false;
+                $response['message'] = "Claim This Codes For Free Reaching Level 2 - Helps Achieving Your Target.";
+                print_r(json_encode($response));
+                return false;
+            }
+    
+             if ($reward_codes < 120) {
+                $response['success'] = false;
+                $response['message'] = "Minimum ₹120 to add balance";
+                print_r(json_encode($response));
+                return false;
+            }
+            $bal_codes = 60000 - $total_codes;
+            if($bal_codes < $reward_codes){
+                $reward_codes = $bal_codes;
+    
+            }
         }
 
-         if ($reward_codes < 120) {
-            $response['success'] = false;
-            $response['message'] = "Minimum ₹120 to add balance";
-            print_r(json_encode($response));
-            return false;
-        }
-        $bal_codes = 60000 - $total_codes;
-        if($bal_codes < $reward_codes){
-            $reward_codes = $bal_codes;
 
-        }
         $amount = $reward_codes * 0.17;
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`,`codes`) VALUES ($user_id,'reward_codes','$datetime','$amount','$reward_codes')";

@@ -54,7 +54,10 @@ if(!empty($branch_id)){
 else{
     $min_withdrawal = $mres[0]['min_withdrawal'];
 }
+if($project_type == 'abcd'){
+    $min_withdrawal = 50;
 
+}
 if($project_type == 'amail'){
     $min_withdrawal = 25;
 
