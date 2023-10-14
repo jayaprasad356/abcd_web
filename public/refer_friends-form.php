@@ -22,6 +22,10 @@
                                     <th data-field="mobile" data-sortable="true">Mobile</th>
                                     <th data-field="friend_mobile" data-sortable="true">Friend Mobile</th>
                                     <th data-field="description" data-sortable="true">Description</th>
+                                    <th data-field="status" data-sortable="true">Status</th>
+                                    <th data-field="remarks" data-sortable="true">Remarks</th>
+                                    <th data-field="datetime" data-sortable="true">Date Time</th>
+                                    <th data-field="operate">Action</th>
                                 </tr>
                             </thead>
                         </table>

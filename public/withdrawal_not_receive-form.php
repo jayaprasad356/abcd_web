@@ -25,6 +25,10 @@
                                     <th data-field="account_num" data-sortable="true">Account number</th>
                                     <th data-field="ifsc_code" data-sortable="true">Ifsc Code</th>
                                     <th data-field="description" data-sortable="true">Description</th>
+                                    <th data-field="status" data-sortable="true">Status</th>
+                                    <th data-field="remarks" data-sortable="true">Remarks</th>
+                                    <th data-field="datetime" data-sortable="true">Date Time</th>
+                                    <th data-field="operate">Action</th>
                                 </tr>
                             </thead>
                         </table>
