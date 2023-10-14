@@ -346,6 +346,12 @@ $fn = new custom_functions;
                     <span>Other Queries</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="whatsapp_group.php">
+                    <i class="fa fa-adn"></i>
+                    <span>Whatsapp Group</span>
+                    </a>
+                </li>
                 <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
