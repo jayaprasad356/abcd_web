@@ -252,13 +252,14 @@ class custom_functions
         $res = $this->db->getResult();
         if (!empty($res) && isset($res[0]['l_referral_count'])) {
             $l_referral_count =  $res[0]['l_referral_count'];
-            $per_code_val = 2;
+            $per_code_val = 1;
             if($l_referral_count <= 2){
-                $per_code_val = 2;
+                $per_code_val = 1;
                 $level = 1;
 
 
-            }elseif($l_referral_count >= 3 && $l_referral_count <= 4){
+            }
+            elseif($l_referral_count >= 3 && $l_referral_count <= 4){
                 $per_code_val = 2;
                 $level = 2;
 

@@ -59,6 +59,7 @@ if ($num == 1) {
     $ch_daily_wallet = $res[0]['ch_daily_wallet'];
     $ch_monthly_wallet = $res[0]['ch_monthly_wallet'];
     $amail_refer = $res[0]['amail_refer'];
+    $reward_codes = $res[0]['reward_codes'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -281,6 +282,18 @@ if ($num == 1) {
     }
 
     if($wallet_type == 'reward_codes'){
+        if ($project_type != 'abcd') {
+            $response['success'] = false;
+            $response['message'] = "Reward codes only Abcd Project";
+            print_r(json_encode($response));
+            return false;
+        }
+        if ($level == 1) {
+            $response['success'] = false;
+            $response['message'] = "Claim This Codes For Free Reaching Level 2 - Helps Achieving Your Target.";
+            print_r(json_encode($response));
+            return false;
+        }
 
          if ($reward_codes < 120) {
             $response['success'] = false;
@@ -288,13 +301,16 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        
-        $reward_codes = 0.17;
+        $bal_codes = 60000 - $total_codes;
+        if($bal_codes < $reward_codes){
+            $reward_codes = $bal_codes;
+
+        }
         $amount = $reward_codes * 0.17;
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`,`codes`) VALUES ($user_id,'reward_codes','$datetime','$amount','$reward_codes')";
         $db->sql($sql);
-        $sql = "UPDATE users SET balance= balance + $amount , today_codes = today_codes + $reward_codes , total_codes = total_codes + $reward_codes , earn= earn + $amount WHERE id=" . $user_id;
+        $sql = "UPDATE users SET reward_codes = 0,balance= balance + $amount , today_codes = today_codes + $reward_codes , total_codes = total_codes + $reward_codes , earn= earn + $amount WHERE id=" . $user_id;
         $db->sql($sql);
 
     }

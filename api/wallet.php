@@ -36,6 +36,7 @@ if ($num == 1) {
     $user_code_generate = $ures[0]['code_generate'];
     $project_type = $ures[0]['project_type'];
     $status = $ures[0]['status'];
+    $level = $ures[0]['level'];
     $sql = "SELECT code_generate,num_sync_times,sync_codes FROM settings";
     $db->sql($sql);
     $set = $db->getResult();
@@ -135,6 +136,8 @@ if ($num == 1) {
                     $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`)VALUES('$user_id','$codes','$amount','$datetime','$type')";
                     $db->sql($sql);
                     $res = $db->getResult();
+
+
                 
                     $sql = "UPDATE `users` SET  `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`ch_daily_wallet` = ch_daily_wallet + $e_amount,`ch_monthly_wallet` = ch_monthly_wallet + $b_amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
                     $db->sql($sql);
@@ -173,6 +176,7 @@ if ($num == 1) {
         $db->sql($sql);
         $tres = $db->getResult();
         $num = $db->numRows($tres);
+     
         $code_min_sync_time = $fn->get_sync_time($ures[0]['level']);
         if ($num >= 1) {
             $dt1 = $tres[0]['datetime'];
@@ -226,6 +230,9 @@ if ($num == 1) {
                     $db->sql($sql);
                     $res = $db->getResult();
 
+                    $sql = "UPDATE `users` SET  `reward_codes` = reward_codes + $codes WHERE `id` = $user_id AND project_type = 'abcd' AND level = 1";
+                    $db->sql($sql);
+
                                 
                     $sql = "UPDATE `users` SET `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`daily_wallet` = daily_wallet + $d_amount,`monthly_wallet` = monthly_wallet + $m_amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
                     $db->sql($sql);
@@ -246,7 +253,7 @@ if ($num == 1) {
 
     }
 
-    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails,daily_wallet,monthly_wallet,ch_daily_wallet,ch_monthly_wallet  FROM users WHERE id = $user_id ";
+    $sql = "SELECT level,per_code_val,today_codes,total_codes,balance,code_generate,status,referred_by,refund_wallet,total_refund,black_box,today_mails,total_mails,bonus_wallet,earnings_wallet,today_mails,total_mails,daily_wallet,monthly_wallet,ch_daily_wallet,ch_monthly_wallet,reward_codes  FROM users WHERE id = $user_id ";
     $db->sql($sql);
     $res = $db->getResult();
     
@@ -256,6 +263,7 @@ if ($num == 1) {
     $response['status'] = $res[0]['status'];
     $response['balance'] = $res[0]['balance'];
     $response['level'] = $res[0]['level'];
+    $response['reward_codes'] = $res[0]['reward_codes'];
     $response['per_code_val'] = $res[0]['per_code_val'];
     $response['today_mails'] = $res[0]['today_mails'];
     $response['total_mails'] = $res[0]['total_mails'];
