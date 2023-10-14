@@ -6,7 +6,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-
+date_default_timezone_set('Asia/Kolkata');
 
 include_once('../includes/crud.php');
 
@@ -14,6 +14,7 @@ $db = new Database();
 $db->connect();
 include_once('../includes/functions.php');
 $fn = new functions;
+$datetime = date('Y-m-d H:i:s');
 
 if (empty($_POST['query_type'])) {
     $response['success'] = false;
@@ -48,8 +49,9 @@ if($query_type == 'refer_friends'){
     $friend_mobile = $db->escapeString($_POST['friend_mobile']);
     $description=$db->escapeString($_POST['description']);
    
+
    
-   $sql = "INSERT INTO refer_friends (`user_id`,`friend_mobile`,`description`) VALUES ('$user_id','$friend_mobile','$description')";
+   $sql = "INSERT INTO refer_friends (`user_id`,`friend_mobile`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$friend_mobile','$description','$datetime','')";
    $db->sql($sql);
 
 }
@@ -77,10 +79,9 @@ if ($query_type == 'refer_not_receive') {
     $user_id=$db->escapeString($_POST['user_id']);
     $friend_mobile = $db->escapeString($_POST['friend_mobile']);
     $description=$db->escapeString($_POST['description']);
-   
-    
-   $sql = "INSERT INTO refer_not_receive (`user_id`,`friend_mobile`,`description`) VALUES ('$user_id','$friend_mobile','$description')";
-   $db->sql($sql);
+
+    $sql = "INSERT INTO refer_not_receive (`user_id`,`friend_mobile`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$friend_mobile','$description','$datetime','')";
+    $db->sql($sql);
 
 }
 if ($query_type == 'withdrawal_not_receive') {
@@ -129,7 +130,7 @@ if ($query_type == 'withdrawal_not_receive') {
     $description=$db->escapeString($_POST['description']);
    
     
-   $sql = "INSERT INTO withdrawal_not_receive (`user_id`,`withdrawal_date`,`amount`,`account_num`,`ifsc_code`,`description`) VALUES ('$user_id','$withdrawal_date','$amount','$account_num','$ifsc_code','$description')";
+   $sql = "INSERT INTO withdrawal_not_receive (`user_id`,`withdrawal_date`,`amount`,`account_num`,`ifsc_code`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$withdrawal_date','$amount','$account_num','$ifsc_code','$description','$datetime','')";
    $db->sql($sql);
 
 }
@@ -165,7 +166,7 @@ if ($query_type == 'withdrawal_cancel') {
     $description=$db->escapeString($_POST['description']);
    
     
-   $sql = "INSERT INTO withdrawal_cancel (`user_id`,`account_num`,`ifsc_code`,`description`) VALUES ('$user_id','$account_num','$ifsc_code','$description')";
+   $sql = "INSERT INTO withdrawal_cancel (`user_id`,`account_num`,`ifsc_code`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$account_num','$ifsc_code','$description','$datetime','')";
    $db->sql($sql);
 
 }
@@ -194,7 +195,7 @@ if ($query_type == 'other_queries') {
     $description=$db->escapeString($_POST['description']);
    
     
-   $sql = "INSERT INTO other_queries (`user_id`,`title`,`description`) VALUES ('$user_id','$title','$description')";
+   $sql = "INSERT INTO other_queries (`user_id`,`title`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$title','$description','$datetime','')";
    $db->sql($sql);
 
 }

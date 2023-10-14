@@ -188,7 +188,7 @@ if (isset($_POST['btnEdit'])) {
 
         }
         if($plan == 30){
-            $num_sync_times = 17;
+            $num_sync_times = 9;
             $duration = 30;
         }else{
             $num_sync_times = 10;

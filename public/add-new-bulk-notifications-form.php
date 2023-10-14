@@ -89,6 +89,15 @@ if (isset($_POST['btnd'])) {
                         <br>
                         <div class="row">
                             <div class="form-group">
+                                <div class="col-md-12">
+                                    <label for="exampleInputEmail1">Link</label><i class="text-danger asterik">*</i><?php echo isset($error['link']) ? $error['link'] : ''; ?>
+                                    <input type="text" class="form-control" name="link" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group">
                                 <div class="col-md-6">
                                 <label for="">CSV File</label>
                                 <input type="file" name="upload_file" class="form-control" accept=".csv" />
