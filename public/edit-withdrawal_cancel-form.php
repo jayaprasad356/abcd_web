@@ -26,7 +26,7 @@ if (isset($_POST['btnEdit'])) {
      if (!empty($account_num) && !empty($ifsc_code) && !empty($description)) 
 		{
 
-        $sql_query = "UPDATE withdrawal_cancel SET account_num='$account_num',ifsc_code='$ifsc_code',description='$description',remarks='$remarks',status='$status' WHERE id =  $ID";
+        $sql_query = "UPDATE withdrawal_cancel SET account_num='$account_num',ifsc_code='$ifsc_code',description='$description',remarks='$remarks',status=$status WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
