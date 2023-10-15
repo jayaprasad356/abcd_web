@@ -12,7 +12,7 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
-$sql = "SELECT id,total_codes,joined_date FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' ORDER BY joined_date LIMIT 100 ";
+$sql = "SELECT id,total_codes,joined_date FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' ORDER BY joined_date ";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
