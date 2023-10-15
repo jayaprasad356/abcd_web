@@ -12,7 +12,7 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
-$sql = "SELECT id,total_codes FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' ORDER BY joined_date LIMIT 100 ";
+$sql = "SELECT id,total_codes,joined_date FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' ORDER BY joined_date LIMIT 100 ";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -21,7 +21,8 @@ if ($num >= 1) {
         
         $id = $row['id'];
         $total_codes = $res[0]['total_codes'];
-        $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id ";
+        $joined_date = $res[0]['joined_date'];
+        $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id AND DATE(datetime) >= '$joined_date' ";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
