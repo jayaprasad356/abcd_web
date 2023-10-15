@@ -23,19 +23,22 @@ if ($num >= 1) {
         $total_codes = $row['total_codes'];
         $joined_date = $row['joined_date'];
         
-        $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id AND DATE(datetime) >= '$joined_date' ";
-        $db->sql($sql);
+        $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = ? AND DATE(datetime) >= ?";
+        $db->sql($sql, [$id, $joined_date]);
         $res = $db->getResult();
         $num = $db->numRows($res);
         $g_total_codes = 0;
+        $h_total_codes = 0;
+        
         if ($num >= 1) {
             $g_total_codes = $res[0]['total_codes'];
-            $h_total_codes = $g_total_codes/2;
-            $total_codes = $total_codes -  $h_total_codes;
-
+            $h_total_codes = $g_total_codes / 2;
+            $total_codes = $total_codes - $h_total_codes;
         }
-        $sql = "UPDATE `users` SET `new_total_codes` = $total_codes, `reward_codes` = $h_total_codes WHERE `id` = $id";
-        $db->sql($sql);
+        
+        $sql = "UPDATE `users` SET `new_total_codes` = ?, `reward_codes` = ? WHERE `id` = ?";
+        $db->sql($sql, [$total_codes, $h_total_codes, $id]);
+        
         
  
     }
