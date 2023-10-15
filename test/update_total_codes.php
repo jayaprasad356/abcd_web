@@ -12,7 +12,7 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
-$sql = "SELECT id,total_codes,joined_date FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' AND id = 50635";
+$sql = "SELECT id,total_codes,joined_date FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' ORDER BY joined_date LIMIT 100 ";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -22,7 +22,7 @@ if ($num >= 1) {
         $id = $row['id'];
         $total_codes = $row['total_codes'];
         $joined_date = $row['joined_date'];
-
+        
         $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id AND DATE(datetime) >= '$joined_date' ";
         $db->sql($sql);
         $res = $db->getResult();
@@ -40,7 +40,7 @@ if ($num >= 1) {
  
     }
     $response['success'] = true;
-    $response['message'] = "Codes Updated Successfully".$g_total_codes.'-'.$h_total_codes;
+    $response['message'] = "Codes Updated Successfully";
     print_r(json_encode($response));
 
 }else{
