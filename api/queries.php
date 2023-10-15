@@ -69,18 +69,18 @@ if ($query_type == 'refer_not_receive') {
         print_r(json_encode($response));
         return false;
     }
-    if (empty($_POST['description'])) {
+    if (empty($_POST['referral_date'])) {
         $response['success'] = false;
-        $response['message'] = " Description is Empty";
+        $response['message'] = " Referral Date is Empty";
         print_r(json_encode($response));
         return false;
     }
   
     $user_id=$db->escapeString($_POST['user_id']);
     $friend_mobile = $db->escapeString($_POST['friend_mobile']);
-    $description=$db->escapeString($_POST['description']);
+    $referral_date=$db->escapeString($_POST['referral_date']);
 
-    $sql = "INSERT INTO refer_not_receive (`user_id`,`friend_mobile`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$friend_mobile','$description','$datetime','')";
+    $sql = "INSERT INTO refer_not_receive (`user_id`,`friend_mobile`,`referral_date`,`datetime`,`remarks`) VALUES ('$user_id','$friend_mobile','$referral_date','$datetime','')";
     $db->sql($sql);
 
 }
@@ -115,22 +115,15 @@ if ($query_type == 'withdrawal_not_receive') {
         print_r(json_encode($response));
         return false;
     }
-    if (empty($_POST['description'])) {
-        $response['success'] = false;
-        $response['message'] = "Description is Empty";
-        print_r(json_encode($response));
-        return false;
-    }
   
     $user_id=$db->escapeString($_POST['user_id']);
     $withdrawal_date = $db->escapeString($_POST['withdrawal_date']);
     $amount = $db->escapeString($_POST['amount']);
     $account_num = $db->escapeString($_POST['account_num']);
     $ifsc_code = $db->escapeString($_POST['ifsc_code']);
-    $description=$db->escapeString($_POST['description']);
-   
+
     
-   $sql = "INSERT INTO withdrawal_not_receive (`user_id`,`withdrawal_date`,`amount`,`account_num`,`ifsc_code`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$withdrawal_date','$amount','$account_num','$ifsc_code','$description','$datetime','')";
+   $sql = "INSERT INTO withdrawal_not_receive (`user_id`,`withdrawal_date`,`amount`,`account_num`,`ifsc_code`,`datetime`,`remarks`) VALUES ('$user_id','$withdrawal_date','$amount','$account_num','$ifsc_code','$datetime','')";
    $db->sql($sql);
 
 }
@@ -153,9 +146,9 @@ if ($query_type == 'withdrawal_cancel') {
         print_r(json_encode($response));
         return false;
     }
-    if (empty($_POST['description'])) {
+    if (empty($_POST['bank_name'])) {
         $response['success'] = false;
-        $response['message'] = "Description is Empty";
+        $response['message'] = "Bank name is Empty";
         print_r(json_encode($response));
         return false;
     }
@@ -163,10 +156,10 @@ if ($query_type == 'withdrawal_cancel') {
     $user_id=$db->escapeString($_POST['user_id']);
     $account_num = $db->escapeString($_POST['account_num']);
     $ifsc_code = $db->escapeString($_POST['ifsc_code']);
-    $description=$db->escapeString($_POST['description']);
+    $bank_name=$db->escapeString($_POST['bank_name']);
    
     
-   $sql = "INSERT INTO withdrawal_cancel (`user_id`,`account_num`,`ifsc_code`,`description`,`datetime`,`remarks`) VALUES ('$user_id','$account_num','$ifsc_code','$description','$datetime','')";
+   $sql = "INSERT INTO withdrawal_cancel (`user_id`,`account_num`,`ifsc_code`,`bank_name`,`datetime`,`remarks`) VALUES ('$user_id','$account_num','$ifsc_code','$bank_name','$datetime','')";
    $db->sql($sql);
 
 }

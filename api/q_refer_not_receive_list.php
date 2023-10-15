@@ -30,7 +30,7 @@ if ($num >= 1){
         $temp['id'] = $row['id'];
         $temp['user_id'] = $row['user_id'];
         $temp['friend_mobile'] = $row['friend_mobile'];
-        $temp['description'] = $row['description'];
+        $temp['referral_date'] = $row['referral_date'];
         $temp['datetime'] = $row['datetime'];
         $temp['remarks'] = $row['remarks'];
         if($row['status'] == 1){

@@ -33,7 +33,6 @@ if ($num >= 1){
         $temp['amount'] = $row['amount'];
         $temp['account_num'] = $row['account_num'];
         $temp['ifsc_code'] = $row['ifsc_code'];
-        $temp['description'] = $row['description'];
         $temp['datetime'] = $row['datetime'];
         $temp['remarks'] = $row['remarks'];
         if($row['status'] == 1){

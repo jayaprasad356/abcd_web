@@ -60,6 +60,7 @@ if ($num == 1) {
     $ch_monthly_wallet = $res[0]['ch_monthly_wallet'];
     $amail_refer = $res[0]['amail_refer'];
     $reward_codes = $res[0]['reward_codes'];
+    $l_referral_count = $res[0]['l_referral_count'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -282,6 +283,12 @@ if ($num == 1) {
     }
 
     if($wallet_type == 'reward_codes'){
+        if ($reward_codes == 0) {
+            $response['success'] = false;
+            $response['message'] = "Your Reward is Empty";
+            print_r(json_encode($response));
+            return false;
+        }
 
         if ($project_type == 'abcd') {
             if ($level == 1) {
@@ -301,6 +308,13 @@ if ($num == 1) {
             if($bal_codes < $reward_codes){
                 $reward_codes = $bal_codes;
     
+            }
+        }else{
+            if ($l_referral_count == 0) {
+                $response['success'] = false;
+                $response['message'] = "1 refer to eligible add balance";
+                print_r(json_encode($response));
+                return false;
             }
         }
 
