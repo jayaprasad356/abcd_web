@@ -12,34 +12,33 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
-$sql = "SELECT id,refer_code FROM `users` WHERE LEFT(refer_code, 3) != 'YMS' ";
+$sql = "SELECT id,total_codes FROM `users` WHERE joined_date >= '2023-09-07' AND status = 1 AND code_generate = 1 AND project_type = 'abcd' ORDER BY joined_date LIMIT 100 ";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
-    $total = 0 ;
     foreach ($res as $row) {
         
-        $ID = $row['id'];
-        $refer_code = $row['refer_code'];
-        $refer_code = substr($refer_code, 0, 3);
-        $sql = "SELECT id,short_code FROM `branches` WHERE short_code = '$refer_code' ";
+        $id = $row['id'];
+        $total_codes = $res[0]['total_codes'];
+        $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id ";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
-        if ($num == 0) {
-            $total += 1;
-            $short_code = 'YMS';
-            $short_code = $short_code.$ID;
-            $sql_query = "UPDATE users SET refer_code = '$short_code' WHERE id =  $ID";
-            $db->sql($sql_query);
+        $g_total_codes = 0;
+        if ($num >= 1) {
+            $g_total_codes = $res[0]['total_codes'];
+            $h_total_codes = $g_total_code/2;
+            $total_codes = $total_codes -  $h_total_codes;
 
         }
+        $sql = "UPDATE `users` SET `new_total_codes` = $total_codes, `reward_codes` = $h_total_codes WHERE `id` = $id";
+        $db->sql($sql);
+        
  
     }
     $response['success'] = true;
-    $response['message'] = "Refer Code Updated Successfully";
-    $response['total'] = $total;
+    $response['message'] = "Codes Updated Successfully";
     print_r(json_encode($response));
 
 }else{
