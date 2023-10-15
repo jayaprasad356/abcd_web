@@ -97,21 +97,19 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if ($level < 3)  {
-            if($plan == 30){
-                $min_daily_wallet = 100;
-    
-            }else{
-                $min_daily_wallet = 60;
-    
-            }
-            if ($daily_wallet < $min_daily_wallet)  {
-                $response['success'] = false;
-                $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
-                print_r(json_encode($response));
-                return false;
-            }
+        if($level == 1){
+            $min_daily_wallet = 50;
 
+        }else{
+            $min_daily_wallet = 100;
+
+        }
+    
+        if ($daily_wallet < $min_daily_wallet)  {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
+            print_r(json_encode($response));
+            return false;
         }
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'daily_wallet','$datetime',$daily_wallet)";
