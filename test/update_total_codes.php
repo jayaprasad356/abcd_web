@@ -20,8 +20,9 @@ if ($num >= 1) {
     foreach ($res as $row) {
         
         $id = $row['id'];
-        $total_codes = $res[0]['total_codes'];
-        $joined_date = $res[0]['joined_date'];
+        $total_codes = $row['total_codes'];
+        $joined_date = $row['joined_date'];
+        
         $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id AND DATE(datetime) >= '$joined_date' ";
         $db->sql($sql);
         $res = $db->getResult();
