@@ -131,6 +131,13 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
+        if ($level == 1 && $worked_days < 60)  {
+            $response['success'] = false;
+            $response['message'] = "Complete 60000 Codes To Withdraw";
+            print_r(json_encode($response));
+            return false;
+
+        }
         if($total_codes < 60000){
             if ($worked_days < $duration && $level < 3)  {
                 $response['success'] = false;
@@ -140,13 +147,7 @@ if ($num == 1) {
             }
 
         }
-        if ($level == 1 && $worked_days < 60)  {
-            $response['success'] = false;
-            $response['message'] = "Disabled";
-            print_r(json_encode($response));
-            return false;
 
-        }
         if ($level == 1 && $worked_days >= 60)  {
             $percent = 29;
             $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
