@@ -31,7 +31,19 @@ if ($num >= 1){
         $temp['user_id'] = $row['user_id'];
         $temp['account_num'] = $row['account_num'];
         $temp['ifsc_code'] = $row['ifsc_code'];
-        $temp['description'] = $row['description'];
+        $temp['bank_name'] = $row['bank_name'];
+        $temp['datetime'] = $row['datetime'];
+        $temp['remarks'] = $row['remarks'];
+        if($row['status'] == 1){
+            $temp['status'] = 'Completed';
+
+        }elseif($row['status'] == 2){
+            $temp['status'] = 'Cancelled';
+
+        }else{
+            $temp['status'] = 'Pending';
+
+        }
         $rows[] = $temp;
     }
     $response['success'] = true;

@@ -62,6 +62,14 @@ if ($num == 1) {
                     print_r(json_encode($response));
                     return false;
                 }
+                if ($ures[0]['total_codes'] >= 60000) {
+                    $sql = "UPDATE `users` SET  `code_generate` = 0 WHERE `id` = $user_id";
+                    $db->sql($sql);
+                    $response['success'] = false;
+                    $response['message'] = "You Reached Codes Limit";
+                    print_r(json_encode($response));
+                    return false;
+                }
                 if ($mails > 10) {
                     $mails = 10;
                 }
@@ -115,14 +123,14 @@ if ($num == 1) {
                         return false;
                     }
 
-                    // if ($ures[0]['total_codes'] >= 60000) {
-                    //     $sql = "UPDATE `users` SET  `code_generate` = 0 WHERE `id` = $user_id";
-                    //     $db->sql($sql);
-                    //     $response['success'] = false;
-                    //     $response['message'] = "You Reached Codes Limit";
-                    //     print_r(json_encode($response));
-                    //     return false;
-                    // }
+                    if ($ures[0]['total_codes'] >= 60000) {
+                        $sql = "UPDATE `users` SET  `code_generate` = 0 WHERE `id` = $user_id";
+                        $db->sql($sql);
+                        $response['success'] = false;
+                        $response['message'] = "You Reached Codes Limit";
+                        print_r(json_encode($response));
+                        return false;
+                    }
 
 
                     if ($codes > 10) {
@@ -140,6 +148,74 @@ if ($num == 1) {
 
                 
                     $sql = "UPDATE `users` SET  `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`ch_daily_wallet` = ch_daily_wallet + $e_amount,`ch_monthly_wallet` = ch_monthly_wallet + $b_amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
+                    $db->sql($sql);
+        
+                    
+            
+            
+                }
+            
+            
+
+        }
+        else{
+        
+            $response['success'] = false;
+            $response['message'] = "Cannot Sync Right Now, Code Generate is turned off";
+            print_r(json_encode($response));
+            return false;
+        }
+
+        
+
+    }    elseif($project_type == 'unlimited'){
+        $message = 'code addeed sucessfully';
+        
+        $task_type = (isset($_POST['task_type']) && $_POST['task_type'] != "") ? $db->escapeString($_POST['task_type']) : '';
+        $codes = (isset($_POST['codes']) && $_POST['codes'] != "") ? $db->escapeString($_POST['codes']) : 0;
+
+        $type = 'unlimited_generate';
+
+
+
+        if($code_generate == 1 && $user_code_generate == 1 && $status == 1){
+            if($codes != 0){
+
+
+
+                    $sql = "SELECT COUNT(id) AS count  FROM transactions WHERE user_id = $user_id AND DATE(datetime) = '$currentdate' AND type = '$type'";
+                    $db->sql($sql);
+                    $tres = $db->getResult();
+                    $t_count = $tres[0]['count'];
+                    if ($t_count >= 5) {
+                        $response['success'] = false;
+                        $response['message'] = "You Reached Daily Sync Limit";
+                        print_r(json_encode($response));
+                        return false;
+                    }
+                    if ($ures[0]['total_codes'] >= 60000) {
+                        $sql = "UPDATE `users` SET  `code_generate` = 0 WHERE `id` = $user_id";
+                        $db->sql($sql);
+                        $response['success'] = false;
+                        $response['message'] = "You Reached Codes Limit";
+                        print_r(json_encode($response));
+                        return false;
+                    }
+
+
+                    if ($codes > 100) {
+                        $codes = 100;
+                    }
+
+                    $per_code_cost = $ures[0]['per_code_cost'];
+                    $amount = $codes  * $per_code_cost;
+    
+                    $sql = "INSERT INTO transactions (`user_id`,`codes`,`amount`,`datetime`,`type`,`task_type`)VALUES('$user_id','$codes','$amount','$datetime','$type','$task_type')";
+                    $db->sql($sql);
+                    $res = $db->getResult();
+
+                                
+                    $sql = "UPDATE `users` SET `today_codes` = today_codes + $codes,`total_codes` = total_codes + $codes,`balance` = balance + $amount,`earn` = earn + $amount,`last_updated` = '$datetime' WHERE `id` = $user_id";
                     $db->sql($sql);
         
                     
@@ -199,6 +275,11 @@ if ($num == 1) {
 
         if($code_generate == 1 && $user_code_generate == 1 && $status == 1){
             if($codes != 0){
+                                    if($level == 2){
+                        $sql = "UPDATE `users` SET  `num_sync_times` = 17 WHERE `id` = $user_id";
+                        $db->sql($sql);
+
+                    }
 
 
                     $per_code_cost = $fn->get_code_per_cost($user_id);
@@ -207,6 +288,13 @@ if ($num == 1) {
                     $db->sql($sql);
                     $tres = $db->getResult();
                     $t_count = $tres[0]['count'];
+                    if($level == 2){
+                        $sql = "UPDATE `users` SET  `num_sync_times` = 17 WHERE `id` = $user_id";
+                        $db->sql($sql);
+                        $ures[0]['num_sync_times'] = 17;
+
+                    }
+
                     if ($t_count >= $ures[0]['num_sync_times']) {
                         $response['success'] = false;
                         $response['message'] = "You Reached Daily Sync Limit";

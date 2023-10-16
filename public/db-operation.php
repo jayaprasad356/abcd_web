@@ -139,6 +139,7 @@ if (isset($_POST['suport_notification']) && $_POST['suport_notification'] == 1) 
     $error = false;
     $title = $db->escapeString(($_POST['title']));
     $description = $db->escapeString(($_POST['description']));
+    $link = $db->escapeString(($_POST['link']));
     $filename = $_FILES["upload_file"]["tmp_name"];
     $result = $fn->validate_image($_FILES["upload_file"], false);
     if (!$result) {
@@ -159,7 +160,7 @@ if (isset($_POST['suport_notification']) && $_POST['suport_notification'] == 1) 
                 if ($num >= 1) {
                     $user_id = $res[0]['id'];
 
-                    $sql = "INSERT INTO support_notifications (`user_id`,`title`,`description`,`datetime`)VALUES('$user_id','$title','$description','$datetime')";
+                    $sql = "INSERT INTO support_notifications (`user_id`,`title`,`description`,`link`,`datetime`)VALUES('$user_id','$title','$description','$link','$datetime')";
                     $db->sql($sql);
                 
                     $type = "support_message";

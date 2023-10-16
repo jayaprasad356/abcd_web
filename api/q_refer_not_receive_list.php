@@ -30,7 +30,19 @@ if ($num >= 1){
         $temp['id'] = $row['id'];
         $temp['user_id'] = $row['user_id'];
         $temp['friend_mobile'] = $row['friend_mobile'];
-        $temp['description'] = $row['description'];
+        $temp['referral_date'] = $row['referral_date'];
+        $temp['datetime'] = $row['datetime'];
+        $temp['remarks'] = $row['remarks'];
+        if($row['status'] == 1){
+            $temp['status'] = 'Completed';
+
+        }elseif($row['status'] == 2){
+            $temp['status'] = 'Cancelled';
+
+        }else{
+            $temp['status'] = 'Pending';
+
+        }
         $rows[] = $temp;
     }
     $response['success'] = true;

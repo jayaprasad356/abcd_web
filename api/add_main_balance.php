@@ -60,6 +60,7 @@ if ($num == 1) {
     $ch_monthly_wallet = $res[0]['ch_monthly_wallet'];
     $amail_refer = $res[0]['amail_refer'];
     $reward_codes = $res[0]['reward_codes'];
+    $l_referral_count = $res[0]['l_referral_count'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -96,21 +97,19 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if ($level < 3)  {
-            if($plan == 30){
-                $min_daily_wallet = 100;
-    
-            }else{
-                $min_daily_wallet = 60;
-    
-            }
-            if ($daily_wallet < $min_daily_wallet)  {
-                $response['success'] = false;
-                $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
-                print_r(json_encode($response));
-                return false;
-            }
+        if($level == 1){
+            $min_daily_wallet = 50;
 
+        }else{
+            $min_daily_wallet = 100;
+
+        }
+    
+        if ($daily_wallet < $min_daily_wallet)  {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹".$min_daily_wallet." to add balance";
+            print_r(json_encode($response));
+            return false;
         }
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'daily_wallet','$datetime',$daily_wallet)";
@@ -132,6 +131,13 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
+        if ($level == 1 && $worked_days < 60)  {
+            $response['success'] = false;
+            $response['message'] = "Complete 60000 Codes To Withdraw";
+            print_r(json_encode($response));
+            return false;
+
+        }
         if($total_codes < 60000){
             if ($worked_days < $duration && $level < 3)  {
                 $response['success'] = false;
@@ -141,14 +147,8 @@ if ($num == 1) {
             }
 
         }
-        if ($level == 1 && $plan == 30)  {
-            $response['success'] = false;
-            $response['message'] = "Disabled";
-            print_r(json_encode($response));
-            return false;
 
-        }
-        if ($level == 1 && $plan == 50)  {
+        if ($level == 1 && $worked_days >= 60)  {
             $percent = 29;
             $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
             $result = ($percent / 100) * $monthly_wallet;
@@ -282,30 +282,42 @@ if ($num == 1) {
     }
 
     if($wallet_type == 'reward_codes'){
-        if ($project_type != 'abcd') {
+        if ($reward_codes == 0) {
             $response['success'] = false;
-            $response['message'] = "Reward codes only Abcd Project";
-            print_r(json_encode($response));
-            return false;
-        }
-        if ($level == 1) {
-            $response['success'] = false;
-            $response['message'] = "Claim This Codes For Free Reaching Level 2 - Helps Achieving Your Target.";
+            $response['message'] = "Your Reward is Empty";
             print_r(json_encode($response));
             return false;
         }
 
-         if ($reward_codes < 120) {
-            $response['success'] = false;
-            $response['message'] = "Minimum ₹120 to add balance";
-            print_r(json_encode($response));
-            return false;
+        if ($project_type == 'abcd') {
+            if ($level == 1) {
+                $response['success'] = false;
+                $response['message'] = "Claim This Codes For Free Reaching Level 2 - Helps Achieving Your Target.";
+                print_r(json_encode($response));
+                return false;
+            }
+    
+             if ($reward_codes < 120) {
+                $response['success'] = false;
+                $response['message'] = "Minimum ₹120 to add balance";
+                print_r(json_encode($response));
+                return false;
+            }
+            $bal_codes = 60000 - $total_codes;
+            if($bal_codes < $reward_codes){
+                $reward_codes = $bal_codes;
+    
+            }
+        }else{
+            if ($l_referral_count == 0) {
+                $response['success'] = false;
+                $response['message'] = "1 refer to eligible add balance";
+                print_r(json_encode($response));
+                return false;
+            }
         }
-        $bal_codes = 60000 - $total_codes;
-        if($bal_codes < $reward_codes){
-            $reward_codes = $bal_codes;
 
-        }
+
         $amount = $reward_codes * 0.17;
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`,`codes`) VALUES ($user_id,'reward_codes','$datetime','$amount','$reward_codes')";
