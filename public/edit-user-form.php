@@ -53,7 +53,6 @@ if (isset($_POST['btnEdit'])) {
             $trial_wallet = $db->escapeString(($_POST['trial_wallet']));
             $per_code_cost = $db->escapeString(($_POST['per_code_cost']));
             $num_sync_times = (isset($_POST['num_sync_times']) && !empty($_POST['num_sync_times'])) ? $db->escapeString($_POST['num_sync_times']) : 17;
-            $plan = (isset($_POST['plan']) && !empty($_POST['plan'])) ? $db->escapeString($_POST['plan']) : 30;
             $l_referral_count = (isset($_POST['l_referral_count']) && !empty($_POST['l_referral_count'])) ? $db->escapeString($_POST['l_referral_count']) : 0;
 
             $sa_withdrawal = $db->escapeString(($_POST['sa_withdrawal']));
@@ -188,14 +187,7 @@ if (isset($_POST['btnEdit'])) {
 
 
         }
-        if($plan == 30){
-            $num_sync_times = 9;
-            $duration = 30;
-        }else{
-            $num_sync_times = 10;
-            $duration = 50;
-
-        }
+   
         $fn->update_refer_code_cost($ID);
         $register_bonus_sent = $fn->get_value('users','register_bonus_sent',$ID);
 
@@ -250,12 +242,7 @@ if (isset($_POST['btnEdit'])) {
                 if(strlen($referred_by) == 3){
                     $incentives = 100;
                 }else{
-                    if($plan == 30){
-                        $incentives = 12.5;
-    
-                    }else{
-                        $incentives = 5;
-                    }
+
                     
                 }
 
@@ -281,7 +268,7 @@ if (isset($_POST['btnEdit'])) {
             $db->sql($sql_query);
             
         }
-        if($status == 1 && ($join_type == 1 || $join_type == 2)){
+        if($status == 1 && ($join_type == 1 || $join_type == 2 || $join_type == 3)){
             $total_codes = 0;
             $today_codes = 0;
       
@@ -289,7 +276,7 @@ if (isset($_POST['btnEdit'])) {
             $worked_days = 0;
             $level = 1;
             $l_referral_count = 0;
-            $per_code_val = 2;
+            $per_code_val = 1;
             $salary_advance_balance = 200;
             $joined_date = $date;
             $target_bonus_sent = 0;
@@ -327,10 +314,8 @@ if (isset($_POST['btnEdit'])) {
                 $per_code_cost = 0.12;
             }
             
-
-
         }
-
+       
         
         if($project_type == 'champion'){
             $per_code_cost = $fn->update_refer_code_cost_champion($ID);
@@ -344,6 +329,7 @@ if (isset($_POST['btnEdit'])) {
             }
          
         }
+        
         if($project_type == 'amail'){
             $duration = 300;
         }
@@ -351,7 +337,7 @@ if (isset($_POST['btnEdit'])) {
             $per_code_cost = 0.06;
         } 
     
-        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,plan=$plan,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent,ch_daily_wallet = $ch_daily_wallet,ch_monthly_wallet = $ch_monthly_wallet,reward_codes=$reward_codes WHERE id =  $ID";
+        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent,ch_daily_wallet = $ch_daily_wallet,ch_monthly_wallet = $ch_monthly_wallet,reward_codes=$reward_codes WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -515,22 +501,13 @@ if (isset($_POST['btnCancel'])) { ?>
                                            <option value="0">None</option>
                                            <option value='1'>Rejoin</option>
                                            <option value='2'>Free</option>
+                                           <option value='3'>unlimited_shift</option>
                                     </select>
                                 </div>
                         </div>
                         <br>
                         <div class="row">
-                        <div class="form-group col-md-4">
-                                    <label class="control-label">Plan</label><i class="text-danger asterik">*</i><br>
-                                    <div id="plan" class="btn-group">
-                                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                            <input type="radio" name="plan" value="30" <?= ($res[0]['plan'] == 30) ? 'checked' : ''; ?>> 30 Days
-                                        </label>
-                                        <label class="btn btn-default" data-toggle-class="btn-default" data-toggle-passive-class="btn-default">
-                                            <input type="radio" name="plan" value="50" <?= ($res[0]['plan'] == 50) ? 'checked' : ''; ?>> 50 Days
-                                        </label>
-                                    </div>
-                                </div>
+                        
                                 <div class="col-md-3">
                                    <label for="exampleInputEmail1">Project Type</label> <i class="text-danger asterik">*</i>
                                     <select id='project_type' name="project_type" class='form-control'>
