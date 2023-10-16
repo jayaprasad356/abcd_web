@@ -175,6 +175,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
         $tempRow['total_refund'] = $row['total_refund'];
         $tempRow['trial_wallet'] = $row['trial_wallet'];
         $tempRow['old_monthly_wallet'] = $row['old_monthly_wallet'];
+        $tempRow['reward_codes'] = $row['reward_codes'];
         if($row['status']==0)
             $tempRow['status'] ="<label class='label label-default'>Not Verify</label>";
         elseif($row['status']==1)
@@ -2627,7 +2628,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_friends') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-refer_friends.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-refer_friends-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-refer_friends.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -2706,13 +2707,13 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_not_receive') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-refer_not_receive.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-refer_not_receive-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-refer_not_receive.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['friend_mobile'] = $row['friend_mobile'];
-        $tempRow['description'] = $row['description'];
+        $tempRow['referral_date'] = $row['referral_date'];
         $tempRow['remarks'] = $row['remarks'];
         $tempRow['datetime'] = $row['datetime'];
         if($row['status']==1)
@@ -2785,7 +2786,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-withdrawal_not_receive.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-withdrawal_not_receive-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-withdrawal_not_receive.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -2794,7 +2795,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
         $tempRow['amount'] = $row['amount'];
         $tempRow['account_num'] = $row['account_num'];
         $tempRow['ifsc_code'] = $row['ifsc_code'];
-        $tempRow['description'] = $row['description'];
         $tempRow['remarks'] = $row['remarks'];
         $tempRow['datetime'] = $row['datetime'];
         if($row['status']==1)
@@ -2867,14 +2867,14 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-withdrawal_cancel.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-withdrawal_cancel-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-withdrawal_cancel.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['account_num'] = $row['account_num'];
         $tempRow['ifsc_code'] = $row['ifsc_code'];
-        $tempRow['description'] = $row['description'];
+        $tempRow['bank_name'] = $row['bank_name'];
         $tempRow['remarks'] = $row['remarks'];
         $tempRow['datetime'] = $row['datetime'];
         if($row['status']==1)
@@ -2947,7 +2947,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'other_queries') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-other_queries.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-other_queries-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-other_queries.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];

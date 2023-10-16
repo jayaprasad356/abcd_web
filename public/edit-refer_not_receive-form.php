@@ -16,16 +16,16 @@ if (isset($_GET['id'])) {
 if (isset($_POST['btnEdit'])) {
 
              $friend_mobile = $db->escapeString(($_POST['friend_mobile']));
-             $description = $db->escapeString(($_POST['description']));
+             $referral_date = $db->escapeString(($_POST['referral_date']));
              $remarks = $db->escapeString(($_POST['remarks']));
              $datetime = $db->escapeString(($_POST['datetime']));
              $status = $db->escapeString(($_POST['status']));
              $error = array();
 
-     if (!empty($friend_mobile) && !empty($description) && !empty($remarks) && !empty($datetime) && !empty($status)) 
+     if (!empty($friend_mobile) && !empty($referral_date) && !empty($remarks) && !empty($datetime) && !empty($status)) 
 		{
 
-        $sql_query = "UPDATE refer_not_receive SET friend_mobile='$friend_mobile',description='$description',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
+        $sql_query = "UPDATE refer_not_receive SET friend_mobile='$friend_mobile',referral_date='$referral_date',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -115,8 +115,8 @@ if (isset($_POST['btnCancel'])) { ?>
                         <div class="row">
                             <div class="form-group">
                             <div class='col-md-6'>
-                                    <label for="exampleInputEmail1">Description</label> <i class="text-danger asterik">*</i>
-                                    <textarea type="text" rows="3" class="form-control" name="description" ><?php echo $res[0]['description']?></textarea>
+                            <label for="exampleInputEmail1">Referral Date</label><i class="text-danger asterik">*</i>
+                                    <input type="date" class="form-control" name="referral_date" value="<?php echo $res[0]['referral_date']; ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleInputEmail1">Remarks</label><i class="text-danger asterik">*</i>

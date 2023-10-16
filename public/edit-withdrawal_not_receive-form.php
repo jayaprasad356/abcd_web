@@ -19,16 +19,15 @@ if (isset($_POST['btnEdit'])) {
              $amount = $db->escapeString(($_POST['amount']));
              $account_num = $db->escapeString(($_POST['account_num']));
              $ifsc_code = $db->escapeString(($_POST['ifsc_code']));
-             $description = $db->escapeString(($_POST['description']));
              $remarks = $db->escapeString(($_POST['remarks']));
              $datetime = $db->escapeString(($_POST['datetime']));
              $status = $db->escapeString(($_POST['status']));
              $error = array();
 
-     if (!empty($withdrawal_date) && !empty($amount) && !empty($account_num) && !empty($ifsc_code) && !empty($description) && !empty($remarks) && !empty($datetime) && !empty($status)) 
+     if (!empty($withdrawal_date) && !empty($amount) && !empty($account_num) && !empty($ifsc_code)  && !empty($remarks) && !empty($datetime) && !empty($status)) 
 		{
 
-        $sql_query = "UPDATE withdrawal_not_receive SET withdrawal_date='$withdrawal_date',amount='$amount',account_num='$account_num',ifsc_code='$ifsc_code',description='$description',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
+        $sql_query = "UPDATE withdrawal_not_receive SET withdrawal_date='$withdrawal_date',amount='$amount',account_num='$account_num',ifsc_code='$ifsc_code',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -134,10 +133,6 @@ if (isset($_POST['btnCancel'])) { ?>
                         <br>
                         <div class="row">
                             <div class="form-group">
-                            <div class='col-md-6'>
-                                    <label for="exampleInputEmail1">Description</label> <i class="text-danger asterik">*</i>
-                                    <textarea type="text" rows="3" class="form-control" name="description" ><?php echo $res[0]['description']?></textarea>
-                                </div>
                                 <div class="col-md-6">
                                     <label for="exampleInputEmail1">Remarks</label><i class="text-danger asterik">*</i>
                                     <textarea type="text" rows="3" class="form-control" name="remarks" ><?php echo $res[0]['remarks']?></textarea>

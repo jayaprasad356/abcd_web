@@ -143,7 +143,8 @@
                                     <th data-field="password" data-sortable="true">Password</th>
                                     <th data-field="dob" data-sortable="true">Date of Birth</th>
                                     <th data-field="old_monthly_wallet" data-sortable="true">Old Monthly Balance</th>
-                            </tr>
+                                    <th data-field="reward_codes" data-sortable="true">Reward Codes</th>
+                                </tr>
                         </thead>
                         </table>
                     </div>

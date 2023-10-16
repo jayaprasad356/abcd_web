@@ -21,7 +21,7 @@
                                     <th data-field="name" data-sortable="true">Name</th>
                                     <th data-field="mobile" data-sortable="true">Mobile</th>
                                     <th data-field="friend_mobile" data-sortable="true">Friend Mobile</th>
-                                    <th data-field="description" data-sortable="true">Description</th>
+                                    <th data-field="referral_date" data-sortable="true">Referral Date</th>
                                     <th data-field="status" data-sortable="true">Status</th>
                                     <th data-field="remarks" data-sortable="true">Remarks</th>
                                     <th data-field="datetime" data-sortable="true">Date Time</th>
@@ -59,4 +59,9 @@
             search: p.search
         };
     }
+</script>
+<script>
+function redirectToPaidPage() {
+    window.location.href = "edit-withdrawal_not_receive-page.php";
+}
 </script>
