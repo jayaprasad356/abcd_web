@@ -25,10 +25,10 @@ class Database
 
 
     //LIve
- //private $db_host = "localhost";
-//private $db_user = "u117947056_abcd";
-//private $db_pass = "Abcd@2022"; 
-//private $db_name = "u117947056_abcd"; 
+ private $db_host = "localhost";
+private $db_user = "u117947056_abcd";
+private $db_pass = "Abcd@2022"; 
+private $db_name = "u117947056_abcd"; 
 
 
 
