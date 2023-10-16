@@ -309,6 +309,13 @@ if (isset($_POST['btnEdit'])) {
                 $sql_query = "DELETE FROM `leaves` WHERE user_id = $ID";
                 $db->sql($sql_query);
 
+            }if($join_type == 3){
+
+                $referred_by = 'unlimited_shift';
+                $per_code_cost = 0.17;
+    
+
+
             }else{
                 $referred_by = 'free';
                 $per_code_cost = 0.12;
