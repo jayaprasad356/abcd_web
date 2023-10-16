@@ -282,6 +282,7 @@ if (isset($_POST['btnEdit'])) {
             $target_bonus_sent = 0;
 
             $incentives = 25;
+            $reward_codes = 0;
             
 
             if($join_type == 1){
@@ -313,6 +314,7 @@ if (isset($_POST['btnEdit'])) {
 
                 $referred_by = 'unlimited_shift';
                 $per_code_cost = 0.17;
+                
     
 
 
