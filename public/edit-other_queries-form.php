@@ -22,7 +22,7 @@ if (isset($_POST['btnEdit'])) {
              $status = $db->escapeString(($_POST['status']));
              $error = array();
 
-     if (!empty($title) && !empty($description) && !empty($remarks) && !empty($datetime) && !empty($status)) 
+    
 		{
 
         $sql_query = "UPDATE other_queries SET title='$title',description='$description',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";

@@ -24,7 +24,7 @@ if (isset($_POST['btnEdit'])) {
              $status = $db->escapeString(($_POST['status']));
              $error = array();
 
-     if (!empty($withdrawal_date) && !empty($amount) && !empty($account_num) && !empty($ifsc_code)  && !empty($remarks) && !empty($datetime) && !empty($status)) 
+    
 		{
 
         $sql_query = "UPDATE withdrawal_not_receive SET withdrawal_date='$withdrawal_date',amount='$amount',account_num='$account_num',ifsc_code='$ifsc_code',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";

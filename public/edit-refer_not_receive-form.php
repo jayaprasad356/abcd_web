@@ -22,7 +22,7 @@ if (isset($_POST['btnEdit'])) {
              $status = $db->escapeString(($_POST['status']));
              $error = array();
 
-     if (!empty($friend_mobile) && !empty($referral_date) && !empty($remarks) && !empty($datetime) && !empty($status)) 
+    
 		{
 
         $sql_query = "UPDATE refer_not_receive SET friend_mobile='$friend_mobile',referral_date='$referral_date',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
