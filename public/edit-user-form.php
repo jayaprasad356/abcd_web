@@ -224,7 +224,7 @@ if (isset($_POST['btnEdit'])) {
                 }
 
             }else{
-                   $per_code_cost = 3;
+                $per_code_cost = 3;
                 $join_codes = $function->getSettingsVal('join_codes');
                 $amount = $join_codes  * $per_code_cost;
                 $register_bonus = $amount;
@@ -233,7 +233,7 @@ if (isset($_POST['btnEdit'])) {
                 $salary_advance_balance = $salary_advance_balance + 200;
                 $earn = $earn + $register_bonus;
                 $balance = $balance + $register_bonus;
-                $duration = $plan;
+                $duration = 60;
     
                 $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
@@ -242,8 +242,8 @@ if (isset($_POST['btnEdit'])) {
                 if(strlen($referred_by) == 3){
                     $incentives = 100;
                 }else{
+                    $incentives = 12.5;
 
-                    
                 }
 
             }
