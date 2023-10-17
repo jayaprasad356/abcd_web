@@ -26,7 +26,7 @@ if ($num >= 1) {
     foreach ($res as $row) {
         $user_id = $row['id'];
         $history_days = $fnc->get_leave_temp($user_id);
-        $duration = 60 - (($history_days + 1) * 2);
+        $duration = 60 - (($history_days) * 2);
         $sql = "UPDATE `users` SET  `new_duration` = $duration WHERE `id` = $user_id";
         $db->sql($sql);
 
