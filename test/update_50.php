@@ -17,7 +17,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT id FROM users WHERE joined_date >= '2023-08-09' AND joined_date <= '2023-10-06' AND  status = 1 AND plan = 30 AND level = 1";
+$sql = "SELECT id FROM users WHERE joined_date >= '2023-08-09' AND joined_date <= '2023-09-06' AND  status = 1 AND plan = 30 AND level = 1 AND project_type = 'abcd'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
