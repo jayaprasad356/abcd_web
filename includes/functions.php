@@ -309,7 +309,7 @@ class functions
     }
     public function get_leave_temp($id)
     {
-        $date = '2023-10-06';
+        $date = '2023-09-06';
         $sql = "SELECT joined_date,datediff('$date', joined_date) AS history_days FROM users WHERE id=" . $id;
         $this->db->sql($sql);
         $res = $this->db->getResult();
