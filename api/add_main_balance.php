@@ -100,7 +100,11 @@ if ($num == 1) {
         if($level == 1){
             $min_daily_wallet = 50;
 
-        }else{
+        }
+        elseif($plan == 50){
+            $min_daily_wallet = 60;
+        }
+        else{
             $min_daily_wallet = 100;
 
         }
