@@ -135,16 +135,25 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if($level == 1 && $plan == 50){
-            $percent = 29;
-            $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
-            $result = ($percent / 100) * $monthly_wallet;
-            $monthly_wallet = $old_monthly_wallet + $result;
-            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-            $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
-            $db->sql($sql);
+        if($plan == 50){
+            if($level == 1 && $plan == 50 && $worked_days >= 50){
+                $percent = 29;
+                $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+                $result = ($percent / 100) * $monthly_wallet;
+                $monthly_wallet = $old_monthly_wallet + $result;
+                $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+                $db->sql($sql);
+                $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+                $db->sql($sql);
+            }else{
+                $response['success'] = false;
+                $response['message'] = "Complete 50 Days To Withdraw";
+                print_r(json_encode($response));
+                return false;
+    
+            }
         }
+
         if ($level == 1 && $worked_days < 60)  {
             $response['success'] = false;
             $response['message'] = "Complete 60000 Codes To Withdraw";
