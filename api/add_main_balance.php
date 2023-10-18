@@ -91,7 +91,7 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'daily_wallet'){
-        if ($daily_wallet == 0)  {
+        if ($daily_wallet <= 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
             print_r(json_encode($response));
@@ -129,7 +129,7 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
-        if ($monthly_wallet == 0)  {
+        if ($monthly_wallet <= 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
             print_r(json_encode($response));
