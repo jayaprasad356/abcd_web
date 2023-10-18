@@ -263,7 +263,11 @@ include "header.php";
                                 $db->sql($sql);
                                 $res = $db->getResult();
                                 $num = $db->numRows($res);
-                                echo $num.'/'.$anum.'/'.$cnum;
+                                $sql = "SELECT id FROM users u WHERE u.joined_date = '$currentdate' AND status = 1 AND project_type = 'unlimited' $join1";
+                                $db->sql($sql);
+                                $res = $db->getResult();
+                                $unum = $db->numRows($res);
+                                echo $num.'/'.$anum.'/'.$cnum.'/'.$unum;
                                 ?></h3>
                                 <p>Today Joins</p>
                         </div>
