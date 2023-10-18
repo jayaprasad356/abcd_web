@@ -136,7 +136,7 @@ if ($num == 1) {
             return false;
         }
         if($plan == 50){
-            if($level == 1 && $plan == 50 && $worked_days >= 50){
+            if($level == 1 && $plan == 50 && $worked_days >= $duration){
                 $percent = 29;
                 $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
                 $result = ($percent / 100) * $monthly_wallet;
