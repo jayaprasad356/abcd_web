@@ -70,6 +70,16 @@ if($project_type == 'unlimited'){
 }
 
 $datetime = date('Y-m-d H:i:s');
+$sql = "SELECT u.id FROM `users`u,`transactions`t WHERE u.id = t.user_id AND u.level = 1 AND u.plan = 50 AND worked_days < 50 AND t.type = 'monthly_wallet' AND DATE(t.datetime) = '2023-10-18' AND u.id = $user_id";
+$db->sql($sql);
+$res = $db->getResult();
+$num = $db->numRows($res);
+if ($num >= 1) {
+    $response['success'] = false;
+    $response['message'] = "Disabled now";
+    print_r(json_encode($response));    
+
+}
 $sql = "SELECT id FROM bank_details WHERE user_id = $user_id ";
 $db->sql($sql);
 $res = $db->getResult();
