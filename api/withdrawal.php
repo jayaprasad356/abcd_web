@@ -78,6 +78,7 @@ if ($num >= 1) {
     $response['success'] = false;
     $response['message'] = "Disabled now";
     print_r(json_encode($response));    
+    return false;
 
 }
 $sql = "SELECT id FROM bank_details WHERE user_id = $user_id ";
