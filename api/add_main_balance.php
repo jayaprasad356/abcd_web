@@ -296,45 +296,29 @@ if ($num == 1) {
         // // $response['message'] = "disabled";
         // // print_r(json_encode($response));
         // return false;
-        if($amail_refer == 0){
-            if ($bonus_wallet < 700) {
-                $response['success'] = false;
-                $response['message'] = "Minimum ₹700 to add balance";
-                print_r(json_encode($response));
-                return false;
-            }
-            $bonus_wallet = 700;
-            $sql_query = "SELECT * FROM `bonus_refer_bonus` WHERE user_id = $user_id AND status = 0";
-            $db->sql($sql_query);
-            $res = $db->getResult();
-            $num = $db->numRows($res);
-            if($num>=1){
-                $bonus_id = $res[0]['id'];
-                $sql = "UPDATE bonus_refer_bonus SET status= 1 WHERE id=" . $bonus_id;
-                $db->sql($sql);
-    
-            }else{
-                $response['success'] = false;
-                $response['message'] = "Refer 1 Person to get ₹700";
-                print_r(json_encode($response));
-                return false;
-
-            }
-        }else{
-            if ($current_refers < $target_refers) {
-                $response['success'] = false;
-                $response['message'] = "Minimum ".$target_refers." refers to add balance";
-                print_r(json_encode($response));
-                return false;
-            }
-            if ($bonus_wallet < 225) {
-                $response['success'] = false;
-                $response['message'] = "Minimum ₹225 to add balance";
-                print_r(json_encode($response));
-                return false;
-            }
+        if ($bonus_wallet < 700) {
+            $response['success'] = false;
+            $response['message'] = "Minimum ₹700 to add balance";
+            print_r(json_encode($response));
+            return false;
         }
-        
+        $bonus_wallet = 700;
+        $sql_query = "SELECT * FROM `bonus_refer_bonus` WHERE user_id = $user_id AND status = 0";
+        $db->sql($sql_query);
+        $res = $db->getResult();
+        $num = $db->numRows($res);
+        if($num>=1){
+            $bonus_id = $res[0]['id'];
+            $sql = "UPDATE bonus_refer_bonus SET status= 1 WHERE id=" . $bonus_id;
+            $db->sql($sql);
+
+        }else{
+            $response['success'] = false;
+            $response['message'] = "Refer 1 Person to get ₹700";
+            print_r(json_encode($response));
+            return false;
+
+        }
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$bonus_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + $bonus_wallet,earn = earn + $bonus_wallet,bonus_wallet = bonus_wallet - $bonus_wallet WHERE id=" . $user_id;
