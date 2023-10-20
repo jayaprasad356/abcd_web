@@ -17,7 +17,10 @@ $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
 
 
-$sql = "SELECT u.id,t.id AS t_id,u.mobile,u.name,t.amount,u.worked_days,u.duration,u.monthly_wallet FROM `users`u,`transactions`t WHERE u.id = t.user_id AND u.level = 1 AND u.plan = 50 AND worked_days < 50 AND t.type = 'monthly_wallet' AND DATE(t.datetime) = '2023-10-18' AND u.id != 58467";
+$sql = "SELECT u.id,u.mobile,u.name,u.monthly_wallet,u.level,u.worked_days,u.duration,t.amount,t.datetime 
+FROM `users` u, `transactions` t 
+WHERE u.id = t.user_id 
+AND DATE(t.datetime) >= '2023-10-19' AND DATE(t.datetime) <= '2023-10-20' AND t.type = 'monthly_wallet' AND u.plan = 50 AND u.level <= 2 AND .u.worked_days < u.duration";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -38,7 +41,7 @@ if ($num >= 1) {
 
     }
     $response['success'] = true;
-    $response['message'] = "reverse added";
+    $response['message'] = "reverse new added";
     
     print_r(json_encode($response));
 
