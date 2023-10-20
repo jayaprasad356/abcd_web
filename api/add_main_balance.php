@@ -136,14 +136,16 @@ if ($num == 1) {
             return false;
         }
         if($plan == 50){
-            if($level == 1 && $plan == 50 && $worked_days >= $duration){
-                $percent = 29;
-                $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
-                $result = ($percent / 100) * $monthly_wallet;
-                $monthly_wallet = $old_monthly_wallet + $result;
+            if($level <= 2){
+                $response['success'] = false;
+                $response['message'] = "Disabled";
+                print_r(json_encode($response));
+                return false;
+                
+            }else{
                 $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
                 $db->sql($sql);
-                $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+                $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
                 $db->sql($sql);
 
                 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
@@ -154,31 +156,51 @@ if ($num == 1) {
                 $response['data'] = $res;
                 print_r(json_encode($response));
                 return false;
-            }else{
-                if($level > 1){
-                    $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-                    $db->sql($sql);
-                    $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
-                    $db->sql($sql);
 
-                    $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
-                    $db->sql($sql);
-                    $res = $db->getResult();
-                    $response['success'] = true;
-                    $response['message'] = "Added to Main Balance Successfully";
-                    $response['data'] = $res;
-                    print_r(json_encode($response));
-                    return false;
-                }else{
-                    $response['success'] = false;
-                    $response['message'] = "Complete 50 Days To Withdraw";
-                    print_r(json_encode($response));
-                    return false;
+            }
+            // if($level == 1 && $plan == 50 && $worked_days >= $duration){
+            //     $percent = 29;
+            //     $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+            //     $result = ($percent / 100) * $monthly_wallet;
+            //     $monthly_wallet = $old_monthly_wallet + $result;
+            //     $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+            //     $db->sql($sql);
+            //     $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+            //     $db->sql($sql);
 
-                }
+            //     $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
+            //     $db->sql($sql);
+            //     $res = $db->getResult();
+            //     $response['success'] = true;
+            //     $response['message'] = "Added to Main Balance Successfully";
+            //     $response['data'] = $res;
+            //     print_r(json_encode($response));
+            //     return false;
+            // }else{
+            //     if($level > 1){
+            //         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+            //         $db->sql($sql);
+            //         $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
+            //         $db->sql($sql);
+
+            //         $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
+            //         $db->sql($sql);
+            //         $res = $db->getResult();
+            //         $response['success'] = true;
+            //         $response['message'] = "Added to Main Balance Successfully";
+            //         $response['data'] = $res;
+            //         print_r(json_encode($response));
+            //         return false;
+            //     }else{
+            //         $response['success'] = false;
+            //         $response['message'] = "Complete 50 Days To Withdraw";
+            //         print_r(json_encode($response));
+            //         return false;
+
+            //     }
 
     
-            }
+            // }
         }
 
         if ($level == 1 && $worked_days < 60)  {
