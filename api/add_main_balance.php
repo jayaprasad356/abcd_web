@@ -137,66 +137,58 @@ if ($num == 1) {
         }
         if($plan == 50){
             if($level <= 2){
-                if($user_id  == 24900){
-                    if($level == 1){
-                        if(($total_codes >= 60000) || $worked_days >= $duration){
-                            $percent = 29;
-                            $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
-                            $result = ($percent / 100) * $monthly_wallet;
-                            $monthly_wallet = $old_monthly_wallet + $result;
-                            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-                            $db->sql($sql);
-                            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
-                            $db->sql($sql);
-                            $response['success'] = true;
-                            $response['message'] = "Added to Main Balance Successfully";
-                            $response['data'] = $res;
-                            print_r(json_encode($response));
-                            return false;
+                if($level == 1){
+                    if(($total_codes >= 60000) || $worked_days >= $duration){
+                        $percent = 29;
+                        $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+                        $result = ($percent / 100) * $monthly_wallet;
+                        $monthly_wallet = $old_monthly_wallet + $result;
+                        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+                        $db->sql($sql);
+                        $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+                        $db->sql($sql);
+                        $response['success'] = true;
+                        $response['message'] = "Added to Main Balance Successfully".$old_monthly_wallet;
+                        $response['data'] = $res;
+                        print_r(json_encode($response));
+                        return false;
 
 
-                        }else{
-                            $response['success'] = false;
-                            $response['message'] = "Complete 60000 codes/50 days to withdraw";
-                            print_r(json_encode($response));
-                            return false;
-                        }
-
-    
                     }else{
-                        if(($total_codes >= 60000) || $worked_days >= $duration){
-                            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-                            $db->sql($sql);
-                            $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
-                            $db->sql($sql);
-            
-                            $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
-                            $db->sql($sql);
-                            $res = $db->getResult();
-                            $response['success'] = true;
-                            $response['message'] = "Added to Main Balance Successfully";
-                            $response['data'] = $res;
-                            print_r(json_encode($response));
-                            return false;
-
-
-                        }else{
-                            $response['success'] = false;
-                            $response['message'] = "Complete 60000 codes/50 days to withdraw";
-                            print_r(json_encode($response));
-                            return false;
-                        }
-                    
-    
+                        $response['success'] = false;
+                        $response['message'] = "Complete 60000 codes/50 days to withdraw";
+                        print_r(json_encode($response));
+                        return false;
                     }
-                    
+
+
                 }else{
-                    $response['success'] = false;
-                    $response['message'] = "Disabled";
-                    print_r(json_encode($response));
-                    return false;
+                    if(($total_codes >= 60000) || $worked_days >= $duration){
+                        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+                        $db->sql($sql);
+                        $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
+                        $db->sql($sql);
+        
+                        $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
+                        $db->sql($sql);
+                        $res = $db->getResult();
+                        $response['success'] = true;
+                        $response['message'] = "Added to Main Balance Successfully";
+                        $response['data'] = $res;
+                        print_r(json_encode($response));
+                        return false;
+
+
+                    }else{
+                        $response['success'] = false;
+                        $response['message'] = "Complete 60000 codes/50 days to withdraw";
+                        print_r(json_encode($response));
+                        return false;
+                    }
+                
 
                 }
+
 
 
 
