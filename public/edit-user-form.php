@@ -234,6 +234,7 @@ if (isset($_POST['btnEdit'])) {
                 $earn = $earn + $register_bonus;
                 $balance = $balance + $register_bonus;
                 $duration = 60;
+                $num_sync_times = 9;
     
                 $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
