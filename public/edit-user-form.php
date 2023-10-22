@@ -300,6 +300,18 @@ if (isset($_POST['btnEdit'])) {
 
             $incentives = 25;
             $reward_codes = 0;
+            $sa_withdrawal = 0;
+            
+            $earnings_wallet = 0;
+            $bonus_wallet = 0;
+            $today_mails = 0;
+            $total_mails = 0;
+            $current_refers = 0;
+            $target_refers = 4;
+            $daily_wallet = 0;
+            $monthly_wallet = 0;
+            $ch_daily_wallet = 0;
+            $ch_monthly_wallet = 0;
             
 
             if($join_type == 1){
