@@ -2729,22 +2729,28 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_not_receive') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+
 if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
     $offset = 0;
     $limit = 10;
     $where = '';
     $sort = 'date';
     $order = 'DESC';
-    
+   if (isset($_GET['date']) && $_GET['date'] != '') {
+    $date = $db->escapeString($fn->xss_clean($_GET['date']));
+    $where .= " AND l.date = '$date'";
+} else {
+    // Calculate the date five days ago
+    $fiveDaysAgo = date('Y-m-d', strtotime('-5 days'));
+    $where .= " AND l.datetime >= '$fiveDaysAgo'";
+}
+
     if ((isset($_GET['type']) && $_GET['type'] != '')) {
         $type = $db->escapeString($fn->xss_clean($_GET['type']));
         $where .= " AND l.is_scratched = '$type'";
     }
     
-    if (isset($_GET['date']) && $_GET['date'] != '') {
-        $date = $db->escapeString($fn->xss_clean($_GET['date']));
-        $where .= " AND l.date = '$date'";
-    }
+    
     if (isset($_GET['offset']))
         $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
     if (isset($_GET['limit']))
@@ -2817,15 +2823,20 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
     $sort = 'date';
     $order = 'DESC';
     
+    if (isset($_GET['date']) && $_GET['date'] != '') {
+        $date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $where .= " AND l.date = '$date'";
+    } else {
+        // Calculate the date five days ago
+        $fiveDaysAgo = date('Y-m-d', strtotime('-5 days'));
+        $where .= " AND l.datetime >= '$fiveDaysAgo'";
+    }
     if ((isset($_GET['type']) && $_GET['type'] != '')) {
         $type = $db->escapeString($fn->xss_clean($_GET['type']));
         $where .= " AND l.is_scratched = '$type'";
     }
     
-    if (isset($_GET['date']) && $_GET['date'] != '') {
-        $date = $db->escapeString($fn->xss_clean($_GET['date']));
-        $where .= " AND l.date = '$date'";
-    }
+    
     if (isset($_GET['offset']))
         $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
     if (isset($_GET['limit']))
