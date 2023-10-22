@@ -12,18 +12,15 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
-$sql = "SELECT id,total_codes,joined_date FROM `users` WHERE joined_date >= '2023-09-07' AND new_total_codes = 0 AND status = 1 AND code_generate = 1 AND project_type = 'abcd' AND level = 1 ORDER BY joined_date LIMIT 200";
+$sql = "SELECT * FROM `d_users`";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
     foreach ($res as $row) {
         
-        $id = $row['id'];
-        $total_codes = $row['total_codes'];
-        $joined_date = $row['joined_date'];
-        
-        $sql = "SELECT SUM(codes) AS total_codes FROM `transactions` WHERE type = 'generate' AND user_id = $id AND DATE(datetime) >= '$joined_date' ";
+        $id = $row['user_id'];
+        $sql = "SELECT * FROM `transactions` WHERE type = 'monthly_wallet'";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);

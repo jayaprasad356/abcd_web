@@ -223,8 +223,24 @@ if (isset($_POST['btnEdit'])) {
                     
                 }
 
+            }else if($project_type == 'unlimited'){
+                $per_code_val = 1;
+                $per_code_cost = 0.17;
+                $duration = 300;
+                $num_sync_times = 5;
+                $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
+                $db->sql($sql_query);
+                $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,0,0,'$datetime','register_champion')";
+                $db->sql($sql_query);
+                if(strlen($referred_by) == 3){
+                    $incentives = 125;
+                }else{
+                    $incentives = 15;
+                    
+                }
+
             }else{
-                   $per_code_cost = 3;
+                $per_code_cost = 0.17;
                 $join_codes = $function->getSettingsVal('join_codes');
                 $amount = $join_codes  * $per_code_cost;
                 $register_bonus = $amount;
@@ -233,7 +249,8 @@ if (isset($_POST['btnEdit'])) {
                 $salary_advance_balance = $salary_advance_balance + 200;
                 $earn = $earn + $register_bonus;
                 $balance = $balance + $register_bonus;
-                $duration = $plan;
+                $duration = 60;
+                $num_sync_times = 9;
     
                 $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
                 $db->sql($sql_query);
@@ -242,8 +259,8 @@ if (isset($_POST['btnEdit'])) {
                 if(strlen($referred_by) == 3){
                     $incentives = 100;
                 }else{
+                    $incentives = 12.5;
 
-                    
                 }
 
             }
@@ -282,6 +299,19 @@ if (isset($_POST['btnEdit'])) {
             $target_bonus_sent = 0;
 
             $incentives = 25;
+            $reward_codes = 0;
+            $sa_withdrawal = 0;
+            
+            $earnings_wallet = 0;
+            $bonus_wallet = 0;
+            $today_mails = 0;
+            $total_mails = 0;
+            $current_refers = 0;
+            $target_refers = 4;
+            $daily_wallet = 0;
+            $monthly_wallet = 0;
+            $ch_daily_wallet = 0;
+            $ch_monthly_wallet = 0;
             
 
             if($join_type == 1){
@@ -308,6 +338,14 @@ if (isset($_POST['btnEdit'])) {
 
                 $sql_query = "DELETE FROM `leaves` WHERE user_id = $ID";
                 $db->sql($sql_query);
+
+            }elseif($join_type == 3){
+
+                $referred_by = 'unlimited_shift';
+                $per_code_cost = 0.17;
+                
+    
+
 
             }else{
                 $referred_by = 'free';
