@@ -223,8 +223,24 @@ if (isset($_POST['btnEdit'])) {
                     
                 }
 
+            }else if($project_type == 'unlimited'){
+                $per_code_val = 1;
+                $per_code_cost = 0.17;
+                $duration = 300;
+                $num_sync_times = 5;
+                $sql_query = "UPDATE users SET register_bonus_sent = 1 WHERE id =  $ID";
+                $db->sql($sql_query);
+                $sql_query = "INSERT INTO transactions (user_id,amount,codes,datetime,type)VALUES($ID,0,0,'$datetime','register_champion')";
+                $db->sql($sql_query);
+                if(strlen($referred_by) == 3){
+                    $incentives = 125;
+                }else{
+                    $incentives = 15;
+                    
+                }
+
             }else{
-                $per_code_cost = 3;
+                $per_code_cost = 0.17;
                 $join_codes = $function->getSettingsVal('join_codes');
                 $amount = $join_codes  * $per_code_cost;
                 $register_bonus = $amount;
