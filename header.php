@@ -261,7 +261,7 @@ $fn = new custom_functions;
 
                     </ul>
                 </li>
-                <li class="treeview">
+               <!-- <li class="treeview">
                     <a href="admins.php">
                     <i class="fa fa-adn"></i>
                     <span>Multiple Admin</span>
@@ -290,7 +290,7 @@ $fn = new custom_functions;
                     <i class="fa fa-file"></i>
                     <span>Suspect users</span>
                     </a>
-                </li>
+                </li>-->
                 <li class="treeview">
                     <a href="add-amail-bulk-amount.php">
                     <i class="fa fa-file"></i>
@@ -329,12 +329,12 @@ $fn = new custom_functions;
                         <li><a href="other_queries.php"><i class="fa fa-adn"></i>Other Queries</a></li> 
                     </ul>
                 </li>
-                <li class="treeview">
+               <!-- <li class="treeview">
                     <a href="whatsapp_group.php">
                     <i class="fa fa-adn"></i>
                     <span>Whatsapp Group</span>
                     </a>
-                </li>
+                </li>-->
                 <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>

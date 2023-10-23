@@ -2618,7 +2618,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_friends') {
     foreach ($res as $row)
         $total = $row['total'];
    
-     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile  FROM `refer_friends` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile FROM `refer_friends` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
      $db->sql($sql);
      $res = $db->getResult();
 

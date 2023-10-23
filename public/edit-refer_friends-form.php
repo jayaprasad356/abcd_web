@@ -54,6 +54,8 @@ $sql_query = "SELECT * FROM refer_friends JOIN users WHERE refer_friends.user_id
 $db->sql($sql_query);
 $result = $db->getResult();
 
+
+
 if (isset($_POST['btnCancel'])) { ?>
     <script>
         window.location.href = "refer_friends.php";
@@ -138,22 +140,35 @@ if (isset($_POST['btnCancel'])) { ?>
                         <br>
                         <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="btnEdit">Update</button>
-
                     </div>
                         <br>
                         <div class="row">
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Users name</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="users_name" value="<?php echo $res[0]['users_name']; ?>" readonly>
+                                    <input type="text" class="form-control" name="name" value="<?php echo $result[0]['name']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
+                                  <label for="exampleInputEmail1">Support name</label> <i class="text-danger asterisk">*</i>
+                                 <?php
+                                   $support_id = $result[0]['support_id'];
+                                    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
+                                    $db->sql($sql_query);
+                                    $staffResult = $db->getResult();
+                                   if (!empty($staffResult)) {
+                                   $support_name = $staffResult[0]['name'];
+                                   echo "<input type='text' class='form-control' name='support_id' value='$support_name' readonly>";
+                                        } 
+                                      ?>
+                                   </div>
+
+                                <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Project</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="project" value="<?php echo $res[0]['project']; ?>" readonly>
+                                    <input type="text" class="form-control" name="project_type" value="<?php echo $result[0]['project_type']; ?>" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Total Codes Done</label><i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="total_codes_done" value="<?php echo $res[0]['total_codes_done']; ?>" readonly>
+                                    <input type="int" class="form-control" name="total_codes" value="<?php echo $result[0]['total_codes']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -162,19 +177,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Total Refer Counts</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="total_refer_counts" value="<?php echo $res[0]['total_refer_counts']; ?>" readonly>
+                                    <input type="int" class="form-control" name="total_referrals" value="<?php echo $result[0]['total_referrals']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">L Refer Counts</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="l_refer_counts" value="<?php echo $res[0]['l_refer_counts']; ?>" readonly>
+                                    <input type="int" class="form-control" name="l_referral_count" value="<?php echo $result[0]['l_referral_count']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Level</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>" readonly>
+                                    <input type="int" class="form-control" name="level" value="<?php echo $result[0]['level']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Duration</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>" readonly>
+                                    <input type="int" class="form-control" name="duration" value="<?php echo $result[0]['duration']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -183,19 +198,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Worked days</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>" readonly>
+                                    <input type="int" class="form-control" name="worked_days" value="<?php echo $result[0]['worked_days']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">Main Wallet Balance</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="main_wallet_balance" value="<?php echo $res[0]['main_wallet_balance']; ?>" readonly>
+                                    <label for="exampleInputEmail1">Balance</label> <i class="text-danger asterik">*</i>
+                                    <input type="int" class="form-control" name="balance" value="<?php echo $result[0]['balance']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">Monthly balance</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="monthly_balance" value="<?php echo $res[0]['monthly_balance']; ?>" readonly>
+                                    <label for="exampleInputEmail1">Monthly Wallet</label> <i class="text-danger asterik">*</i>
+                                    <input type="int" class="form-control" name="monthly_wallet" value="<?php echo $result[0]['monthly_wallet']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
-                                    <label for="exampleInputEmail1">Bonus wallet</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>" readonly>
+                                    <label for="exampleInputEmail1">Bonus Wallet</label> <i class="text-danger asterik">*</i>
+                                    <input type="int" class="form-control" name="bonus_wallet" value="<?php echo $result[0]['bonus_wallet']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
