@@ -50,10 +50,24 @@ $data = array();
 $sql_query = "SELECT * FROM refer_not_receive WHERE id =" . $ID;
 $db->sql($sql_query);
 $res = $db->getResult();
+$user_id = $res[0]['user_id'];
 
-$sql_query = "SELECT * FROM refer_not_receive JOIN users WHERE refer_not_receive.user_id=users.id" ;
+$sql_query = "SELECT * FROM users WHERE id = $user_id" ;
 $db->sql($sql_query);
 $result = $db->getResult();
+$support_id = $result[0]['support_id'];
+$support_name = '';
+if(!empty($support_id)){
+    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
+    $db->sql($sql_query);
+    $staffResult = $db->getResult();
+    $num = $db->numRows($staffResult);
+    if ($num >= 1) {
+        $support_name = $staffResult[0]['name'];
+        
+        
+    }
+}
 
 if (isset($_POST['btnCancel'])) { ?>
     <script>
@@ -98,7 +112,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Friend Mobile</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="friend_mobile" value="<?php echo $result[0]['friend_mobile']; ?>">
+                                    <input type="text" class="form-control" name="friend_mobile" value="<?php echo $res[0]['friend_mobile']; ?>">
                                 </div>
                             </div> 
                         </div>
@@ -150,16 +164,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-3'>
                                   <label for="exampleInputEmail1">Support name</label> <i class="text-danger asterisk">*</i>
-                                 <?php
-                                   $support_id = $result[0]['support_id'];
-                                    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
-                                    $db->sql($sql_query);
-                                    $staffResult = $db->getResult();
-                                   if (!empty($staffResult)) {
-                                   $support_name = $staffResult[0]['name'];
-                                   echo "<input type='text' class='form-control' name='support_id' value='$support_name' readonly>";
-                                        } 
-                                      ?>
+                                  <input type="text" class="form-control" name="support_id" value="<?php echo $support_name ?>" readonly>
+                                   
                                    </div>
 
                                 <div class='col-md-3'>

@@ -48,14 +48,28 @@ if (isset($_POST['btnEdit'])) {
 
 // create array variable to store previous data
 $data = array();
-
 $sql_query = "SELECT * FROM withdrawal_not_receive WHERE id =" . $ID;
 $db->sql($sql_query);
 $res = $db->getResult();
+$user_id = $res[0]['user_id'];
 
-$sql_query = "SELECT * FROM withdrawal_not_receive JOIN users WHERE withdrawal_not_receive.user_id=users.id" ;
+$sql_query = "SELECT * FROM users WHERE id = $user_id" ;
 $db->sql($sql_query);
 $result = $db->getResult();
+$support_id = $result[0]['support_id'];
+$support_name = '';
+if(!empty($support_id)){
+    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
+    $db->sql($sql_query);
+    $staffResult = $db->getResult();
+    $num = $db->numRows($staffResult);
+    if ($num >= 1) {
+        $support_name = $staffResult[0]['name'];
+        
+        
+    }
+}
+
 
 if (isset($_POST['btnCancel'])) { ?>
     <script>
@@ -100,7 +114,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Withdrawal Date</label> <i class="text-danger asterik">*</i>
-                                    <input type="date" class="form-control" name="withdrawal_date" value="<?php echo $result[0]['withdrawal_date']; ?>">
+                                    <input type="date" class="form-control" name="withdrawal_date" value="<?php echo $res[0]['withdrawal_date']; ?>">
                                 </div>
                             </div> 
                         </div>
@@ -113,7 +127,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Account Number</label> <i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="account_num" value="<?php echo $result[0]['account_num']; ?>">
+                                    <input type="number" class="form-control" name="account_num" value="<?php echo $res[0]['account_num']; ?>">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleInputEmail1">IFSC Code</label><i class="text-danger asterik">*</i>
@@ -165,16 +179,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-3'>
                                   <label for="exampleInputEmail1">Support name</label> <i class="text-danger asterisk">*</i>
-                                 <?php
-                                   $support_id = $result[0]['support_id'];
-                                    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
-                                    $db->sql($sql_query);
-                                    $staffResult = $db->getResult();
-                                   if (!empty($staffResult)) {
-                                   $support_name = $staffResult[0]['name'];
-                                   echo "<input type='text' class='form-control' name='support_id' value='$support_name' readonly>";
-                                        } 
-                                      ?>
+                                  <input type="text" class="form-control" name="support_id" value="<?php echo $support_name ?>" readonly>
+                                   
                                    </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Project</label> <i class="text-danger asterik">*</i>
