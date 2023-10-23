@@ -20,24 +20,12 @@ if (isset($_POST['btnEdit'])) {
              $remarks = $db->escapeString(($_POST['remarks']));
              $datetime = $db->escapeString(($_POST['datetime']));
              $status = $db->escapeString(($_POST['status']));
-             $chat_support = $db->escapeString(($_POST['chat_support']));
-             $users_name = $db->escapeString(($_POST['users_name']));
-             $project = $db->escapeString(($_POST['project']));
-             $total_codes_done = $db->escapeString(($_POST['total_codes_done']));
-             $total_refer_counts = $db->escapeString(($_POST['total_refer_counts']));
-             $level = $db->escapeString(($_POST['level']));
-             $duration = $db->escapeString(($_POST['duration']));
-             $worked_days = $db->escapeString(($_POST['worked_days']));
-             $main_wallet_balance = $db->escapeString(($_POST['main_wallet_balance']));
-             $monthly_balance = $db->escapeString(($_POST['monthly_balance']));
-             $bonus_wallet = $db->escapeString(($_POST['bonus_wallet']));
-             $l_refer_counts = $db->escapeString(($_POST['l_refer_counts']));
              $error = array();
 
     
 		{
 
-        $sql_query = "UPDATE other_queries SET title='$title',description='$description',remarks='$remarks',datetime='$datetime',status='$status',chat_support='$chat_support',users_name='$users_name',project='$project',total_codes_done='$total_codes_done',total_refer_counts='$total_refer_counts',level='$level',duration='$duration',worked_days='$worked_days',main_wallet_balance='$main_wallet_balance',monthly_balance='$monthly_balance',bonus_wallet='$bonus_wallet',l_refer_counts='$l_refer_counts' WHERE id =  $ID";
+        $sql_query = "UPDATE other_queries SET title='$title',description='$description',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -156,21 +144,17 @@ if (isset($_POST['btnCancel'])) { ?>
                         <br>
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Chat support</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="chat_support" value="<?php echo $res[0]['chat_support']; ?>">
-                                </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Users name</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="users_name" value="<?php echo $res[0]['users_name']; ?>">
+                                    <input type="text" class="form-control" name="users_name" value="<?php echo $res[0]['users_name']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Project</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="project" value="<?php echo $res[0]['project']; ?>">
+                                    <input type="text" class="form-control" name="project" value="<?php echo $res[0]['project']; ?>" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Total Codes Done</label><i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="total_codes_done" value="<?php echo $res[0]['total_codes_done']; ?>">
+                                    <input type="int" class="form-control" name="total_codes_done" value="<?php echo $res[0]['total_codes_done']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -179,19 +163,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Total Refer Counts</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="total_refer_counts" value="<?php echo $res[0]['total_refer_counts']; ?>">
+                                    <input type="int" class="form-control" name="total_refer_counts" value="<?php echo $res[0]['total_refer_counts']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">L Refer Counts</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="l_refer_counts" value="<?php echo $res[0]['l_refer_counts']; ?>">
+                                    <input type="int" class="form-control" name="l_refer_counts" value="<?php echo $res[0]['l_refer_counts']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Level</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>">
+                                    <input type="int" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Duration</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>">
+                                    <input type="int" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -200,19 +184,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Worked days</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>">
+                                    <input type="int" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Main Wallet Balance</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="main_wallet_balance" value="<?php echo $res[0]['main_wallet_balance']; ?>">
+                                    <input type="int" class="form-control" name="main_wallet_balance" value="<?php echo $res[0]['main_wallet_balance']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Monthly balance</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="monthly_balance" value="<?php echo $res[0]['monthly_balance']; ?>">
+                                    <input type="int" class="form-control" name="monthly_balance" value="<?php echo $res[0]['monthly_balance']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Bonus wallet</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
+                                    <input type="int" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>

@@ -22,24 +22,12 @@ if (isset($_POST['btnEdit'])) {
              $remarks = $db->escapeString(($_POST['remarks']));
              $datetime = $db->escapeString(($_POST['datetime']));
              $status = $db->escapeString(($_POST['status']));
-             $chat_support = $db->escapeString(($_POST['chat_support']));
-             $users_name = $db->escapeString(($_POST['users_name']));
-             $project = $db->escapeString(($_POST['project']));
-             $total_codes_done = $db->escapeString(($_POST['total_codes_done']));
-             $total_refer_counts = $db->escapeString(($_POST['total_refer_counts']));
-             $level = $db->escapeString(($_POST['level']));
-             $duration = $db->escapeString(($_POST['duration']));
-             $worked_days = $db->escapeString(($_POST['worked_days']));
-             $main_wallet_balance = $db->escapeString(($_POST['main_wallet_balance']));
-             $monthly_balance = $db->escapeString(($_POST['monthly_balance']));
-             $bonus_wallet = $db->escapeString(($_POST['bonus_wallet']));
-             $l_refer_counts = $db->escapeString(($_POST['l_refer_counts']));
              $error = array();
 
     
 		{
 
-        $sql_query = "UPDATE withdrawal_not_receive SET withdrawal_date='$withdrawal_date',amount='$amount',account_num='$account_num',ifsc_code='$ifsc_code',remarks='$remarks',datetime='$datetime',status='$status',chat_support='$chat_support',users_name='$users_name',project='$project',total_codes_done='$total_codes_done',total_refer_counts='$total_refer_counts',level='$level',duration='$duration',worked_days='$worked_days',main_wallet_balance='$main_wallet_balance',monthly_balance='$monthly_balance',bonus_wallet='$bonus_wallet',l_refer_counts='$l_refer_counts' WHERE id =  $ID";
+        $sql_query = "UPDATE withdrawal_not_receive SET withdrawal_date='$withdrawal_date',amount='$amount',account_num='$account_num',ifsc_code='$ifsc_code',remarks='$remarks',datetime='$datetime',status='$status' WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -171,21 +159,17 @@ if (isset($_POST['btnCancel'])) { ?>
                         <br>
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Chat support</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="chat_support" value="<?php echo $res[0]['chat_support']; ?>">
-                                </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Users name</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="users_name" value="<?php echo $res[0]['users_name']; ?>">
+                                    <input type="text" class="form-control" name="users_name" value="<?php echo $res[0]['users_name']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Project</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="project" value="<?php echo $res[0]['project']; ?>">
+                                    <input type="text" class="form-control" name="project" value="<?php echo $res[0]['project']; ?>" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="exampleInputEmail1">Total Codes Done</label><i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="total_codes_done" value="<?php echo $res[0]['total_codes_done']; ?>">
+                                    <input type="int" class="form-control" name="total_codes_done" value="<?php echo $res[0]['total_codes_done']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -194,19 +178,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Total Refer Counts</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="total_refer_counts" value="<?php echo $res[0]['total_refer_counts']; ?>">
+                                    <input type="int" class="form-control" name="total_refer_counts" value="<?php echo $res[0]['total_refer_counts']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">L Refer Counts</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="l_refer_counts" value="<?php echo $res[0]['l_refer_counts']; ?>">
+                                    <input type="int" class="form-control" name="l_refer_counts" value="<?php echo $res[0]['l_refer_counts']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Level</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>">
+                                    <input type="int" class="form-control" name="level" value="<?php echo $res[0]['level']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Duration</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>">
+                                    <input type="int" class="form-control" name="duration" value="<?php echo $res[0]['duration']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -215,19 +199,19 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="form-group">
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Worked days</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>">
+                                    <input type="int" class="form-control" name="worked_days" value="<?php echo $res[0]['worked_days']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Main Wallet Balance</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="main_wallet_balance" value="<?php echo $res[0]['main_wallet_balance']; ?>">
+                                    <input type="int" class="form-control" name="main_wallet_balance" value="<?php echo $res[0]['main_wallet_balance']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Monthly balance</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="monthly_balance" value="<?php echo $res[0]['monthly_balance']; ?>">
+                                    <input type="int" class="form-control" name="monthly_balance" value="<?php echo $res[0]['monthly_balance']; ?>" readonly>
                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Bonus wallet</label> <i class="text-danger asterik">*</i>
-                                    <input type="int" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>">
+                                    <input type="int" class="form-control" name="bonus_wallet" value="<?php echo $res[0]['bonus_wallet']; ?>" readonly>
                                 </div>
                             </div> 
                         </div>
@@ -239,44 +223,66 @@ if (isset($_POST['btnCancel'])) { ?>
     </div>
 </section>
 <section class="content-header">
-    <h1>Last 5 Days of Withdrawals</h1>
+    <h1>Last 5 Days of Withdrawals<small>
 </section>
-<section class="content">
-    <div class="row">
-        <div class="col-12">
-            <div class="box">
-                <div class="box-body table-responsive">
-                    <table id='users_table' class="table table-hover" data-toggle="table" data-url="api-firebase/get-bootstrap-table-data.php?table=withdrawal_not_receive" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true" data-show-columns="true" data-side-pagination="server" data-pagination="true" data-search="true" data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc" data-show-export="true" data-export-types='["txt","csv"]' data-export-options='{
-                        "fileName": "Withdrawal_List_<?= date('d-m-Y') ?>",
-                        "ignoreColumn": ["operate"] 
-                    }'>
-                  
-                        <thead>
-                            <tr>
-                                <th data-field="id" data-sortable="true">ID</th>
-                                <th data-field="name" data-sortable="true">Name</th>
-                                <th data-field="mobile" data-sortable="true">Mobile</th>
-                                <th data-field="withdrawal_date" data-sortable="true">Date of Withdrawal</th>
-                                <th data-field="amount" data-sortable="true">Withdrawal Amount</th>
-                                <th data-field="account_num" data-sortable="true">Account number</th>
-                                <th data-field="ifsc_code" data-sortable="true">Ifsc Code</th>
-                                <th data-field="status" data-sortable="true">Status</th>
-                                <th data-field="remarks" data-sortable="true">Remarks</th>
-                                <th data-field="datetime" data-sortable="true">Date Time</th>
-                            </tr>
-                        </thead>
-                    </table>
+   
+</section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <form name="withdrawal_form" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-12">
+                    <div class="box">
+                        <div class="box-body table-responsive">
+                        <table id='users_table' class="table table-hover" data-toggle="table" data-url="api-firebase/get-bootstrap-table-data.php?table=withdrawal" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true" data-show-columns="true" data-side-pagination="server" data-pagination="true" data-search="true" data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc" data-show-export="true" data-export-types='["txt","csv"]' data-export-options='{
+                            "fileName": "Yellow app-notifications-list-<?= date('d-m-Y') ?>",
+                            "ignoreColumn": ["operate"] 
+                        }'>
+                                <thead>
+                                    <tr>
+                                        <th data-field="id" data-sortable="true">ID</th>
+                                        <th data-field="name" data-sortable="true" data-visible="true" data-footer-formatter="totalFormatter">Name</th>
+                                        <th data-field="amount" data-sortable="true" data-visible="true" data-footer-formatter="priceFormatter">Withdrawals Amount</th>
+                                        <th data-field="status" data-sortable="true">Status</th>
+                                        <th data-field="mobile" data-sortable="true">Mobile</th>
+                                        <th data-field="datetime" data-sortable="true">date</th>
+                                        <th data-field="referred_by" data-sortable="true">Referred By</th>
+                                        <th data-field="refer_code" data-sortable="true">Refer Code</th>
+                                        <th data-field="project_type" data-sortable="true">Project Type</th>
+                                        <th data-field="plan" data-sortable="true">Plan Days</th>
+                                        <th data-field="worked_days" data-sortable="true">Worked Days</th>
+                                        <th data-field="level" data-sortable="true">Level</th>
+                                        <th data-field="total_referrals" data-sortable="true">Refer Count</th>
+                                        <th data-field="support_id" data-sortable="true">Support Name</th>
+                                        <th data-field="daily_wallet" data-sortable="true">Daily Wallet</th>
+                                        <th data-field="monthly_wallet" data-sortable="true">Monthly Wallet</th>
+                                        <th data-field="earnings_wallet" data-sortable="true">Earning Wallet</th>
+                                        <th data-field="bonus_wallet" data-sortable="true">Bonus Wallet</th>
+                                        <th data-field="balance" data-sortable="true">Main Wallet</th>
+                                        <th data-field="account_num" data-sortable="true">Account Number</th>
+                                        <th data-field="holder_name" data-sortable="true">Account Holder Name</th>
+                                        <th data-field="bank" data-sortable="true">Bank Name</th>
+                                        <th data-field="ifsc" data-sortable="true">IFSC</th>    
+                                        <!-- <th  data-field="operate" data-events="actionEvents">Action</th> -->
+                                        </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
+                <!-- /.box -->
             </div>
+            <div class="separator"> </div>
         </div>
-    </div>
-</section>
+        <!-- /.row (main row) -->
+    </section>
 
 <script>
     $('#seller_id').on('change', function() {
         $('#products_table').bootstrapTable('refresh');
     });
-
     $('#community').on('change', function() {
         $('#users_table').bootstrapTable('refresh');
     });
@@ -290,12 +296,10 @@ if (isset($_POST['btnCancel'])) { ?>
             sort: p.sort,
             order: p.order,
             offset: p.offset,
-            search: p.search,
+            search: p.search
         };
     }
 </script>
-
-
 <div class="separator"> </div>
 <?php $db->disconnect(); ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>

@@ -236,8 +236,7 @@ $fn = new custom_functions;
                         <i class="fa fa-angle-right pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                    <li><a href="transactions.php"><i class="fa fa-adn"></i>Transactions</a></li>
-                        
+                    <li><a href="transactions.php"><i class="fa fa-adn"></i>Transactions</a></li> 
                         <li><a href="repayments.php"><i class="fa fa-money"></i>Repayments</a></li>
                         <li><a href="sa_transactions.php"><i class="fa fa-arrow-right"></i>Salary Advance Transactions</a></li>
                     </ul>
@@ -317,34 +316,18 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="refer_friends.php">
-                    <i class="fa fa-adn"></i>
-                    <span>Refer Friends</span>
+                    <a href="#">
+                        <i class="fa fa-bullseye"></i>
+                        <span>User Queries</span>
+                        <i class="fa fa-angle-right pull-right"></i>
                     </a>
-                </li>
-                <li class="treeview">
-                    <a href="refer_not_receive.php">
-                    <i class="fa fa-adn"></i>
-                    <span>Refer Not Receive</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="withdrawal_not_receive.php">
-                    <i class="fa fa-adn"></i>
-                    <span>Withdrawal Not Receive</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="withdrawal_cancel.php">
-                    <i class="fa fa-adn"></i>
-                    <span>Withdrawal Cancel</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="other_queries.php">
-                    <i class="fa fa-adn"></i>
-                    <span>Other Queries</span>
-                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="refer_friends.php"><i class="fa fa-adn"></i>Refer Friends</a></li> 
+                        <li><a href="refer_not_receive.php"><i class="fa fa-adn"></i>Refer Not Receive</a></li> 
+                        <li><a href="withdrawal_not_receive.php"><i class="fa fa-adn"></i>Withdrawal Not Receive</a></li> 
+                        <li><a href="withdrawal_cancel.php"><i class="fa fa-adn"></i>Withdrawal Cancel</a></li> 
+                        <li><a href="other_queries.php"><i class="fa fa-adn"></i>Other Queries</a></li> 
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="whatsapp_group.php">

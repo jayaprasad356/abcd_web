@@ -2628,7 +2628,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_friends') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-refer_friends-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-refer_friends.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-refer_friends.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -2707,7 +2707,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_not_receive') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-refer_not_receive-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-refer_not_receive.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-refer_not_receive.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -2736,14 +2736,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
     $where = '';
     $sort = 'date';
     $order = 'DESC';
-   if (isset($_GET['date']) && $_GET['date'] != '') {
-    $date = $db->escapeString($fn->xss_clean($_GET['date']));
-    $where .= " AND l.date = '$date'";
-} else {
-    // Calculate the date five days ago
-    $fiveDaysAgo = date('Y-m-d', strtotime('-5 days'));
-    $where .= " AND l.datetime >= '$fiveDaysAgo'";
-}
+ 
+    if (isset($_GET['date']) && $_GET['date'] != '') {
+        $date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $where .= " AND l.date = '$date'";
+    }
 
     if ((isset($_GET['type']) && $_GET['type'] != '')) {
         $type = $db->escapeString($fn->xss_clean($_GET['type']));
@@ -2792,7 +2789,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-withdrawal_not_receive-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-withdrawal_not_receive.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-withdrawal_not_receive.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -2816,6 +2813,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+
 if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
     $offset = 0;
     $limit = 10;
@@ -2826,11 +2824,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
     if (isset($_GET['date']) && $_GET['date'] != '') {
         $date = $db->escapeString($fn->xss_clean($_GET['date']));
         $where .= " AND l.date = '$date'";
-    } else {
-        // Calculate the date five days ago
-        $fiveDaysAgo = date('Y-m-d', strtotime('-5 days'));
-        $where .= " AND l.datetime >= '$fiveDaysAgo'";
-    }
+    } 
     if ((isset($_GET['type']) && $_GET['type'] != '')) {
         $type = $db->escapeString($fn->xss_clean($_GET['type']));
         $where .= " AND l.is_scratched = '$type'";
@@ -2878,7 +2872,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-withdrawal_cancel-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-withdrawal_cancel.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-withdrawal_cancel.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -2901,6 +2895,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+
 if (isset($_GET['table']) && $_GET['table'] == 'other_queries') {
     $offset = 0;
     $limit = 10;
@@ -2958,7 +2953,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'other_queries') {
     $tempRow = array();
     foreach ($res as $row) {
 
-        $operate = '<a href="edit-other_queries-page.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = '<a href="edit-other_queries.php?id=' . $row['id'] . '" class="text text-primary"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-other_queries.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
@@ -3034,6 +3029,116 @@ if (isset($_GET['table']) && $_GET['table'] == 'whatsapp_group') {
         $tempRow['link'] = $row['link'];
         $tempRow['operate'] = $operate;
 
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+if (isset($_GET['table']) && $_GET['table'] == 'withdrawal') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+      // Calculate the date five days ago
+      $fiveDaysAgo = date('Y-m-d', strtotime('-5 days'));
+      $where .= " AND w.datetime >= '$fiveDaysAgo'"; // Filter by date
+  
+      if (isset($_GET['user_id']) && $_GET['user_id'] != '') {
+          $user_id = $db->escapeString($fn->xss_clean($_GET['user_id']));
+          $where .= " AND w.user_id = '$user_id'";
+      }
+
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($fn->xss_clean($_GET['limit']));
+
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($fn->xss_clean($_GET['sort']));
+    if (isset($_GET['order']))
+        $order = $db->escapeString($fn->xss_clean($_GET['order']));
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($fn->xss_clean($_GET['search']));
+        $where .= "AND u.mobile like '%" . $search . "%'";
+    }
+    if (isset($_GET['sort'])) {
+        $sort = $db->escapeString($_GET['sort']);
+    }
+    if (isset($_GET['order'])) {
+        $order = $db->escapeString($_GET['order']);
+    }
+    if($_SESSION['role'] == 'Super Admin'){
+        $join = "WHERE w.user_id = u.id AND w.user_id = b.user_id ";
+
+    }
+    else{
+        $refer_code = $_SESSION['refer_code'];
+        $join = "WHERE w.user_id = u.id AND w.user_id = b.user_id AND u.refer_code REGEXP '^$refer_code'";
+    }
+    
+    $where .= " AND w.status = 0 ";
+
+    $sql = "SELECT COUNT(w.id) as total FROM `withdrawals` w,`users` u,`bank_details` b $join AND w.status=0  ". $where ."";
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $sql = "SELECT w.id AS id,w.*,w.datetime,u.name,u.mobile,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,u.worked_days,u.plan,u.bonus_wallet,u.earnings_wallet,u.daily_wallet,u.monthly_wallet,u.level,u.support_id,DATEDIFF( '$currentdate',u.joined_date) AS history,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
+                        $where ORDER BY $sort $order LIMIT $offset, $limit";
+             $db->sql($sql);
+        }
+        else{
+            $sql = "SELECT w.id AS id,w.*,w.datetime,u.name,u.mobile,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,u.worked_days,u.plan,u.bonus_wallet,u.earnings_wallet,u.daily_wallet,u.monthly_wallet,u.level,u.support_id,DATEDIFF( '$currentdate',u.joined_date) AS history,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
+                    AND w.status=0 $where ORDER BY $sort $order LIMIT $offset, $limit";
+             $db->sql($sql);
+        }
+    $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+        // $operate = ' <a class="text text-danger" href="delete-withdrawal.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        // $operate .= ' <a href="edit-withdrawal.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
+      
+        $checkbox = '<input type="checkbox" name="enable[]" value="'.$row['id'].'">';
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['amount'] = $row['amount'];
+        $tempRow['mobile'] = $row['mobile'];
+        $tempRow['datetime'] = $row['datetime'];
+        $tempRow['referred_by'] = $row['referred_by'];
+        $tempRow['refer_code'] = $row['refer_code'];
+        $tempRow['project_type'] = $row['project_type'];
+        $tempRow['plan'] = $row['plan'];
+        $tempRow['worked_days'] = $row['worked_days'];
+        $tempRow['level'] = $row['level'];
+        $tempRow['total_referrals'] = $row['total_referrals'];
+        $tempRow['support_id'] = $row['support_id'];
+        $tempRow['daily_wallet'] = $row['daily_wallet'];
+        $tempRow['monthly_wallet'] = $row['monthly_wallet'];
+        $tempRow['earnings_wallet'] = $row['earnings_wallet'];
+        $tempRow['bonus_wallet'] = $row['bonus_wallet'];
+        $tempRow['balance'] = $row['balance'];
+        $tempRow['account_num'] = ','.$row['account_num'].',';
+        $tempRow['holder_name'] = $row['holder_name'];
+        $tempRow['bank'] = $row['bank'];
+        $tempRow['ifsc'] = $row['ifsc'];
+
+        if($row['status']==1)
+            $tempRow['status'] ="<p class='text text-success'>Paid</p>";
+        elseif($row['status']==0)
+            $tempRow['status']="<p class='text text-primary'>Unpaid</p>";
+        else
+            $tempRow['status']="<p class='text text-danger'>Cancelled</p>";
+        
+        
+
+        $tempRow['column'] = $checkbox;
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;
