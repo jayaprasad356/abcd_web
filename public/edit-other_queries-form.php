@@ -51,6 +51,8 @@ $data = array();
     $db->sql($sql_query);
     $res = $db->getResult();
 
+    $user_id = $res[0]['user_id'];
+    
         $sql_query_user = "SELECT * FROM users WHERE id = $user_id";
         $db->sql($sql_query_user);
         $result = $db->getResult();

@@ -46,37 +46,17 @@ if (isset($_POST['btnEdit'])) {
 
 // create array variable to store previous data
 $data = array();
-<<<<<<< HEAD
 
-    // Query to retrieve withdrawal data
-    $sql_query = "SELECT * FROM withdrawal_cancel WHERE id = $ID";
-    $db->sql($sql_query);
-    $res = $db->getResult();
-
-=======
-$sql_query = "SELECT * FROM withdrawal_cancel WHERE id =" . $ID;
+$sql_query = "SELECT * FROM withdrawal_cancel WHERE id = $ID";
 $db->sql($sql_query);
 $res = $db->getResult();
+
 $user_id = $res[0]['user_id'];
 
-$sql_query = "SELECT * FROM users WHERE id = $user_id" ;
-$db->sql($sql_query);
-$result = $db->getResult();
-$support_id = $result[0]['support_id'];
-$support_name = '';
-if(!empty($support_id)){
-    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
-    $db->sql($sql_query);
-    $staffResult = $db->getResult();
-    $num = $db->numRows($staffResult);
-    if ($num >= 1) {
-        $support_name = $staffResult[0]['name'];
-        
-        
-    }
-}
+    $sql_query_user = "SELECT * FROM users WHERE id = $user_id";
+    $db->sql($sql_query_user);
+    $result = $db->getResult();
 
->>>>>>> 92bd6f7fae59834e91dba3b62410ee5547bceb51
 
     $user_id = $res[0]['user_id'];
 

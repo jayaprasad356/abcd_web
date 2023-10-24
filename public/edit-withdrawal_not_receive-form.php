@@ -48,43 +48,17 @@ if (isset($_POST['btnEdit'])) {
 
 // create array variable to store previous data
 $data = array();
-<<<<<<< HEAD
 
-
-    $sql_query = "SELECT * FROM withdrawal_not_receive WHERE id = $ID";
-    $db->sql($sql_query);
-    $res = $db->getResult();
-
-        $user_id = $res[0]['user_id'];
-
-        $sql_query_user = "SELECT * FROM users WHERE id = $user_id";
-        $db->sql($sql_query_user);
-        $result = $db->getResult();
-  
-=======
-$sql_query = "SELECT * FROM withdrawal_not_receive WHERE id =" . $ID;
+$sql_query = "SELECT * FROM withdrawal_not_receive WHERE id = $ID";
 $db->sql($sql_query);
 $res = $db->getResult();
+
 $user_id = $res[0]['user_id'];
 
-$sql_query = "SELECT * FROM users WHERE id = $user_id" ;
-$db->sql($sql_query);
-$result = $db->getResult();
-$support_id = $result[0]['support_id'];
-$support_name = '';
-if(!empty($support_id)){
-    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
-    $db->sql($sql_query);
-    $staffResult = $db->getResult();
-    $num = $db->numRows($staffResult);
-    if ($num >= 1) {
-        $support_name = $staffResult[0]['name'];
-        
-        
-    }
-}
+    $sql_query_user = "SELECT * FROM users WHERE id = $user_id";
+    $db->sql($sql_query_user);
+    $result = $db->getResult();
 
->>>>>>> 92bd6f7fae59834e91dba3b62410ee5547bceb51
 
 if (isset($_POST['btnCancel'])) { ?>
     <script>
@@ -194,9 +168,18 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-3'>
                                   <label for="exampleInputEmail1">Support name</label> <i class="text-danger asterisk">*</i>
-                                  <input type="text" class="form-control" name="support_id" value="<?php echo $support_name ?>" readonly>
-                                   
+                                 <?php
+                                   $support_id = $result[0]['support_id'];
+                                    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
+                                    $db->sql($sql_query);
+                                    $staffResult = $db->getResult();
+                                   if (!empty($staffResult)) {
+                                   $support_name = $staffResult[0]['name'];
+                                   echo "<input type='text' class='form-control' name='support_id' value='$support_name' readonly>";
+                                        } 
+                                      ?>
                                    </div>
+
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Project</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="project_type" value="<?php echo $result[0]['project_type']; ?>" readonly>
