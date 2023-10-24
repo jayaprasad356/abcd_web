@@ -58,6 +58,12 @@ $user_id = $res[0]['user_id'];
     $db->sql($sql_query_user);
     $result = $db->getResult();
 
+    $support_id = $result[0]['support_id'];
+    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
+    $db->sql($sql_query);
+    $staffResult = $db->getResult();
+       
+
 if (isset($_POST['btnCancel'])) { ?>
     <script>
         window.location.href = "refer_not_receive.php";
@@ -153,18 +159,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-3'>
                                   <label for="exampleInputEmail1">Support name</label> <i class="text-danger asterisk">*</i>
-                                 <?php
-                                   $support_id = $result[0]['support_id'];
-                                    $sql_query = "SELECT name FROM staffs WHERE id = $support_id";
-                                    $db->sql($sql_query);
-                                    $staffResult = $db->getResult();
-                                   if (!empty($staffResult)) {
-                                   $support_name = $staffResult[0]['name'];
-                                   echo "<input type='text' class='form-control' name='support_id' value='$support_name' readonly>";
-                                        } 
-                                      ?>
-                                   </div>
-
+                                  <input type="text" class="form-control" name="name" value="<?php echo $staffResult[0]['name']; ?>" readonly>  
+                                 </div>
                                 <div class='col-md-3'>
                                     <label for="exampleInputEmail1">Project</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="project_type" value="<?php echo $result[0]['project_type']; ?>" readonly>

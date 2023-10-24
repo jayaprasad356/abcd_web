@@ -2578,11 +2578,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_friends') {
     $sort = 'date';
     $order = 'DESC';
     
-    if ((isset($_GET['type']) && $_GET['type'] != '')) {
-        $type = $db->escapeString($fn->xss_clean($_GET['type']));
-        $where .= " AND l.is_scratched = '$type'";
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status='$status'"; 
     }
-    
     if (isset($_GET['date']) && $_GET['date'] != '') {
         $date = $db->escapeString($fn->xss_clean($_GET['date']));
         $where .= " AND l.date = '$date'";
@@ -2657,11 +2656,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'refer_not_receive') {
     $sort = 'date';
     $order = 'DESC';
     
-    if ((isset($_GET['type']) && $_GET['type'] != '')) {
-        $type = $db->escapeString($fn->xss_clean($_GET['type']));
-        $where .= " AND l.is_scratched = '$type'";
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status='$status'"; 
     }
-    
     if (isset($_GET['date']) && $_GET['date'] != '') {
         $date = $db->escapeString($fn->xss_clean($_GET['date']));
         $where .= " AND l.date = '$date'";
@@ -2742,11 +2740,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_not_receive') {
         $where .= " AND l.date = '$date'";
     }
 
-    if ((isset($_GET['type']) && $_GET['type'] != '')) {
-        $type = $db->escapeString($fn->xss_clean($_GET['type']));
-        $where .= " AND l.is_scratched = '$type'";
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status='$status'"; 
     }
-    
     
     if (isset($_GET['offset']))
         $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
@@ -2825,12 +2822,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawal_cancel') {
         $date = $db->escapeString($fn->xss_clean($_GET['date']));
         $where .= " AND l.date = '$date'";
     } 
-    if ((isset($_GET['type']) && $_GET['type'] != '')) {
-        $type = $db->escapeString($fn->xss_clean($_GET['type']));
-        $where .= " AND l.is_scratched = '$type'";
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status='$status'"; 
     }
-    
-    
     if (isset($_GET['offset']))
         $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
     if (isset($_GET['limit']))
@@ -2903,11 +2898,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'other_queries') {
     $sort = 'date';
     $order = 'DESC';
     
-    if ((isset($_GET['type']) && $_GET['type'] != '')) {
-        $type = $db->escapeString($fn->xss_clean($_GET['type']));
-        $where .= " AND l.is_scratched = '$type'";
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status='$status'"; 
     }
-    
     if (isset($_GET['date']) && $_GET['date'] != '') {
         $date = $db->escapeString($fn->xss_clean($_GET['date']));
         $where .= " AND l.date = '$date'";
