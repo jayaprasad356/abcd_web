@@ -47,14 +47,16 @@ if (isset($_POST['btnEdit'])) {
 // create array variable to store previous data
 $data = array();
 
-$sql_query = "SELECT * FROM refer_not_receive WHERE id =" . $ID;
-$db->sql($sql_query);
-$res = $db->getResult();
+    $sql_query = "SELECT * FROM refer_not_receive WHERE id = $ID";
+    $db->sql($sql_query);
+    $res = $db->getResult();
+    
+    $user_id = $res[0]['user_id'];
 
-$sql_query = "SELECT * FROM refer_not_receive JOIN users WHERE refer_not_receive.user_id=users.id" ;
-$db->sql($sql_query);
-$result = $db->getResult();
-
+        $sql_query_user = "SELECT * FROM users WHERE id = $user_id";
+        $db->sql($sql_query_user);
+        $result = $db->getResult();
+   
 if (isset($_POST['btnCancel'])) { ?>
     <script>
         window.location.href = "refer_not_receive.php";
@@ -98,7 +100,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Friend Mobile</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="friend_mobile" value="<?php echo $result[0]['friend_mobile']; ?>">
+                                    <input type="text" class="form-control" name="friend_mobile" value="<?php echo $res[0]['friend_mobile']; ?>">
                                 </div>
                             </div> 
                         </div>

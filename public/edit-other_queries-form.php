@@ -47,14 +47,14 @@ if (isset($_POST['btnEdit'])) {
 // create array variable to store previous data
 $data = array();
 
-$sql_query = "SELECT * FROM other_queries WHERE id =" . $ID;
-$db->sql($sql_query);
-$res = $db->getResult();
+    $sql_query = "SELECT * FROM other_queries WHERE id = $ID";
+    $db->sql($sql_query);
+    $res = $db->getResult();
 
-$sql_query = "SELECT * FROM other_queries JOIN users WHERE other_queries.user_id=users.id" ;
-$db->sql($sql_query);
-$result = $db->getResult();
-
+        $sql_query_user = "SELECT * FROM users WHERE id = $user_id";
+        $db->sql($sql_query_user);
+        $result = $db->getResult();
+   
 if (isset($_POST['btnCancel'])) { ?>
     <script>
         window.location.href = "other_queries.php";
@@ -98,7 +98,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                                 <div class='col-md-4'>
                                     <label for="exampleInputEmail1">Title</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="title" value="<?php echo $result[0]['title']; ?>">
+                                    <input type="text" class="form-control" name="title" value="<?php echo $res[0]['title']; ?>">
                                 </div>
                             </div> 
                         </div>
