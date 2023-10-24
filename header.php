@@ -291,6 +291,22 @@ $fn = new custom_functions;
                     <span>Suspect users</span>
                     </a>
                 </li>-->
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-bullseye"></i>
+                        <span>User Queries</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="refer_friends.php"><i class="fa fa-adn"></i>Refer Friends</a></li> 
+                        <li><a href="refer_not_receive.php"><i class="fa fa-adn"></i>Refer Not Receive</a></li> 
+                        <li><a href="withdrawal_not_receive.php"><i class="fa fa-adn"></i>Withdrawal Not Receive</a></li> 
+                        <li><a href="withdrawal_cancel.php"><i class="fa fa-adn"></i>Withdrawal Cancel</a></li> 
+                        <li><a href="other_queries.php"><i class="fa fa-adn"></i>Other Queries</a></li> 
+                    </ul>
+                </li>
                 <li class="treeview">
                     <a href="add-amail-bulk-amount.php">
                     <i class="fa fa-file"></i>
@@ -314,20 +330,6 @@ $fn = new custom_functions;
                     <i class="fa fa-adn"></i>
                     <span>Queries</span>
                     </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-bullseye"></i>
-                        <span>User Queries</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="refer_friends.php"><i class="fa fa-adn"></i>Refer Friends</a></li> 
-                        <li><a href="refer_not_receive.php"><i class="fa fa-adn"></i>Refer Not Receive</a></li> 
-                        <li><a href="withdrawal_not_receive.php"><i class="fa fa-adn"></i>Withdrawal Not Receive</a></li> 
-                        <li><a href="withdrawal_cancel.php"><i class="fa fa-adn"></i>Withdrawal Cancel</a></li> 
-                        <li><a href="other_queries.php"><i class="fa fa-adn"></i>Other Queries</a></li> 
-                    </ul>
                 </li>
                <!-- <li class="treeview">
                     <a href="whatsapp_group.php">
