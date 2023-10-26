@@ -272,7 +272,8 @@ if (isset($_POST['export_all'])) {
                                         <th data-field="account_num" data-sortable="true">Account Number</th>
                                         <th data-field="holder_name" data-sortable="true">Account Holder Name</th>
                                         <th data-field="bank" data-sortable="true">Bank Name</th>
-                                        <th data-field="ifsc" data-sortable="true">IFSC</th>    
+                                        <th data-field="ifsc" data-sortable="true">IFSC</th>   
+                                        <th data-field="duration" data-sortable="true">Duration</th>     
                                         <!-- <th  data-field="operate" data-events="actionEvents">Action</th> -->
                                     </tr>
                                 </thead>

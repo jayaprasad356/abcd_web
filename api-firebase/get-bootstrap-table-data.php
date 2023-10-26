@@ -527,7 +527,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
              $db->sql($sql);
         }
         else{
-            $sql = "SELECT w.id AS id,w.*,w.datetime,u.name,u.mobile,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,u.worked_days,u.plan,u.bonus_wallet,u.earnings_wallet,u.daily_wallet,u.monthly_wallet,u.level,u.support_id,DATEDIFF( '$currentdate',u.joined_date) AS history,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type FROM `withdrawals` w,`users` u,`bank_details` b $join
+            $sql = "SELECT w.id AS id,w.*,w.datetime,u.name,u.mobile,u.total_referrals,u.balance,u.mobile,u.referred_by,u.refer_code,u.worked_days,u.plan,u.bonus_wallet,u.earnings_wallet,u.daily_wallet,u.monthly_wallet,u.level,u.support_id,DATEDIFF( '$currentdate',u.joined_date) AS history,b.bank,b.account_num,b.ifsc,b.holder_name,u.project_type,u.duration FROM `withdrawals` w,`users` u,`bank_details` b $join
                     AND w.status=0 $where ORDER BY $sort $order LIMIT $offset, $limit";
              $db->sql($sql);
         }
@@ -562,6 +562,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['balance'] = $row['balance'];
         $tempRow['account_num'] = ','.$row['account_num'].',';
         $tempRow['holder_name'] = $row['holder_name'];
+        $tempRow['duration'] = $row['duration'];
         $tempRow['bank'] = $row['bank'];
         $tempRow['ifsc'] = $row['ifsc'];
 
