@@ -17,7 +17,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT id FROM users WHERE joined_date >= '2023-08-09' AND joined_date <= '2023-09-06' AND  status = 1 AND plan = 30 AND level = 1 AND project_type = 'abcd'";
+$sql = "SELECT id,monthly_wallet,reward_codes FROM `old_users` WHERE referred_by = 'rejoin' AND monthly_wallet_status = 0 AND worked_days < duration";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -25,16 +25,16 @@ if ($num >= 1) {
 
     foreach ($res as $row) {
         $user_id = $row['id'];
-        $history_days = $fnc->get_leave_temp($user_id);
-        $duration = 60 - (($history_days + 1) * 2);
-        $sql = "UPDATE `users` SET  `new_duration` = $duration WHERE `id` = $user_id";
+        $monthly_wallet = $row['monthly_wallet'];
+        $reward_codes = $row['reward_codes'];
+        $sql = "UPDATE `users` SET  `monthly_wallet` = $monthly_wallet,`reward_codes` = $reward_codes WHERE `id` = $user_id";
         $db->sql($sql);
 
 
 
     }
     $response['success'] = true;
-    $response['message'] = "duration added";
+    $response['message'] = "monthly wallet  added";
     
     print_r(json_encode($response));
 
