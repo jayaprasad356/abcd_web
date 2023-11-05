@@ -27,7 +27,7 @@ if ($num >= 1) {
         $user_id = $row['id'];
         $monthly_wallet = $row['monthly_wallet'];
         $reward_codes = $row['reward_codes'];
-        $sql = "UPDATE `users` SET  `monthly_wallet` = monthly_wallet + $monthly_wallet,`reward_codes` = reward_codes + $reward_codes WHERE `id` = $user_id";
+        $sql = "UPDATE `users` SET  `monthly_wallet` = $monthly_wallet,`reward_codes` = $reward_codes WHERE `id` = $user_id";
         $db->sql($sql);
 
 
