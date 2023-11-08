@@ -75,7 +75,7 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if($withdrawal_status == 1 &&  $main_ws == 1 ){
-    if ($num >= 0) {
+    if ($num >= 1) {
         if($amount >= $min_withdrawal){
             if($balance >= $amount){
                 $sql = "SELECT * FROM `users` WHERE level = 1 AND project_type = 'abcd' AND status = 1 AND worked_days >= duration AND plan = 30 AND total_codes < 60000 AND monthly_wallet_status = 0 AND due_amt < 1000 AND id = $user_id";
