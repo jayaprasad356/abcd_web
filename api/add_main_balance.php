@@ -429,8 +429,17 @@ if ($num == 1) {
 
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`,`codes`) VALUES ($user_id,'reward_codes','$datetime','$amount','$reward_codes')";
         $db->sql($sql);
-        $sql = "UPDATE users SET reward_codes = 0,balance= balance + $amount , today_codes = today_codes + $reward_codes , total_codes = total_codes + $reward_codes , earn= earn + $amount WHERE id=" . $user_id;
-        $db->sql($sql);
+
+        if($project_type == 'abcd'){
+            $sql = "UPDATE users SET reward_codes = 0,monthly_wallet = monthly_wallet + $amount , today_codes = today_codes + $reward_codes , total_codes = total_codes + $reward_codes WHERE id=" . $user_id;
+            $db->sql($sql);
+
+        }else{
+            $sql = "UPDATE users SET reward_codes = 0,balance= balance + $amount , today_codes = today_codes + $reward_codes , total_codes = total_codes + $reward_codes , earn= earn + $amount WHERE id=" . $user_id;
+            $db->sql($sql);
+
+        }
+
 
     }
     if($wallet_type == 'ch_daily_wallet'){

@@ -31,7 +31,7 @@ if ($num >= 1) {
         $user_id= $res[0]['user_id'];
         $amount= $res[0]['amount'];
 
-        $sql = "UPDATE users SET balance= balance + $amount,withdrawal = withdrawal - $amount WHERE id = $user_id";
+        $sql = "UPDATE users SET balance= balance - $amount,withdrawal = withdrawal + $amount WHERE id = $user_id";
         $db->sql($sql);
         $sql = "INSERT INTO transactions (user_id,amount,datetime,type) VALUES ('$user_id','$amount','$datetime','cancelled')";
         $db->sql($sql);
@@ -39,7 +39,7 @@ if ($num >= 1) {
 
     }
     $response['success'] = true;
-    $response['message'] = "balance added";
+    $response['message'] = "balance minus";
     
     print_r(json_encode($response));
 
