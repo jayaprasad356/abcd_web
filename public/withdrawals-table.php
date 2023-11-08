@@ -243,10 +243,10 @@ if (isset($_POST['export_all'])) {
                                         </div>
                                     <?php } ?>
                                 </div>
-                            <table id='users_table' class="table table-hover" data-toggle="table" data-url="api-firebase/get-bootstrap-table-data.php?table=withdrawals" data-page-list="[5, 10, 20, 50, 100, 200,500,700,1000]" data-show-refresh="true" data-show-columns="true" data-side-pagination="server" data-pagination="true" data-search="true" data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="w.id" data-show-footer="true" data-sort-order="desc" data-show-export="true" data-export-types='["txt","csv"]' data-export-options='{
-                                "fileName": "Yellow app-withdrawals-list-<?= date('d-m-Y') ?>",
-                                "ignoreColumn": ["operate"] 
-                            }'>
+                                <table id='users_table' class="table table-hover" data-toggle="table" data-url="api-firebase/get-bootstrap-table-data.php?table=withdrawals" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true" data-show-columns="true" data-side-pagination="server" data-pagination="true" data-search="true" data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc" data-show-export="true" data-export-types='["txt","csv"]' data-export-options='{
+                            "fileName": "Yellow app-notifications-list-<?= date('d-m-Y') ?>",
+                            "ignoreColumn": ["operate"] 
+                        }'>
                                 <thead>
                                     <tr>
                                         <th data-field="column"> All</th>
