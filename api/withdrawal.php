@@ -75,13 +75,38 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if($withdrawal_status == 1 &&  $main_ws == 1 ){
-    if ($num >= 1) {
+    if ($num >= 0) {
         if($amount >= $min_withdrawal){
             if($balance >= $amount){
-                $sql = "UPDATE `users` SET `balance` = balance - $amount,`withdrawal` = withdrawal + $amount WHERE `id` = $user_id";
+                $sql = "SELECT * FROM `users` WHERE level = 1 AND project_type = 'abcd' AND status = 1 AND worked_days >= duration AND plan = 30 AND total_codes < 60000 AND monthly_wallet_status = 0 AND due_amt < 1000 AND id = $user_id";
                 $db->sql($sql);
-                $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`datetime`,`withdrawal_type`)VALUES('$user_id','$amount','$datetime','code_withdrawal')";
-                $db->sql($sql);
+                $res = $db->getResult();
+                $num = $db->numRows($res);
+                if ($num >= 1) {
+                    if($balance < 1000){
+                        $response['success'] = false;
+                        $response['message'] = "No Sufficient Balance to Pay Service Charge Rs.1000";
+                        print_r(json_encode($response));
+                        return false;
+
+                    }
+                    $type = 'service_charge';
+                    $amount = 1000;
+                    $sql = "UPDATE `users` SET `balance` = balance - $amount,`due_amt` = due_amt + $amount WHERE `id` = $user_id";
+                    $db->sql($sql);
+                    $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$user_id','$amount','$datetime','$type')";
+                    $db->sql($sql);
+                    $message = "Service Charge Paid Successfully";
+
+                }else{
+                    $sql = "UPDATE `users` SET `balance` = balance - $amount,`withdrawal` = withdrawal + $amount WHERE `id` = $user_id";
+                    $db->sql($sql);
+                    $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`datetime`,`withdrawal_type`)VALUES('$user_id','$amount','$datetime','code_withdrawal')";
+                    $db->sql($sql);
+                    $message = "Withdrawal Requested Successfully";
+
+                }
+
                 $sql = "SELECT balance,refer_balance FROM users WHERE id = $user_id ";
                 $db->sql($sql);
                 $res = $db->getResult();
@@ -90,7 +115,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
                 $response['success'] = true;
                 $response['balance'] = $balance;
                 $response['refer_balance'] = $refer_balance;
-                $response['message'] = "Withdrawal Requested Successfully";
+                $response['message'] = $message;
                 print_r(json_encode($response));
         
             }
