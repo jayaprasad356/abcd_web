@@ -340,6 +340,7 @@ include "header.php";
                     <div class="small-box bg-teal">
                         <div class="inner">
                         <h3><?php
+                         $currentdate = date('Y-m-d');
                                 $sql = "SELECT COUNT(id) AS total FROM users WHERE status=1  AND today_codes != 0 AND project_type = 'unlimited'";
                                 $db->sql($sql);
                                 $res = $db->getResult();
