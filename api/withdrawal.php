@@ -85,7 +85,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
                 if ($num >= 1) {
                     if($balance < 1000){
                         $response['success'] = false;
-                        $response['message'] = "No Sufficient Balance to Pay Service Charge Rs.1000";
+                        $response['message'] = "You do not have sufficient balance to pay Rs 1000 platform fee for non completion of target.";
                         print_r(json_encode($response));
                         return false;
 
@@ -96,7 +96,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
                     $db->sql($sql);
                     $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$user_id','$amount','$datetime','$type')";
                     $db->sql($sql);
-                    $message = "Service Charge Paid Successfully";
+                    $message = "Rs 1000 platform fee will be charged for non completion of target.";
 
                 }else{
                     $sql = "UPDATE `users` SET `balance` = balance - $amount,`withdrawal` = withdrawal + $amount WHERE `id` = $user_id";
