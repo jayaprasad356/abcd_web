@@ -90,7 +90,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
                         return false;
 
                     }
-                    $type = 'platform_fee';
+                    $type = 'platform_fees';
                     $amount = 1000;
                     $sql = "UPDATE `users` SET `balance` = balance - $amount,`due_amt` = due_amt + $amount WHERE `id` = $user_id";
                     $db->sql($sql);
