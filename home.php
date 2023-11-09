@@ -336,6 +336,24 @@ include "header.php";
                         <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-teal">
+                        <div class="inner">
+                        <h3><?php
+                         $currentdate = date('Y-m-d');
+                                $sql = "SELECT COUNT(id) AS total FROM users WHERE status=1  AND today_codes != 0 AND project_type = 'unlimited'";
+                                $db->sql($sql);
+                                $res = $db->getResult();
+                                $num = $res[0]['total'];
+                                echo $num;
+                                ?></h3>
+                          <h3>
+                            <p>Unlimited Active Users</p>
+                        </div>
+                        
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
                 
                 <!-- <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-yellow">
