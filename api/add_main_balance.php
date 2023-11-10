@@ -100,6 +100,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'daily_wallet'){
+        $response['success'] = false;
+        $response['message'] = "Your wallet is disabled";
+        print_r(json_encode($response));
+        return false;
         if ($daily_wallet <= 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
@@ -132,10 +136,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        $response['success'] = false;
-        $response['message'] = "Your wallet is disabled";
-        print_r(json_encode($response));
-        return false;
+        // $response['success'] = false;
+        // $response['message'] = "Your wallet is disabled";
+        // print_r(json_encode($response));
+        // return false;
         if ($monthly_wallet_status == 0 )  {
             $response['success'] = false;
             $response['message'] = "Your wallet is disabled";
@@ -169,7 +173,7 @@ if ($num == 1) {
 
                     }else{
                         $response['success'] = false;
-                        $response['message'] = "Complete 60000 codes/50 days to withdraw";
+                        $response['message'] = "Complete 60000 codes / 50 days to withdraw";
                         print_r(json_encode($response));
                         return false;
                     }
@@ -194,7 +198,7 @@ if ($num == 1) {
 
                     }else{
                         $response['success'] = false;
-                        $response['message'] = "Complete 60000 codes/50 days to withdraw";
+                        $response['message'] = "Complete 60000 codes / 50 days to withdraw";
                         print_r(json_encode($response));
                         return false;
                     }
@@ -267,39 +271,50 @@ if ($num == 1) {
             // }
         }
 
-        if ($level == 1 && $worked_days < 60)  {
-            $response['success'] = false;
-            $response['message'] = "Complete 60000 Codes To Withdraw";
-            print_r(json_encode($response));
-            return false;
-
-        }
-        if($total_codes < 60000){
-            if ($worked_days < $duration && $level < 3)  {
-                $response['success'] = false;
-                $response['message'] = "Reach level 3 and above to withdraw";
-                print_r(json_encode($response));
-                return false;
-            }
-
-        }
-
-        if ($level == 1 && $worked_days >= 60)  {
-            $percent = 29;
-            $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
-            $result = ($percent / 100) * $monthly_wallet;
-            $monthly_wallet = $old_monthly_wallet + $result;
-            $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
-            $db->sql($sql);
-            $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
-            $db->sql($sql);
-        }
-        else {
+        if (($worked_days >= $duration) || $total_codes >= 60000)  {
             $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
             $db->sql($sql);
             $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
             $db->sql($sql);
+
+
         }
+        else{
+            $response['success'] = false;
+            $response['message'] = "Complete 60000 Codes To Withdraw Or Complete ".$duration.' days to Withdraw.';
+            print_r(json_encode($response));
+            return false;
+
+
+        }
+        // if($total_codes < 60000){
+        //     if ($worked_days < $duration && $level < 3)  {
+        //         $response['success'] = false;
+        //         $response['message'] = "Reach level 3 and above to withdraw";
+        //         print_r(json_encode($response));
+        //         return false;
+        //     }
+
+        // }
+
+        // if ($level == 1 && $worked_days >= 60)  {
+        //     $percent = 29;
+        //     $monthly_wallet = $monthly_wallet - $old_monthly_wallet;
+        //     $result = ($percent / 100) * $monthly_wallet;
+        //     $monthly_wallet = $old_monthly_wallet + $result;
+        //     $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+        //     $db->sql($sql);
+        //     $sql = "UPDATE users SET balance= balance + $monthly_wallet,earn = earn + $monthly_wallet,monthly_wallet = monthly_wallet - $monthly_wallet,old_monthly_wallet = 0,monthly_wallet_status = 0 WHERE id=" . $user_id;
+        //     $db->sql($sql);
+        // }
+        // else {
+        //     $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'monthly_wallet','$datetime',$monthly_wallet)";
+        //     $db->sql($sql);
+        //     $sql = "UPDATE users SET balance= balance + monthly_wallet,earn = earn + monthly_wallet,monthly_wallet = 0 WHERE id=" . $user_id;
+        //     $db->sql($sql);
+        // }
+
+
 
 
 
