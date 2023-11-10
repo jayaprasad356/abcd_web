@@ -100,10 +100,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'daily_wallet'){
-        // $response['success'] = false;
-        // $response['message'] = "Your wallet is disabled";
-        // print_r(json_encode($response));
-        // return false;
+        $response['success'] = false;
+        $response['message'] = "Your wallet is disabled";
+        print_r(json_encode($response));
+        return false;
         if ($daily_wallet <= 0)  {
             $response['success'] = false;
             $response['message'] = "Your wallet is empty";
