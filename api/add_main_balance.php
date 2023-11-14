@@ -62,6 +62,7 @@ if ($num == 1) {
     $reward_codes = $res[0]['reward_codes'];
     $l_referral_count = $res[0]['l_referral_count'];
     $total_mails = $res[0]['total_mails'];
+    $old_amail_refer = $res[0]['old_amail_refer'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -79,18 +80,6 @@ if ($num == 1) {
     }
 
     if($wallet_type == 'earnings_wallet'){
-        $response['success'] = false;
-        $response['message'] = "Your wallet is disabled";
-        print_r(json_encode($response));
-        return false;
-        $target_mails = $worked_days * 10;
-        if($total_mails < $target_mails){
-            $response['success'] = false;
-            $response['message'] = "You missed to acheive daily target";
-            print_r(json_encode($response));
-            return false;
-
-        }
         if ($earnings_wallet < 25) {
             $response['success'] = false;
             $response['message'] = "Minimum ₹75 to add balance";
@@ -103,6 +92,7 @@ if ($num == 1) {
             $res = $db->getResult();
             $num = $db->numRows($res);
             $total_mails = $res[0]['total_mails'];
+            $total_mails = ($l_referral_count - $old_amail_refer) * 10;
             $target_mails = ($worked_days + 1 )* 10;
             if($total_mails < $target_mails){
                 $response['success'] = false;
@@ -115,6 +105,7 @@ if ($num == 1) {
 
         }else{
             $target_mails = ($worked_days + 1 )* 10;
+            $total_mails = ($l_referral_count - $old_amail_refer) * 10;
             if($total_mails < $target_mails){
                 $response['success'] = false;
                 $response['message'] = "You missed to acheive daily target";
