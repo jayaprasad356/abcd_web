@@ -92,7 +92,7 @@ if ($num == 1) {
             $res = $db->getResult();
             $num = $db->numRows($res);
             $total_mails = $res[0]['total_mails'];
-            $total_mails = ($l_referral_count - $old_amail_refer) * 10;
+            $total_mails = $total_mails + ($l_referral_count - $old_amail_refer) * 10;
             $target_mails = ($worked_days + 1 )* 10;
             if($total_mails < $target_mails){
                 $response['success'] = false;
@@ -105,7 +105,7 @@ if ($num == 1) {
 
         }else{
             $target_mails = ($worked_days + 1 )* 10;
-            $total_mails = ($l_referral_count - $old_amail_refer) * 10;
+            $total_mails = $total_mails + ($l_referral_count - $old_amail_refer) * 10;
             if($total_mails < $target_mails){
                 $response['success'] = false;
                 $response['message'] = "You missed to acheive daily target";
