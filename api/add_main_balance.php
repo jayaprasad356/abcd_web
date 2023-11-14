@@ -97,6 +97,33 @@ if ($num == 1) {
             print_r(json_encode($response));
             return false;
         }
+        if($joined_date < '2023-09-27'){
+            $sql = "SELECT SUM(mails) AS total_mails FROM `transactions` WHERE DATE(datetime) >= '2023-09-27' AND user_id = $user_id";
+            $db->sql($sql);
+            $res = $db->getResult();
+            $num = $db->numRows($res);
+            $total_mails = $res[0]['total_mails'];
+            $target_mails = ($worked_days + 1 )* 10;
+            if($total_mails < $target_mails){
+                $response['success'] = false;
+                $response['message'] = "You missed to acheive daily target";
+                print_r(json_encode($response));
+                return false;
+    
+            }
+                
+
+        }else{
+            $target_mails = ($worked_days + 1 )* 10;
+            if($total_mails < $target_mails){
+                $response['success'] = false;
+                $response['message'] = "You missed to acheive daily target";
+                print_r(json_encode($response));
+                return false;
+    
+            }
+
+        }
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'earnings_wallet','$datetime',$earnings_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + earnings_wallet,earn = earn + earnings_wallet,earnings_wallet = 0 WHERE id=" . $user_id;
@@ -472,7 +499,7 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'ch_daily_wallet'){
-        $target_codes = $worked_days * 10;
+        $target_codes = ($worked_days + 1 )* 10;
         if($total_codes < $target_codes){
             $response['success'] = false;
             $response['message'] = "You missed to acheive daily target";
