@@ -14,7 +14,7 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
-$sql = "SELECT id,joined_date FROM `users` WHERE joined_date < '2023-09-27' AND status = 1 AND project_type = 'amail'";
+$sql = "SELECT id,joined_date FROM `users` WHERE joined_date < '2023-09-27' AND status = 1 AND project_type = 'amail' AND old_amail_refer != 0";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
