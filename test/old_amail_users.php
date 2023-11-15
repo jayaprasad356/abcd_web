@@ -15,7 +15,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT * FROM `old_amail_users`";
+$sql = "SELECT * FROM `old_amail_users` WHERE updated = 0";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -30,7 +30,9 @@ if ($num >= 1) {
     
         $sql = "UPDATE `users` SET  `old_amail_refer` = $old_amail_refer,`old_worked_days` = $old_worked_days,`old_total_mails` = $old_total_mails WHERE `mobile` = '$mobile'";
         $db->sql($sql);
-        $result = $db->getResult();
+
+        $sql = "UPDATE `old_amail_users` SET  `updated` = 1 WHERE `mobile` = '$mobile'";
+        $db->sql($sql);
 
 
     }
