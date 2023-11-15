@@ -93,9 +93,10 @@ if ($num == 1) {
             $num = $db->numRows($res);
             $total_mails = $res[0]['total_mails'];
             $target_mails = ($worked_days + 1 )* 10;
+            $balance_mails = $target_mails - $total_mails;
             if($total_mails < $target_mails){
                 $response['success'] = false;
-                $response['message'] = "You missed to acheive daily target";
+                $response['message'] = "You missed to complete ".$balance_mails." mails";
                 print_r(json_encode($response));
                 return false;
     
@@ -104,9 +105,10 @@ if ($num == 1) {
 
         }else{
             $target_mails = ($worked_days + 1 )* 10;
+            $balance_mails = $target_mails - $total_mails;
             if($total_mails < $target_mails){
                 $response['success'] = false;
-                $response['message'] = "You missed to acheive daily target";
+                $response['message'] = "You missed to complete ".$balance_mails." mails";
                 print_r(json_encode($response));
                 return false;
     
@@ -489,9 +491,10 @@ if ($num == 1) {
     }
     if($wallet_type == 'ch_daily_wallet'){
         $target_codes = ($worked_days + 1 )* 10;
+        $balance_codes = $target_codes - $total_codes;
         if($total_codes < $target_codes){
             $response['success'] = false;
-            $response['message'] = "You missed to acheive daily target";
+            $response['message'] = "You missed to complete ".$balance_codes." codes";
             print_r(json_encode($response));
             return false;
 
