@@ -63,6 +63,8 @@ if ($num == 1) {
     $l_referral_count = $res[0]['l_referral_count'];
     $total_mails = $res[0]['total_mails'];
     $old_amail_refer = $res[0]['old_amail_refer'];
+    $old_worked_days = $res[0]['old_worked_days'];
+    $old_total_mails = $res[0]['old_total_mails'];
     $target_date = '2023-08-21';
     $joined_date_timestamp = strtotime($joined_date);
     $target_date_timestamp = strtotime($target_date);
@@ -87,11 +89,8 @@ if ($num == 1) {
             return false;
         }
         if($joined_date < '2023-09-27'){
-            $sql = "SELECT SUM(mails) AS total_mails FROM `transactions` WHERE DATE(datetime) >= '2023-09-27' AND user_id = $user_id";
-            $db->sql($sql);
-            $res = $db->getResult();
-            $num = $db->numRows($res);
-            $total_mails = $res[0]['total_mails'];
+            $total_mails = $total_mails - $old_total_mails;
+            $worked_days = $worked_days - $old_worked_days;
             $target_mails = ($worked_days + 1 )* 10;
             $balance_mails = $target_mails - $total_mails;
             if($total_mails < $target_mails){
