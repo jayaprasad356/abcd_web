@@ -70,6 +70,9 @@ if (isset($_POST['btnEdit'])) {
             $ch_daily_wallet = $db->escapeString(($_POST['ch_daily_wallet']));
             $ch_monthly_wallet = $db->escapeString(($_POST['ch_monthly_wallet']));
             $reward_codes = $db->escapeString(($_POST['reward_codes']));
+            $old_amail_refer = $db->escapeString(($_POST['old_amail_refer']));
+            $old_worked_days = $db->escapeString(($_POST['old_worked_days']));
+            $old_total_mails = $db->escapeString(($_POST['old_total_mails']));
 
             $error = array();
 
@@ -379,7 +382,7 @@ if (isset($_POST['btnEdit'])) {
             $per_code_cost = 0.06;
         } 
     
-        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent,ch_daily_wallet = $ch_daily_wallet,ch_monthly_wallet = $ch_monthly_wallet,reward_codes=$reward_codes WHERE id =  $ID";
+        $sql_query = "UPDATE users SET name='$name', mobile='$mobile', password='$password', dob='$dob', email='$email', city='$city', refer_code='$refer_code', referred_by='$referred_by', earn='$earn', balance='$balance', withdrawal_status=$withdrawal_status,total_codes=$total_codes, today_codes=$today_codes,device_id='$device_id',status = $status,code_generate = $code_generate,code_generate_time = $code_generate_time,joined_date = '$joined_date',mcg_timer='$mcg_timer',security='$security',black_box='$black_box',salary_advance_balance='$salary_advance_balance',duration='$duration',worked_days='$worked_days',lead_id='$lead_id',support_id='$support_id',branch_id='$branch_id',trial_wallet='$trial_wallet',per_code_cost=$per_code_cost,num_sync_times=$num_sync_times,l_referral_count=$l_referral_count,sa_withdrawal=$sa_withdrawal,level=$level,per_code_val=$per_code_val,earnings_wallet=$earnings_wallet,bonus_wallet=$bonus_wallet,project_type='$project_type' ,today_mails=$today_mails,total_mails=$total_mails,current_refers=$current_refers,target_refers=$target_refers,daily_wallet=$daily_wallet,monthly_wallet=$monthly_wallet,target_bonus_sent = $target_bonus_sent,ch_daily_wallet = $ch_daily_wallet,ch_monthly_wallet = $ch_monthly_wallet,reward_codes=$reward_codes,old_amail_refer=$old_amail_refer,old_worked_days=$old_worked_days,old_total_mails=$old_total_mails WHERE id =  $ID";
         $db->sql($sql_query);
         $update_result = $db->getResult();
         if (!empty($update_result)) {
@@ -745,6 +748,23 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                          <br>
+                         <div class="row">   
+                                  <div class="form-group">
+                                  <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Old Amail Refer</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="old_amail_refer" value="<?php echo $res[0]['old_amail_refer']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Old Worked Days</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="old_worked_days" value="<?php echo $res[0]['old_worked_days']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Old Total Mails</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="old_total_mails" value="<?php echo $res[0]['old_total_mails']; ?>">
+                                </div>
+                                </div>
+                            </div>
+                            <br>
                      <div class="row">   
                             <div class="form-group">
                                   <div class="col-md-3">
@@ -775,6 +795,9 @@ if (isset($_POST['btnCancel'])) { ?>
                                         <label for="exampleInputEmail1">Champion Monthly Wallet</label><i class="text-danger asterik">*</i>
                                          <input type="number" class="form-control" name="ch_monthly_wallet" value="<?php echo $res[0]['ch_monthly_wallet']; ?>"style="background-color:#e6def3;" <?php if($_SESSION['role'] == 'Admin'){ echo 'readonly'; } ?>>
                                     </div>
+                              
+                                </div>
+                             
                                 </div>
                              </div><!-- /.box-body -->
                        </form>
