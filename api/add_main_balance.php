@@ -91,7 +91,7 @@ if ($num == 1) {
         if($joined_date < '2023-09-27'){
             $total_mails = $total_mails - $old_total_mails;
             $worked_days = $worked_days - $old_worked_days;
-            $target_mails = ($worked_days + 1 )* 10;
+            $target_mails = $worked_days * 10;
             $balance_mails = $target_mails - $total_mails;
             if($total_mails < $target_mails){
                 $response['success'] = false;
@@ -489,7 +489,7 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'ch_daily_wallet'){
-        $target_codes = ($worked_days + 1 )* 10;
+        $target_codes = $worked_days * 10;
         $balance_codes = $target_codes - $total_codes;
         if($total_codes < $target_codes){
             $response['success'] = false;
