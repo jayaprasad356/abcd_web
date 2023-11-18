@@ -48,7 +48,18 @@ $db->sql($sql);
 $sql = "INSERT INTO join_reports (date, total_users,total_paid) SELECT joined_date, COUNT(id) AS total_users,(SELECT SUM(amount) FROM withdrawals WHERE DATE(datetime) = '$yesterday_date' AND status = 1) AS total_paid FROM users WHERE status = 1 AND joined_date = '$yesterday_date'";
 $db->sql($sql);
 
-// $sql = "UPDATE users SET reward_codes = reward_codes + (l_referral_count * 50)  WHERE status = 1 AND project_type = 'unlimited' AND code_generate = 1 AND l_referral_count != 0 AND total_codes < 60000";
-// $db->sql($sql);
+$sql = "SELECT id FROM leaves WHERE date='$currentdate' AND status = 1 AND type = 'common_leave' ORDER BY date";
+$db->sql($sql);
+$res = $db->getResult();
+$num = $db->numRows($res);
+
+if ($num == 0) {
+    $sql = "UPDATE users SET reward_codes = reward_codes + (l_referral_count * 50)  WHERE status = 1 AND project_type = 'unlimited' AND code_generate = 1 AND l_referral_count != 0 AND total_codes < 60000";
+    $db->sql($sql);
+
+
+    
+}
+
 
 ?>
