@@ -107,14 +107,14 @@ if (isset($_POST['btnEdit'])) {
                     $user_current_refers = $res[0]['current_refers'];
                     $user_target_refers = $res[0]['target_refers'];
                     $referral_bonus = 500;
-                    $sql_query = "UPDATE users SET `total_mails` = total_mails + 10,`current_refers` = current_refers + 1,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id AND status = 1";
+                    // $sql_query = "UPDATE users SET `total_mails` = total_mails + 10,`current_refers` = current_refers + 1,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id AND status = 1";
+                    // $db->sql($sql_query);
+                    $sql_query = "INSERT INTO bonus_refer_bonus (user_id,refer_user_id,status,amount,datetime)VALUES($user_id,$ID,0,500,'$datetime')";
                     $db->sql($sql_query);
-                    $sql_query = "INSERT INTO bonus_refer_bonus (user_id,refer_user_id,status,amount,datetime)VALUES($user_id,$ID,0,700,'$datetime')";
-                    $db->sql($sql_query);
-                    $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
-                    $db->sql($sql_query);
-                    $sql_query = "INSERT INTO transactions (user_id,mails,datetime,type)VALUES($user_id,10,'$datetime','codes_bonus')";
-                    $db->sql($sql_query);
+                    // $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
+                    // $db->sql($sql_query);
+                    // $sql_query = "INSERT INTO transactions (user_id,mails,datetime,type)VALUES($user_id,10,'$datetime','codes_bonus')";
+                    // $db->sql($sql_query);
 
                 }elseif($user_project_type == 'champion'){
                     $user_current_refers = $res[0]['current_refers'];
@@ -128,15 +128,16 @@ if (isset($_POST['btnEdit'])) {
                         $pre_bonus = 500;
                     
                     }
+                    $pre_bonus = 500;
                     
-                    $sql_query = "UPDATE users SET `total_codes` = total_codes + 10,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id  AND status = 1";
-                    $db->sql($sql_query);
+                    // $sql_query = "UPDATE users SET `total_codes` = total_codes + 10,`l_referral_count` = l_referral_count + 1,`earn` = earn + $referral_bonus,`balance` = balance + $referral_bonus WHERE id =  $user_id  AND status = 1";
+                    // $db->sql($sql_query);
                     $sql_query = "INSERT INTO champion_refer_bonus (user_id,refer_user_id,status,amount,datetime)VALUES($user_id,$ID,0,$pre_bonus,'$datetime')";
                     $db->sql($sql_query);
-                    $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
-                    $db->sql($sql_query);
-                    $sql_query = "INSERT INTO transactions (user_id,codes,datetime,type)VALUES($user_id,10,'$datetime','codes_bonus')";
-                    $db->sql($sql_query);
+                    // $sql_query = "INSERT INTO transactions (user_id,amount,datetime,type)VALUES($user_id,$referral_bonus,'$datetime','refer_bonus')";
+                    // $db->sql($sql_query);
+                    // $sql_query = "INSERT INTO transactions (user_id,codes,datetime,type)VALUES($user_id,10,'$datetime','codes_bonus')";
+                    // $db->sql($sql_query);
 
                     $fn->update_refer_code_cost_champion($user_id);
 
