@@ -338,10 +338,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'bonus_wallet'){
-        $response['success'] = false;
-        $response['message'] = "disabled";
-        print_r(json_encode($response));
-        return false;
+        // $response['success'] = false;
+        // $response['message'] = "disabled";
+        // print_r(json_encode($response));
+        // return false;
         if ($bonus_wallet < 700) {
             $response['success'] = false;
             $response['message'] = "Minimum ₹700 to add balance";
@@ -511,10 +511,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'ch_monthly_wallet'){
-        $response['success'] = false;
-        $response['message'] = "disabled";
-        print_r(json_encode($response));
-        return false;
+        // $response['success'] = false;
+        // $response['message'] = "disabled";
+        // print_r(json_encode($response));
+        // return false;
         if ($ch_monthly_wallet < 1000) {
             $response['success'] = false;
             $response['message'] = "Minimum ₹1000 to add balance";
