@@ -38,7 +38,7 @@ if ($num >= 1) {
 
     }
     $response['success'] = true;
-    $response['message'] = "bonus wallet  added";
+    $response['message'] = "bonus wallet 2 added";
     
     print_r(json_encode($response));
 
