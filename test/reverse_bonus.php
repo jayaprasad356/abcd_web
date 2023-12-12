@@ -25,10 +25,10 @@ if ($num >= 1) {
 
     foreach ($res as $row) {
         $user_id = $row['user_id'];
-        $bonus_wallet = $row['amount'];
-        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'ch_monthly_wallet','$datetime',$bonus_wallet)";
+        $bonus_wallet = -$row['amount'];
+        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$bonus_wallet)";
         $db->sql($sql);
-        $sql = "UPDATE users SET balance= balance + $bonus_wallet,earn = earn + $bonus_wallet,ch_monthly_wallet = ch_monthly_wallet - $bonus_wallet WHERE id=" . $user_id;
+        $sql = "UPDATE users SET balance= balance + $bonus_wallet,earn = earn + $bonus_wallet,bonus_wallet = bonus_wallet - $bonus_wallet WHERE id=" . $user_id;
         $db->sql($sql);
 
         // $sql = "UPDATE bonus_refer_bonus SET status = 0 WHERE user_id = $user_id ORDER BY ID LIMIT 1";
@@ -38,7 +38,7 @@ if ($num >= 1) {
 
     }
     $response['success'] = true;
-    $response['message'] = "bonus wallet 2 added";
+    $response['message'] = "main bonus wallet  added";
     
     print_r(json_encode($response));
 
