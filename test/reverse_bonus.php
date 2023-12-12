@@ -17,7 +17,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT user_id,amount FROM`transactions`t WHERE type = 'ch_monthly_wallet' AND DATE(datetime) = '2023-12-11'";
+$sql = "SELECT user_id,amount FROM`transactions`t WHERE type = 'ch_monthly_wallet' AND DATE(datetime) = '2023-12-12'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);

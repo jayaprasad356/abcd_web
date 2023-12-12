@@ -154,10 +154,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        // $response['success'] = false;
-        // $response['message'] = "Your wallet is disabled";
-        // print_r(json_encode($response));
-        // return false;
+        $response['success'] = false;
+        $response['message'] = "Your wallet is disabled";
+        print_r(json_encode($response));
+        return false;
         if ($monthly_wallet_status == 0 )  {
             $response['success'] = false;
             $response['message'] = "Your wallet is disabled";
@@ -511,10 +511,10 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'ch_monthly_wallet'){
-        // $response['success'] = false;
-        // $response['message'] = "disabled";
-        // print_r(json_encode($response));
-        // return false;
+        $response['success'] = false;
+        $response['message'] = "disabled";
+        print_r(json_encode($response));
+        return false;
         if ($ch_monthly_wallet < 1000) {
             $response['success'] = false;
             $response['message'] = "Minimum ₹1000 to add balance";
