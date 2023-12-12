@@ -121,7 +121,7 @@ if (isset($_POST['btnEdit'])) {
                     $user_target_refers = $res[0]['target_refers'];
                     $referral_bonus = 600;
                     if($project_type == 'champion'){
-                        $pre_bonus = 1000;
+                        $pre_bonus = 500;
                     
 
                     }else{

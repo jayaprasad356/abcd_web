@@ -17,7 +17,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT user_id,amount,datetime FROM`transactions`t WHERE type = 'ch_monthly_wallet' AND DATE(datetime) = '2023-12-12' AND amount > 0";
+$sql = "SELECT user_id,amount,datetime FROM`transactions`t WHERE type = 'bonus_wallet' AND DATE(datetime) = '2023-12-12' AND amount > 0";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -31,11 +31,14 @@ if ($num >= 1) {
         $sql = "UPDATE users SET balance= balance + $bonus_wallet,earn = earn + $bonus_wallet,ch_monthly_wallet = ch_monthly_wallet - $bonus_wallet WHERE id=" . $user_id;
         $db->sql($sql);
 
+        $sql = "UPDATE bonus_refer_bonus SET status = 0 WHERE user_id = $user_id ORDER BY ID LIMIT 1";
+        $db->sql($sql);
+
 
 
     }
     $response['success'] = true;
-    $response['message'] = "champion wallet  added";
+    $response['message'] = "bonus wallet  added";
     
     print_r(json_encode($response));
 
