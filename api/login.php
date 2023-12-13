@@ -41,7 +41,7 @@ if ($mobile == '9876543210' AND $password == 'abcd0111') {
     $response['user_verify'] = true;
     $response['device_verify'] = true;
     $response['message'] = "Logged In Successfully";
-    $sql = "SELECT * FROM users WHERE id = '1'";
+    $sql = "SELECT * FROM users WHERE id = 50767 ";
     $db->sql($sql);
     $res = $db->getResult();
     $num = $db->numRows($res);
