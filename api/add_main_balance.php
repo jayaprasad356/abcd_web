@@ -342,13 +342,13 @@ if ($num == 1) {
         // $response['message'] = "disabled";
         // print_r(json_encode($response));
         // return false;
-        if ($bonus_wallet < 700) {
+        if ($bonus_wallet < 500) {
             $response['success'] = false;
-            $response['message'] = "Minimum ₹700 to add balance";
+            $response['message'] = "Minimum ₹500 to add balance";
             print_r(json_encode($response));
             return false;
         }
-        $bonus_wallet = 700;
+        $bonus_wallet = 500;
         $sql_query = "SELECT * FROM `bonus_refer_bonus` WHERE user_id = $user_id AND status = 0";
         $db->sql($sql_query);
         $res = $db->getResult();
