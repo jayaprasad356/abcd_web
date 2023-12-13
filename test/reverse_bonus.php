@@ -17,7 +17,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT user_id,amount,datetime FROM`transactions`t WHERE type = 'bonus_wallet' AND DATE(datetime) = '2023-12-12' AND amount > 0";
+$sql = "SELECT id,user_id,amount,datetime FROM`transactions`t WHERE type = 'bonus_wallet' AND DATE(datetime) = '2023-12-13' AND amount > 0";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -25,8 +25,9 @@ if ($num >= 1) {
 
     foreach ($res as $row) {
         $user_id = $row['user_id'];
-        $bonus_wallet = -$row['amount'];
-        $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'bonus_wallet','$datetime',$bonus_wallet)";
+        $trans_id = $row['id'];
+        $bonus_wallet = -200;
+        $sql = "UPDATE transactions SET amount = 500  WHERE id=" . $trans_id;
         $db->sql($sql);
         $sql = "UPDATE users SET balance= balance + $bonus_wallet,earn = earn + $bonus_wallet,bonus_wallet = bonus_wallet - $bonus_wallet WHERE id=" . $user_id;
         $db->sql($sql);
