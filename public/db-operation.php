@@ -278,6 +278,55 @@ if (isset($_POST['cancel_withdrawal']) && $_POST['cancel_withdrawal'] == 1) {
         echo "<p class='alert alert-danger'>Invalid file format! Please upload data in CSV file!</p><br>";
     }
 }
+if (isset($_POST['disable_user']) && $_POST['disable_user'] == 1) {
+    $count = 0;
+    $count1 = 0;
+    $error = false;
+    $title = $db->escapeString(($_POST['title']));
+    $description = $db->escapeString(($_POST['description']));
+    $filename = $_FILES["upload_file"]["tmp_name"];
+    $result = $fn->validate_image($_FILES["upload_file"], false);
+    if (!$result) {
+        $error = true;
+    }
+    if ($_FILES["upload_file"]["size"] > 0  && $error == false) {
+        $file = fopen($filename, "r");
+        while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+            // print_r($emapData);
+            if ($count1 != 0) {
+                $mobile = trim($db->escapeString($emapData[0]));
+             
+
+
+                $sql = "UPDATE users SET code_generate = 0,withdrawal_status = 0 WHERE mobile = '$mobile'";
+                $db->sql($sql);
+                
+            }
+
+            $count1++;
+        }
+        fclose($file);
+        // $file = fopen($filename, "r");
+        // while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+        //     // print_r($emapData);
+        //     if ($count1 != 0) {
+        //         $emapData[0] = trim($db->escapeString($emapData[0]));
+        //         $emapData[1] = trim($db->escapeString($emapData[1]));  
+                
+        //         $sql = "UPDATE users SET `support_id`= $emapData[1],op_leads = 1 WHERE id= $emapData[0]";
+        //         $db->sql($sql);
+
+        //     }
+
+        //     $count1++;
+        // }
+        // fclose($file);
+
+        echo "<p class='alert alert-success'>Disabled Successfully</p><br>";
+    } else {
+        echo "<p class='alert alert-danger'>Invalid file format! Please upload data in CSV file!</p><br>";
+    }
+}
 if (isset($_POST['amail_bulk_amount']) && $_POST['amail_bulk_amount'] == 1) {
     $count = 0;
     $count1 = 0;

@@ -314,6 +314,12 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="add-new-bulk-disable.php">
+                    <i class="fa fa-file"></i>
+                    <span>Bulk Disabled</span>
+                    </a>
+                </li>
+                <li class="treeview">
                     <a href="add-abcd-bulk-codes.php">
                     <i class="fa fa-file"></i>
                     <span>Abcd Bulk Codes</span>
