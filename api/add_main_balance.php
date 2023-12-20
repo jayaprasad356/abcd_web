@@ -154,10 +154,7 @@ if ($num == 1) {
 
     }
     if($wallet_type == 'monthly_wallet'){
-        $response['success'] = false;
-        $response['message'] = "Your wallet is disabled";
-        print_r(json_encode($response));
-        return false;
+
         if ($monthly_wallet_status == 0 )  {
             $response['success'] = false;
             $response['message'] = "Your wallet is disabled";
