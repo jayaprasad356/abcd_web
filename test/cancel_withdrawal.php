@@ -15,7 +15,7 @@ $db = new Database();
 $db->connect();
 $currentdate = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$sql = "SELECT * FROM `cancel_with`";
+$sql = "SELECT * FROM `withdrawals` WHERE status = 0";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
