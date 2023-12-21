@@ -17,6 +17,8 @@ include_once('../includes/functions.php');
 $fn = new functions;
 $fn->monitorApi('withdrawal');
 
+$date = date('Y-m-d');
+
 if (empty($_POST['user_id'])) {
     $response['success'] = false;
     $response['message'] = "User Id is Empty";
@@ -76,8 +78,22 @@ $res = $db->getResult();
 $num = $db->numRows($res);
 if($withdrawal_status == 1 &&  $main_ws == 1 ){
     if ($num >= 1) {
-        if($amount >= $min_withdrawal){
+        if($amount == 20){
             if($balance >= $amount){
+
+                $sql = "SELECT id FROM withdrawals WHERE user_id = $user_id AND DATE(datetime) = '$date'";
+                $db->sql($sql);
+                $res= $db->getResult();
+                $num = $db->numRows($res);
+    
+                if ($num >= 1){
+                    $response['success'] = false;
+                    $response['message'] = "You Already Requested to Withdrawal pls wait...";
+                    print_r(json_encode($response));
+                    return false;
+    
+                }
+
                 $sql = "SELECT * FROM `users` WHERE project_type = 'abcd' AND status = 1 AND worked_days >= duration AND total_codes < 60000 AND due_amt < 1000 AND id = $user_id";
                 $db->sql($sql);
                 $res = $db->getResult();
@@ -129,7 +145,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
         }
         else{
             $response['success'] = false;
-            $response['message'] = "Required Minimum Amount to Withdrawal is ".$min_withdrawal;
+            $response['message'] = "Max & Min Rs 20 Can Be Withdrawn As Per Bank Limits.";
             print_r(json_encode($response)); 
         }
     }else{
