@@ -63,7 +63,7 @@ if (isset($_POST['btnd'])) {
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form id='add_form' method="post" action="public/db-operation.php" enctype="multipart/form-data">
-                <input type="hidden" id="bulk_upload" name="bulk_upload" required="" value="1" aria-required="true">
+                <input type="hidden" id="bulk_approval" name="bulk_approval" required="" value="1" aria-required="true">
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group">
