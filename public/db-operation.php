@@ -479,6 +479,39 @@ if (isset($_POST['bulk_suppoort_change']) && $_POST['bulk_suppoort_change'] == 1
     }
 }
 
+if (isset($_POST['bulk_approval']) && $_POST['bulk_approval'] == 1) {
+    $count = 0;
+    $count1 = 0;
+    $error = false;
+
+    $filename = $_FILES["upload_file"]["tmp_name"];
+    $result = $fn->validate_image($_FILES["upload_file"], false);
+
+    if (!$result) {
+        $error = true;
+    }
+
+    if ($_FILES["upload_file"]["size"] > 0 && $error == false) {
+        $file = fopen($filename, "r");
+
+        while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+            if ($count1 != 0) {
+                $mobile = trim($db->escapeString($emapData[0]));
+
+                $sql = "UPDATE users SET main_wallet = 1 , daily_wallet = 1 , monthly_wallet = 1, earning_wallet = 1 , bonus_wallet = 1 ,ch_daily_wallet = 1 , ch_bonus_wallet = 1 WHERE mobile = '$mobile'";
+                $db->sql($sql);
+            }
+
+            $count1++;
+        }
+
+        fclose($file);
+
+        echo "<p class='alert alert-success'>CSV file is successfully imported!</p><br>";
+    } else {
+        echo "<p class='alert alert-danger'>Invalid file format! Please upload data in CSV file!</p><br>";
+    }
+}
 if (isset($_POST['bulk_update']) && $_POST['bulk_update'] == 1) {
     $count = 0;
     $count1 = 0;
