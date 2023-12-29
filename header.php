@@ -314,12 +314,6 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="bulk-upload-user.php">
-                    <i class="fa fa-folder-open"></i>
-                    <span>Bulk Upload</span>
-                    </a>
-                </li>
-                <li class="treeview">
                     <a href="add-new-bulk-disable.php">
                     <i class="fa fa-file"></i>
                     <span>Bulk Disabled</span>
@@ -341,6 +335,12 @@ $fn = new custom_functions;
                     <a href="queries.php">
                     <i class="fa fa-adn"></i>
                     <span>Queries</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="bulk-upload-user.php">
+                    <i class="fa fa-folder-open"></i>
+                    <span>Bulk Upload</span>
                     </a>
                 </li>
                
