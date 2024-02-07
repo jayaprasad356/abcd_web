@@ -28,8 +28,11 @@ $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
 
+    $sql = "UPDATE users SET code_generate = 0,withdrawal_status = 0  WHERE id = $user_id";
+    $db->sql($sql);
+
     $response['success'] = true;
-    $response['message'] = "Users listed Successfully";
+    $response['message'] = "Thanks for joining nextgen";
     print_r(json_encode($response));
 
 }else{
