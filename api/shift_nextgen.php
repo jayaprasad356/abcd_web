@@ -28,7 +28,7 @@ $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
 
-    $sql = "UPDATE users SET code_generate = 0,withdrawal_status = 0  WHERE id = $user_id";
+    $sql = "UPDATE users SET code_generate = 0,withdrawal_status = 0,nextgen = 1 WHERE id = $user_id";
     $db->sql($sql);
 
     $response['success'] = true;
