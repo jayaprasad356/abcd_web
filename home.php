@@ -320,7 +320,7 @@ include "header.php";
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-teal">
+                <div class="small-box bg-maroon">
                         <div class="inner">
                         <?php
                             $currentdate = date('Y-m-d');
