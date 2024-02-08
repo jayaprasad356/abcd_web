@@ -106,6 +106,7 @@
                             <tr>
                                     <th data-field="operate">Action</th>
                                     <th data-field="id" data-sortable="true">ID</th>
+                                    <th data-field="nextgen" data-sortable="true">Nextgen</th>
                                     <th data-field="registered_date" data-sortable="true">Registration Date</th>
                                     <th data-field="name" data-sortable="true">User Name</th>
                                     <th data-field="mobile" data-sortable="true">Mobile Number</th>
