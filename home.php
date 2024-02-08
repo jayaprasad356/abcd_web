@@ -324,13 +324,13 @@ include "header.php";
                         <div class="inner">
                         <?php
                             $currentdate = date('Y-m-d');
-                            $sql = "SELECT SUM(mails) AS today_mails FROM transactions WHERE DATE(datetime) = '$currentdate'";
+                            $sql = "SELECT COUNT(id) AS count FROM users WHERE nextgen = 1";
                             $db->sql($sql);
                             $res = $db->getResult();
-                            $num = $res[0]['today_mails'];
+                            $num = $res[0]['count'];
                            ?>
                           <h3><?php echo $num; ?></h3>
-                            <p>Today mails</p>
+                            <p>Nextgen Shifted</p>
                         </div>
                         
                         <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
