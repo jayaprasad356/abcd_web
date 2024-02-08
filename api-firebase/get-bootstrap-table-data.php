@@ -193,14 +193,15 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
             $tempRow['black_box']="<p class='text text-danger'>disabled</p>";
 
         if($row['withdrawal_status']==1)
+            $tempRow['withdrawal_status'] ="<p class='text text-success'>enabled</p>";
+        else
+            $tempRow['withdrawal_status']="<p class='text text-danger'>disabled</p>";
+
+        if($row['nextgen']==1)
             $tempRow['withdrawal_status'] ="<p class='text text-success'>shifted</p>";
         else
             $tempRow['withdrawal_status']="<p class='text text-danger'>Not shifted</p>";
 
-        if($row['nextgen']==1)
-            $tempRow['nextgen'] ="<p class='text text-success'>enabled</p>";
-        else
-            $tempRow['nextgen']="<p class='text text-danger'>disabled</p>";
         $tempRow['operate'] = $operate;
 
         $rows[] = $tempRow;
