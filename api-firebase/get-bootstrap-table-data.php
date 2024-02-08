@@ -198,9 +198,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'users') {
             $tempRow['withdrawal_status']="<p class='text text-danger'>disabled</p>";
 
         if($row['nextgen']==1)
-            $tempRow['withdrawal_status'] ="<p class='text text-success'>shifted</p>";
+            $tempRow['nextgen'] ="<p class='text text-success'>shifted</p>";
         else
-            $tempRow['withdrawal_status']="<p class='text text-danger'>Not shifted</p>";
+            $tempRow['nextgen']="<p class='text text-danger'>Not shifted</p>";
 
         $tempRow['operate'] = $operate;
 
