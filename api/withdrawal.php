@@ -39,7 +39,7 @@ $sql = "SELECT * FROM settings";
 $db->sql($sql);
 $mres = $db->getResult();
 $main_ws = $mres[0]['withdrawal_status'];
-$sql = "SELECT balance,refer_balance,withdrawal_status,branch_id,project_type FROM users WHERE id = $user_id ";
+$sql = "SELECT balance,refer_balance,withdrawal_status,branch_id,project_type,nextgen FROM users WHERE id = $user_id ";
 $db->sql($sql);
 $res = $db->getResult();
 $balance = $res[0]['balance'];
@@ -47,6 +47,7 @@ $refer_balance = $res[0]['refer_balance'];
 $withdrawal_status = $res[0]['withdrawal_status'];
 $branch_id = $res[0]['branch_id'];
 $project_type = $res[0]['project_type'];
+$nextgen = $res[0]['nextgen'];
 if(!empty($branch_id)){
     $sql = "SELECT min_withdrawal FROM branches WHERE id = $branch_id";
     $db->sql($sql);
@@ -72,13 +73,20 @@ if($project_type == 'unlimited'){
 }
 
 $datetime = date('Y-m-d H:i:s');
+if ($nextgen == 1){
+    $response['success'] = false;
+    $response['message'] = "You Cannot Withdraw, As You have selected to join NextGen.";
+    print_r(json_encode($response));
+    return false;
+
+}
 $sql = "SELECT id FROM bank_details WHERE user_id = $user_id ";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if($withdrawal_status == 1 &&  $main_ws == 1 ){
     if ($num >= 1) {
-        if($amount == 20){
+        if($amount == 100){
             if($balance >= $amount){
 
                 $sql = "SELECT id FROM withdrawals WHERE user_id = $user_id AND DATE(datetime) = '$date'";
@@ -108,6 +116,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
                     }
                     $type = 'platform_fees';
                     $amount = 1000;
+
                     $sql = "UPDATE `users` SET `balance` = balance - $amount,`due_amt` = due_amt + $amount WHERE `id` = $user_id";
                     $db->sql($sql);
                     $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$user_id','$amount','$datetime','$type')";
@@ -115,9 +124,10 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
                     $message = "Rs 1000 platform fee will be charged for non completion of target.";
 
                 }else{
+                    $damount = $amount - 5;
                     $sql = "UPDATE `users` SET `balance` = balance - $amount,`withdrawal` = withdrawal + $amount WHERE `id` = $user_id";
                     $db->sql($sql);
-                    $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`datetime`,`withdrawal_type`)VALUES('$user_id','$amount','$datetime','code_withdrawal')";
+                    $sql = "INSERT INTO withdrawals (`user_id`,`amount`,`datetime`,`withdrawal_type`)VALUES('$user_id','$damount','$datetime','code_withdrawal')";
                     $db->sql($sql);
                     $message = "Withdrawal Requested Successfully";
 
@@ -145,7 +155,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
         }
         else{
             $response['success'] = false;
-            $response['message'] = "Max & Min Rs 20 Can Be Withdrawn As Per Bank Limits.";
+            $response['message'] = "Max & Min Rs 100 Can Be Withdrawn As Per Bank Limits.";
             print_r(json_encode($response)); 
         }
     }else{
