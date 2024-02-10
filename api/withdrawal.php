@@ -89,7 +89,7 @@ if($withdrawal_status == 1 &&  $main_ws == 1 ){
         if($amount == 100){
             if($balance >= $amount){
 
-                $sql = "SELECT id FROM withdrawals WHERE user_id = $user_id AND DATE(datetime) = '$date'";
+                $sql = "SELECT id FROM withdrawals WHERE user_id = $user_id AND status = 0";
                 $db->sql($sql);
                 $res= $db->getResult();
                 $num = $db->numRows($res);
